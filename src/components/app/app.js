@@ -1,6 +1,7 @@
 import styles from './app.module.css';
 import { Header } from '../header/header';
 import { Footer } from '../footer/footer';
+import { Input } from '../input/input';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <div style={{ fontWeight: 400, fontSize: 60 }}>
         на 400 и 500 =)
       </div>
+      <Input />
       <Footer />
     </div>
   );
