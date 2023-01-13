@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Route, Switch } from "react-router-dom";
 import styles from './app.module.css';
 import { Header } from '../header/header';
 import { Footer } from '../footer/footer';
@@ -19,16 +20,18 @@ function App() {
   return (
     <div className={styles.page}>
       <Header />
-      
-      <div style={{ fontWeight: 500, fontSize: 60 }}>
+      <Switch>
+        <Route path='/'>
+          <LoginPage />
+        </Route>
+      </Switch>
+      {/* <div style={{ fontWeight: 500, fontSize: 60 }}>
         Шрифты подключены
       </div>
       <div style={{ fontWeight: 400, fontSize: 60 }}>
         на 400 и 500 =)
       </div>
-      <Input />
-      
-      <LoginPage />
+      <Input /> */}
       <Footer />
     </div>
   );
