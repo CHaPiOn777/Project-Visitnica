@@ -3,6 +3,10 @@
   padding-right: 24px;
 }
 
+.container {
+  margin: 0 auto;
+}
+
 .text {
   padding: 0;
   padding-bottom: 32px;
