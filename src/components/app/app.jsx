@@ -3,6 +3,7 @@ import { Header } from '../header/header';
 import { Footer } from '../footer/footer';
 import { Input } from '../input/input';
 import { Switch, Route } from 'react-router-dom';
+import NotFound from '../../pages/not-found';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
               на 400 и 500 =)
             </div>
             <Input />
+          </Route>
+          <Route path="*">
+            <NotFound />
           </Route>
         </Switch>
 
