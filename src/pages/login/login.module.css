@@ -1,0 +1,14 @@
+.main {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.text {
+  padding: 0;
+  padding-bottom: 32px;
+  margin: 0 auto;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 42px;
+  text-align: center;
+}
