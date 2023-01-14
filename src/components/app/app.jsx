@@ -9,7 +9,6 @@ import { getCookie, setCookie } from '../../services/utils/cookie';
 import { getUserInfo } from '../api/api';
 
 function App() {
-  const [id, setID] = useState()
   const [name, setName] = useState()
   const user = {} //данные юзера, тут есть id
   useEffect(() => {
@@ -23,15 +22,9 @@ function App() {
         for (let key in res) {
           user[key] = res[key];
         }
-        setID(user.id)
         setName(res.real_name)
     })}
-    console.log(user)
-    console.log(id)
-    console.log(name)
-    
-    debugger
-  }, [document.location.hash, user, id, name])
+  }, [user, name])
 
   return (
     <div className={styles.page}>
@@ -39,6 +32,7 @@ function App() {
       <main className={styles.main}>
         <Switch>
           <Route path={'/'} exact={true}>
+            <>
             <div style={{ fontWeight: 500, fontSize: 60 }}>
               Шрифты подключены
             </div>
@@ -46,6 +40,7 @@ function App() {
               на 400 и 500 =)
             </div>
             <Input />
+            </>
           </Route>
           <Route path='/login' exact={true}>
             <LoginPage />

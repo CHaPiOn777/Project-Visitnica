@@ -1,6 +1,5 @@
 import styles from './header.module.css';
 import logo from '../../images/VISITKI.svg';
-import { useEffect } from 'react';
 
 export const Header = ({ user }) => {
   const { name } = user;

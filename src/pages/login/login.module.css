@@ -5,6 +5,8 @@
 
 .container {
   margin: 0 auto;
+  max-width: 440px;
+  border: 1px solid red;
 }
 
 .text {
@@ -15,4 +17,22 @@
   font-size: 32px;
   line-height: 42px;
   text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .main {
+    padding-left: 165px;
+    padding-right: 165px;
+  }
+  .text {
+    font-size: 40px;
+    line-height: 52px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .main {
+    padding-left: 500px;
+    padding-right: 500px;
+  }
 }
