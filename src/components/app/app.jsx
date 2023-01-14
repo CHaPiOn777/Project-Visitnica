@@ -1,31 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './app.module.css';
 import { Header } from '../header/header';
 import { Footer } from '../footer/footer';
 import { Input } from '../input/input';
 import { Switch, Route } from 'react-router-dom';
 import { LoginPage } from '../../pages/login/login';
-import { setCookie } from '../../services/utils/cookie';
+import { getCookie, setCookie } from '../../services/utils/cookie';
 import { getUserInfo } from '../api/api';
 
 function App() {
+  const [id, setID] = useState()
+  const [name, setName] = useState()
   const user = {} //данные юзера, тут есть id
-  useEffect(()=> {
-    if(document.location.hash) {
-      const newToken = document.location.hash.split('&').find(el=>el.includes('access_token')).split('=')[1]
+  useEffect(() => {
+    if (document.location.hash) {
+      const newToken = document.location.hash.split('&').find(el => el.includes('access_token')).split('=')[1]
       setCookie('accessToken', newToken);
-      getUserInfo()
-        .then(res => res.json())
-        .then(res => {
-          for (let key in res) {
-            user[key] = res[key];
-          }
-        })
     }
-  }, [document.location.hash])
+    if (getCookie('accessToken')) {getUserInfo()
+      .then(res => res.json())
+      .then((res) => {
+        for (let key in res) {
+          user[key] = res[key];
+        }
+        setID(user.id)
+        setName(res.real_name)
+    })}
+    console.log(user)
+    console.log(id)
+    console.log(name)
+    
+    debugger
+  }, [document.location.hash, user, id, name])
+
   return (
     <div className={styles.page}>
-      <Header />
+      <Header user={{ name }} />
       <main className={styles.main}>
         <Switch>
           <Route path={'/'} exact={true}>
