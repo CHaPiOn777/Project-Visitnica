@@ -9,6 +9,7 @@ import { LoginPage } from '../../pages/login/login';
 import { getCookie, setCookie } from '../../services/utils/cookie';
 import { getUserInfo, getUserInfoRequest } from '../api/api';
 import { getToken, refreshToken } from '../../services/utils/token';
+import NotFound from '../../pages/not-found';
 
 function App() {
   const [name, setName] = useState();
@@ -58,6 +59,9 @@ function App() {
           </Route>
           <Route path='/login' exact={true}>
             <LoginPage />
+          </Route>
+          <Route path="*">
+            <NotFound />
           </Route>
         </Switch>
 
