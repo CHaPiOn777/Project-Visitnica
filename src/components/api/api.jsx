@@ -8,7 +8,7 @@ const config = {
 }
 
 export const getUserInfo = () => {
-  const token = getCookie('accessToken');
+  const token = getCookie('refreshToken');
   // return fetch('https://login.yandex.ru/info?format=json', {
     // headers: { 
     //   'Authorization': `OAuth ${getCookie('accessToken')}`,

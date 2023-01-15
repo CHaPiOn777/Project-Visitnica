@@ -15,9 +15,9 @@ function App() {
   useEffect(() => {
     if (document.location.hash) {
       const newToken = document.location.hash.split('&').find(el => el.includes('access_token')).split('=')[1]
-      setCookie('accessToken', newToken);
+      setCookie('refreshToken', newToken);
     }
-    if (getCookie('accessToken')) {
+    if (getCookie('refreshToken')) {
       getUserInfo()
         .then(async (res) => {
           if (res.ok) {
@@ -30,6 +30,7 @@ function App() {
           for (let key in decodedUser) {
             user[key] = decodedUser[key];
           }
+          debugger
           setName(decodedUser.name)
         })
     }
