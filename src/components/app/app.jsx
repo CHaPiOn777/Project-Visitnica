@@ -8,7 +8,7 @@ import { Switch, Route } from 'react-router-dom';
 import { LoginPage } from '../../pages/login/login';
 import { getCookie, setCookie } from '../../services/utils/cookie';
 import { getUserInfo, getUserInfoRequest } from '../api/api';
-import { refreshToken } from '../../services/utils/token';
+import { getToken, refreshToken } from '../../services/utils/token';
 
 function App() {
   const [name, setName] = useState();
@@ -19,24 +19,24 @@ function App() {
       const newToken = document.location.hash.split('&').find(el => el.includes('access_token')).split('=')[1]
       setCookie('refreshToken', newToken);
     }
-    if (getCookie('refreshToken')) {
-      getUserInfoRequest()
-        .then(async (res) => {
-          if (res.ok) {
-            const token = await res.text();
-            return token
-          }
-        })
+    if (getCookie('refreshToken') && !localStorage.getItem('accessToken')) {
+      getToken(user)
         .then(res => {
-          const decodedUser = jwt_decode(res);
-          for (let key in decodedUser) {
-            user[key] = decodedUser[key];
+          const userData = JSON.parse(localStorage.getItem('accessToken'));
+          if (userData) {
+            setName(userData.name)
+            setAvatar(userData.avatar_id)
           }
-          debugger
-          localStorage.setItem('accessToken', JSON.stringify({'bearerToken': decodedUser.jti, 'created_at': decodedUser.iat*1000, 'exp': decodedUser.exp*1000 }))
-          setName(decodedUser.name)
-          setAvatar(decodedUser.avatar_id)
-        })
+    })
+    }
+    if (getCookie('refreshToken') && localStorage.getItem('accessToken')) {
+      const userData = JSON.parse(localStorage.getItem('accessToken'));
+      const isValid = userData.exp - new Date().getTime();
+      if (!isValid) {
+        getToken(user)
+      }
+      setName(userData.name)
+      setAvatar(userData.avatar_id)
     }
   }, [user, name])
 
