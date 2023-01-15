@@ -7,7 +7,8 @@ import { Switch, Route } from 'react-router-dom';
 import { LoginPage } from '../../pages/login/login';
 import { getCookie, setCookie } from '../../services/utils/cookie';
 import { getToken } from '../../services/utils/token';
-import NotFound from '../../pages/not-found';
+import NotFound from '../../pages/not-found/not-found';
+import { CommentsPage } from '../../pages/comments/comments';
 
 function App() {
   const [name, setName] = useState();
@@ -57,6 +58,9 @@ function App() {
           </Route>
           <Route path='/login' exact={true}>
             <LoginPage />
+          </Route>
+          <Route path='/comments'>
+            <CommentsPage />
           </Route>
           <Route path="*">
             <NotFound />
