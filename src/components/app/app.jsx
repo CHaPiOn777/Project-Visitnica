@@ -7,10 +7,12 @@ import { Input } from '../input/input';
 import { Switch, Route } from 'react-router-dom';
 import { LoginPage } from '../../pages/login/login';
 import { getCookie, setCookie } from '../../services/utils/cookie';
-import { getUserInfo } from '../api/api';
+import { getUserInfo, getUserInfoRequest } from '../api/api';
+import { refreshToken } from '../../services/utils/token';
 
 function App() {
   const [name, setName] = useState();
+  const [avatar, setAvatar] = useState();
   const user = {} //данные юзера, тут есть id
   useEffect(() => {
     if (document.location.hash) {
@@ -18,7 +20,7 @@ function App() {
       setCookie('refreshToken', newToken);
     }
     if (getCookie('refreshToken')) {
-      getUserInfo()
+      getUserInfoRequest()
         .then(async (res) => {
           if (res.ok) {
             const token = await res.text();
@@ -31,14 +33,16 @@ function App() {
             user[key] = decodedUser[key];
           }
           debugger
+          localStorage.setItem('accessToken', JSON.stringify({'bearerToken': decodedUser.jti, 'created_at': decodedUser.iat*1000, 'exp': decodedUser.exp*1000 }))
           setName(decodedUser.name)
+          setAvatar(decodedUser.avatar_id)
         })
     }
   }, [user, name])
 
   return (
     <div className={styles.page}>
-      <Header user={{ name }} />
+      <Header user={{ name, avatar }} />
       <main className={styles.main}>
         <Switch>
           <Route path={'/'} exact={true}>
