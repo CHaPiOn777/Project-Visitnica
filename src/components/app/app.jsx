@@ -54,6 +54,9 @@ function App() {
           <Route path='/login' exact={true}>
             <LoginPage />
           </Route>
+          <Route path="*">
+            <NotFound />
+          </Route>
         </Switch>
 
 
