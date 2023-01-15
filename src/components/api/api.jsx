@@ -16,5 +16,5 @@ export const getUserInfo = () => {
     //   'Content-Type': 'application/x-www-form-urlencoded'
     // }
   // })
-  return fetch(`https://login.yandex.ru/info?format=json&oauth_token=${token}`)
+  return fetch(`https://login.yandex.ru/info?format=jwt&oauth_token=${token}`)
 }
