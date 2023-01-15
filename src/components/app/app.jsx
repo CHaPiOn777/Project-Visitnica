@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import jwt_decode from "jwt-decode";
 import styles from './app.module.css';
 import { Header } from '../header/header';
 import { Footer } from '../footer/footer';
@@ -7,8 +6,7 @@ import { Input } from '../input/input';
 import { Switch, Route } from 'react-router-dom';
 import { LoginPage } from '../../pages/login/login';
 import { getCookie, setCookie } from '../../services/utils/cookie';
-import { getUserInfo, getUserInfoRequest } from '../api/api';
-import { getToken, refreshToken } from '../../services/utils/token';
+import { getToken } from '../../services/utils/token';
 import NotFound from '../../pages/not-found';
 
 function App() {
