@@ -8,6 +8,7 @@ import { Switch, Route } from 'react-router-dom';
 import { LoginPage } from '../../pages/login/login';
 import { getCookie, setCookie } from '../../services/utils/cookie';
 import { getUserInfo } from '../api/api';
+import NotFound from '../../pages/not-found';
 
 function App() {
   const [name, setName] = useState();
