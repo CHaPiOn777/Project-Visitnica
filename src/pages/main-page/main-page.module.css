@@ -1,14 +1,27 @@
 .main {
+  box-sizing: border-box;
   max-width: 1440px;
+  padding: 0 40px;
   margin: auto;
 }
 
 .lead {
   display: flex;
+  min-height: 48px;
+  width: 100%;
+  margin: 8px 0 40px;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
 }
 
 .gallery {
-  margin: 0 40px;
   display: grid;
   grid: auto-flow / repeat(auto-fit, minmax(272px, 1fr));
   gap: 39px 20px;
@@ -16,15 +29,31 @@
 }
 
 @media screen and (max-width: 768px) {
+  .main {
+    padding: 0 32px;
+  }
+
+  .lead {
+    margin: 8px 0 32px;
+  }
+
   .gallery {
-    margin: 0 32px;
     gap: 31px 20px;
   }
 }
 
 @media screen and (max-width: 320px) {
+  .main {
+    padding: 0 24px;
+  }
+  
+  .lead {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    margin: 8px 0 24px;
+  }
+
   .gallery {
-    margin: 0 24px;
     gap: 24px;
   }
 }

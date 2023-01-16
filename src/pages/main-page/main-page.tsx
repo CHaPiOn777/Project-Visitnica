@@ -9,6 +9,7 @@ import { TProfile } from "../../services/utils/types";
 
 export default function MainPage () {
   const [profiles, setProfiles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
     getCohortProfiles().then((res) => {
@@ -35,7 +36,7 @@ export default function MainPage () {
     <main className={styles.main}>
       <div className={styles.lead}>
         <span>здесь должен быть елемент выбора города</span>
-        <Link to='/'>Посмотреть на карте</Link>
+        <Link className={styles.link} to='/'>Посмотреть на карте</Link>
       </div>
       <div className={styles.gallery}>
         {elements}
