@@ -43,10 +43,9 @@ function App() {
   return (
     <div className={styles.page}>
       <Header user={{ name, avatar }} />
-      <main className={styles.main}>
         <Switch>
           <Route path={'/'} exact={true}>
-            <>
+            <main className={styles.main}>
               <div style={{ fontWeight: 500, fontSize: 60 }}>
                 Шрифты подключены
               </div>
@@ -54,7 +53,7 @@ function App() {
                 на 400, 500, 700
               </div>
               <Input />
-            </>
+            </main>
           </Route>
           <Route path='/login' exact={true}>
             <LoginPage />
@@ -66,9 +65,6 @@ function App() {
             <NotFound />
           </Route>
         </Switch>
-
-
-      </main>
       <Footer />
     </div>
   );
