@@ -12,21 +12,29 @@ export default function MainPage () {
   
   useEffect(() => {
     getCohortProfiles().then((res) => {
-      if (res.items?.length > 0) setProfiles(res.items);
+      if (res.items?.length > 0) {
+        let arr: any = [];
+        while (arr.length < 8) {
+          arr = arr.concat(res.items);
+        }
+        setProfiles(arr);
+        // setProfiles(res);
+      }
     }).catch((err) => {
       console.error(`Ошибка загрузки профилей пользователей: ${err}`);
     })
   }, []);
 
   const elements = useMemo(() => {
-    return profiles.map((item: TProfile) => {
-      return <ProfileThumb key={item._id} {...item.profile} />
+    return profiles.map((item: TProfile, index) => {
+      return <ProfileThumb key={item._id + index} {...item.profile} />
     })
   }, [profiles]);
   
   return (
-    <main>
-      <div>
+    <main className={styles.main}>
+      <div className={styles.lead}>
+        <span>здесь должен быть елемент выбора города</span>
         <Link to='/'>Посмотреть на карте</Link>
       </div>
       <div className={styles.gallery}>
