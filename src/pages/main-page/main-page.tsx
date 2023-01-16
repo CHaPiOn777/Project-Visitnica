@@ -6,12 +6,14 @@ import getCohortProfiles from "../../services/utils/api/get-cohort-profiles";
 
 import styles from "./main-page.module.css";
 import { TProfile } from "../../services/utils/types";
+import LoadingIcon from "../../components/loading-icon/loading-icon";
 
 export default function MainPage () {
   const [profiles, setProfiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
+    setIsLoading(true);
     getCohortProfiles().then((res) => {
       if (res.items?.length > 0) {
         let arr: any = [];
@@ -20,6 +22,7 @@ export default function MainPage () {
         }
         setProfiles(arr);
         // setProfiles(res);
+        setIsLoading(false);
       }
     }).catch((err) => {
       console.error(`Ошибка загрузки профилей пользователей: ${err}`);
@@ -41,6 +44,11 @@ export default function MainPage () {
       <div className={styles.gallery}>
         {elements}
       </div>
+      {isLoading && (
+        <div className={styles.terminator}>
+          <LoadingIcon />
+        </div>
+      )}
     </main>
   )
 }

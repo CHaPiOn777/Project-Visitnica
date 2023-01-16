@@ -28,6 +28,11 @@
   justify-content: center;
 }
 
+.terminator {
+  padding: 78px 0;
+  text-align: center;
+}
+
 @media screen and (max-width: 768px) {
   .main {
     padding: 0 32px;
