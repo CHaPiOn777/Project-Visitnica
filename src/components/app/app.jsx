@@ -43,15 +43,18 @@ function App() {
       <main className={styles.main}>
         <Switch>
           <Route path={'/'} exact={true}>
-            <>
-              <div style={{ fontWeight: 500, fontSize: 60 }}>
-                Шрифты подключены
-              </div>
-              <div style={{ fontWeight: 400, fontSize: 60 }}>
-                на 400 и 500 =)
-              </div>
-              <Input />
-            </>
+            <MainPage />
+            {
+              /*<>
+                <div style={{ fontWeight: 500, fontSize: 60 }}>
+                  Шрифты подключены
+                </div>
+                <div style={{ fontWeight: 400, fontSize: 60 }}>
+                  на 400 и 500 =)
+                </div>
+                <Input />
+              </>*/
+            }
           </Route>
           <Route path='/login' exact={true}>
             <LoginPage />
