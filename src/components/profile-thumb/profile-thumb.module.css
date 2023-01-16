@@ -1,9 +1,28 @@
 .container {
   color: #100c34;
+  cursor: pointer;
 }
 
 .container:hover {
   color: #ff00a8;
+}
+
+.container:hover .image-border::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: '';
+  outline: 2px solid #ff00a8;
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.image-border {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
 }
 
 .image {

@@ -11,7 +11,9 @@ type TThumbProps = {
 export default function ProfileThumb (props: TThumbProps) {
   return (
     <div className={styles.container}>
-      <img className={styles.image} src={props.photo} alt={props.name} />
+      <div className={styles['image-border']}>
+        <img className={styles.image} src={props.photo} alt={props.name} />
+      </div>
       <p className={styles.name}>{props.name}</p>
       <p className={styles.city}>{props.city.name}</p>
     </div>
