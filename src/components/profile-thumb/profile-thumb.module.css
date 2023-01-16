@@ -19,10 +19,22 @@
   z-index: 1;
 }
 
+.container:hover .chat-icon {
+  visibility: visible;
+}
+
 .image-border {
   position: relative;
   aspect-ratio: 1 / 1;
   overflow: hidden;
+}
+
+.chat-icon {
+  position: absolute;
+  top: 19px;
+  right: 19px;
+  z-index: 1;
+  visibility: hidden;
 }
 
 .image {

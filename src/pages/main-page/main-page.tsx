@@ -14,6 +14,7 @@ export default function MainPage () {
   const [isLoading, setIsLoading] = useState(true);
   const term = useRef<HTMLDivElement>(null);
   
+  // Начальная загрузка профилей
   useEffect(() => {
     setIsLoading(true);
     getCohortProfiles({offset: 0, limit: 12}).then((res) => {
@@ -33,6 +34,7 @@ export default function MainPage () {
     })
   }, []);
 
+  // Отслеживаем появление во вьюпорте дива с рефом term и догружаем еще профилей, если он появляется.
   const isAtBottom = useOnScreen(term);
   useEffect(() => {
     if (isAtBottom && !isLoading) {
@@ -46,6 +48,7 @@ export default function MainPage () {
           arr = arr.concat(res.items);
         }
         setProfiles(arr);
+
         setIsLoading(false);
       })
     }

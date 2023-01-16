@@ -1,5 +1,7 @@
 import { RefObject, useEffect, useMemo, useRef, useState } from "react";
 
+// Это хук для отслеживания, присутствует ли элемент из рефа во вьюпорте
+
 export default function useOnScreen (ref: RefObject<HTMLElement>) {
   const [onScreen, setOnScreen] = useState(false);
   const observer = useRef<IntersectionObserver | null>(null);
