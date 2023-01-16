@@ -1,8 +1,15 @@
 import { getCookie } from "../cookie";
+import { TProfileResponse } from "../types";
 import request from "../request";
 
-export default function getCohortProfiles () {
-  return request(`/profiles`, {
+type TGetProfiles = {
+  limit?: number;
+  offset?: number;
+  cohort?: number;
+}
+
+export default function getCohortProfiles ({offset = 0, limit = 12, cohort}: TGetProfiles): Promise<TProfileResponse> {
+  return request(`/profiles?limit=${limit}&offset=${offset}&cohort=${cohort}`, {
     headers: {
       Authorisation: `Bearer ${getCookie('accessToken')}`
     }
