@@ -1,25 +1,30 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProfileThumb from "../../components/profile-thumb/profile-thumb";
 
 import getCohortProfiles from "../../services/utils/api/get-cohort-profiles";
 
 import styles from "./main-page.module.css";
-import { TProfile } from "../../services/utils/types";
+import { TProfile, TUser } from "../../services/utils/types";
 import LoadingIcon from "../../components/loading-icon/loading-icon";
 import useOnScreen from "../../hooks/use-on-screen";
+import getUserProfile from "../../services/utils/api/get-user-profile";
 
 export default function MainPage () {
+  const { cohort } = useParams<{ cohort: string }>();
   const [profiles, setProfiles] = useState<TProfile[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState<TUser>();
   const term = useRef<HTMLDivElement>(null);
   
   // Начальная загрузка профилей
   useEffect(() => {
     setIsLoading(true);
-    getCohortProfiles({offset: 0, limit: 12}).then((res) => {
+    // псевдозапрос на получение данных текущего пользователя:
+    getUserProfile().then((res) => setCurrentUser(res));
+    getCohortProfiles({offset: 0, limit: 12, cohort: cohort || currentUser?.cohort}).then((res) => {
       if (res.items?.length > 0) {
-        // setProfiles(res);
+        // setProfiles(res.items);
         // !REMOVE искусственно наполняем массив профилей, чтобы сделать вёрстку нормально
         let arr: TProfile[] = [];
         while (arr.length < 12) {
@@ -38,9 +43,9 @@ export default function MainPage () {
   const isAtBottom = useOnScreen(term);
   useEffect(() => {
     if (isAtBottom && !isLoading) {
-      setIsLoading(true);
-      getCohortProfiles({offset: profiles.length, limit: 12}).then((res) => {
-        // setProfiles((profiles) => profiles.concat(res.items));
+      // setIsLoading(true);
+      getCohortProfiles({offset: profiles.length, limit: 12, cohort: cohort || currentUser?.cohort}).then((res) => {
+        setProfiles((profiles) => profiles.concat(res.items));
         // !REMOVE искусственно добавляем больше профилей
         let arr: TProfile[] = [...profiles];
         const oldLength = arr.length;
@@ -56,7 +61,15 @@ export default function MainPage () {
 
   const elements = useMemo(() => {
     return profiles.map((item: TProfile, index) => {
-      return <ProfileThumb key={item._id + index} {...item.profile} />
+      return (
+        <ProfileThumb 
+          key={item._id + index}
+          id={item._id}
+          curator={currentUser?.role === "curator"}
+          withComments={item._id === currentUser?._id}
+          {...item.profile}
+        />
+      )
     })
   }, [profiles]);
   

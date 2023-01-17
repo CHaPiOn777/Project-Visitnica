@@ -5,7 +5,7 @@ import request from "../request";
 type TGetProfiles = {
   limit?: number;
   offset?: number;
-  cohort?: number;
+  cohort?: string;
 }
 
 export default function getCohortProfiles ({offset = 0, limit = 12, cohort}: TGetProfiles): Promise<TProfileResponse> {

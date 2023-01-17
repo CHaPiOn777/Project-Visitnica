@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   color: #100c34;
   cursor: pointer;
 }
@@ -23,6 +24,11 @@
   visibility: visible;
 }
 
+.link-overlay {
+  text-decoration: none;
+  color: inherit;
+}
+
 .image-border {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -33,8 +39,21 @@
   position: absolute;
   top: 19px;
   right: 19px;
-  z-index: 1;
+  z-index: 2;
   visibility: hidden;
+}
+
+.comment-counter {
+  position: absolute;
+  padding: 2px 3px;
+  min-width: 13px;
+  top: -10px;
+  left: 11px;
+  border-radius: 10px;
+  background: #100c34;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
 }
 
 .image {
@@ -54,4 +73,10 @@
   margin: 0;
   font-size: 16px;
   color: #a3a3a3;
+}
+
+@media screen and (max-width: 768px) {
+  .chat-icon {
+    visibility: visible;
+  }
 }
