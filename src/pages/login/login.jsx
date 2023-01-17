@@ -1,6 +1,6 @@
 import styles from './login.module.css';
 
-export const LoginPage = () => {
+export default function LoginPage () {
   
   return(
     <main className={styles.main}>

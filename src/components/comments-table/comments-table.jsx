@@ -3,7 +3,7 @@ import styles from './comments-table.module.css';
 
 export const CommentsTable = () => {
   return (
-     <section className={styles.container}>
+    <section className={styles.container}>
     <table className={styles.table}>
       <thead >
         <tr >
