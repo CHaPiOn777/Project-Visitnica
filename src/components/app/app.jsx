@@ -8,11 +8,15 @@ import { Switch, Route } from 'react-router-dom';
 import LoginPage from '../../pages/login/login';
 import { getCookie, setCookie } from '../../services/utils/cookie';
 import { getToken } from '../../services/utils/token';
-import NotFound from '../../pages/not-found/not-found';
 import CommentsPage from '../../pages/comments/comments';
 import MainPage from '../../pages/main-page/main-page';
 import StudentsPage from '../../pages/students/students';
 import ProtectedRoute from '../protected-route/protected-route';
+import { getUserInfo } from '../../services/api';
+import Comment from '../comment/comment';
+import PurpleBtn from '../btn/btn';
+import MapPage from '../../pages/map/map';
+import NotFound from '../../pages/not-found/not-found';
 
 function App() {
   const [name, setName] = useState();
@@ -58,6 +62,17 @@ function App() {
                 <Input />
               </>*/
             }
+            <>
+              <div style={{ fontWeight: 500, fontSize: 60 }}>
+                Шрифты подключены
+              </div>
+              <div style={{ fontWeight: 400, fontSize: 60 }}>
+                на 400 и 500 =)
+              </div>
+              <PurpleBtn text='Test' />
+              <Comment />
+              <Input />
+            </>
           </Route>
           <Route path='/login' exact={true}>
             <LoginPage />
@@ -70,6 +85,9 @@ function App() {
           </Route>
           <Route path='/comments'>
             <CommentsPage />
+          </Route>
+          <Route path='/map' exact={true}>
+            <MapPage />
           </Route>
           <Route path="*">
             <NotFound />
