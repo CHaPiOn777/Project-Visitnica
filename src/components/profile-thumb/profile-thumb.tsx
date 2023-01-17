@@ -19,8 +19,8 @@ export default function ProfileThumb (props: TThumbProps) {
 
   useEffect(() => {
     if (props.curator) {
-      getProfileReactions({id: props.id}).then((res) => {
-        setCommentCount(res.items.length);
+      getProfileReactions({limit: 0, id: props.id}).then((res) => {
+        setCommentCount(res.total);
       }).catch((err) => {
         console.error(`Ошибка загрузки комментариев: ${err}`);
       });
