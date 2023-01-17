@@ -1,6 +1,7 @@
 .container {
   color: #100c34;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .container:hover {
@@ -54,4 +55,10 @@
   margin: 0;
   font-size: 16px;
   color: #a3a3a3;
+}
+
+@media screen and (max-width: 768px) {
+  .chat-icon {
+    visibility: visible;
+  }
 }

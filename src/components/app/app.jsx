@@ -59,9 +59,6 @@ function App() {
           <Route path='/login' exact={true}>
             <LoginPage />
           </Route>
-          <Route path='/tmp' exact={true}>
-            <MainPage />
-          </Route>
           <Route path="*">
             <NotFound />
           </Route>
