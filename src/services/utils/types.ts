@@ -3,6 +3,11 @@ export type TProfileResponse = {
   items: TProfile[];
 }
 
+export type TProfileReactionsResponse = {
+  total: number;
+  items: TReaction[];
+}
+
 export type TProfile = {
   _id: string;
   email: string;
@@ -14,4 +19,16 @@ export type TProfile = {
       name: string;
     }
   }
+}
+
+export type TReaction = {
+  _id: string;
+  from: {
+    _id: string;
+    name: string;
+    email: string;
+  },
+  target: string | null;
+  text?: string;
+  emotion?: string;
 }

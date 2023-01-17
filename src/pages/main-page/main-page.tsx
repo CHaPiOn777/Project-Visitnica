@@ -14,12 +14,17 @@ export default function MainPage () {
   const [isLoading, setIsLoading] = useState(true);
   const term = useRef<HTMLDivElement>(null);
   
+  // Пока в бэке нет эндпойнта, который выдавал бы пользователю собственный профиль.
+  // Так же нет и способа определить, студентом является пользователь, или куратором.
+  // Исходя из этого пока хардкожу эти данные сюда.
+  const currentUser = { _id: "e638ad9bce6d7efd1b5b035b", role: "curator", cohort: "web+16" }
+  
   // Начальная загрузка профилей
   useEffect(() => {
     setIsLoading(true);
-    getCohortProfiles({offset: 0, limit: 12}).then((res) => {
+    getCohortProfiles({offset: 0, limit: 12, cohort: currentUser.cohort}).then((res) => {
       if (res.items?.length > 0) {
-        // setProfiles(res);
+        // setProfiles(res.items);
         // !REMOVE искусственно наполняем массив профилей, чтобы сделать вёрстку нормально
         let arr: TProfile[] = [];
         while (arr.length < 12) {
@@ -38,9 +43,9 @@ export default function MainPage () {
   const isAtBottom = useOnScreen(term);
   useEffect(() => {
     if (isAtBottom && !isLoading) {
-      setIsLoading(true);
-      getCohortProfiles({offset: profiles.length, limit: 12}).then((res) => {
-        // setProfiles((profiles) => profiles.concat(res.items));
+      // setIsLoading(true);
+      getCohortProfiles({offset: profiles.length, limit: 12, cohort: currentUser.cohort}).then((res) => {
+        setProfiles((profiles) => profiles.concat(res.items));
         // !REMOVE искусственно добавляем больше профилей
         let arr: TProfile[] = [...profiles];
         const oldLength = arr.length;
@@ -56,7 +61,15 @@ export default function MainPage () {
 
   const elements = useMemo(() => {
     return profiles.map((item: TProfile, index) => {
-      return <ProfileThumb key={item._id + index} {...item.profile} />
+      return (
+        <ProfileThumb 
+          key={item._id + index}
+          id={item._id}
+          curator={currentUser.role === "curator"}
+          withComments={item._id === currentUser._id}
+          {...item.profile}
+        />
+      )
     })
   }, [profiles]);
   
