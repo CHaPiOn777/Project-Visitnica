@@ -18,9 +18,9 @@ function App() {
   useEffect(() => {
     if (document.location.hash) {
       const newToken = document.location.hash.split('&').find(el => el.includes('access_token')).split('=')[1]
-      setCookie('refreshToken', newToken);
+      setCookie('accessToken', newToken);
     }
-    if (getCookie('refreshToken') && !localStorage.getItem('accessToken')) {
+    if (getCookie('accessToken') && !localStorage.getItem('accessToken')) {
       getToken(user)
         .then(res => {
           const userData = JSON.parse(localStorage.getItem('accessToken'));
@@ -30,7 +30,7 @@ function App() {
           }
     })
     }
-    if (getCookie('refreshToken') && localStorage.getItem('accessToken')) {
+    if (getCookie('accessToken') && localStorage.getItem('accessToken')) {
       const userData = JSON.parse(localStorage.getItem('accessToken'));
       const isValid = userData.exp - new Date().getTime();
       if (!isValid) {
