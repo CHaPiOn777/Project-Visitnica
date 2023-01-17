@@ -15,23 +15,50 @@ const baseUrl = 'https://visitki.practicum-team.ru/api'
 // const checkReponse = (res) => {
 //   return res.ok ? res.json() : res.json().then(err => Promise.reject(err));
 // }
-
-export const getUsers = () => {
-  return fetch('https://visitki.practicum-team.ru/api/users', {
-    method: 'POST',
+// export default function checkResponse (resp) {
+//   if (resp.ok) {
+//     return resp.json();
+//   } else {
+//     return resp.json().then((obj) => { throw new Error(obj.message) });
+//   }
+// }
+export const getUsers = ({offset = 0, limit = 12, cohort}) => {
+  return fetch(`/profiles?limit=${limit}&offset=${offset}&cohort=${cohort}`, {
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + getCookie('accessToken')
+      Authorization: `Bearer ${getCookie('accessToken')}`
     }
   })
-    .then(res => res.json())
-    .catch(err => console.log(err))
+    .then(res => checkResponse(res))
+    .then(res => console.log(res))
   // .then(res => checkReponse(res))
 }
 
 
-getUsers()
+
+
+
+export default function checkResponse (resp) {
+  if (resp.ok) {
+    console.log(resp)
+    return resp.json();
+  } else {
+    return resp.json().then((obj) => { throw new Error(obj.message) });
+  }
+}
+
+function request (url, options) {
+  return fetch(url, options).then(res => checkResponse(res));
+}
+
+function getCohortProfiles ({offset = 0, limit = 12, cohort}) {
+  return request(`/profiles?limit=${limit}&offset=${offset}&cohort=${cohort}`, {
+    headers: {
+      Authorisation: `Bearer ${getCookie('accessToken')}`
+    }
+  })
   .then(res => console.log(res))
+}
+getCohortProfiles({offset: 0, limit: 12})
  
 
 export const getUserInfo = () => {
