@@ -8,20 +8,19 @@ import styles from "./main-page.module.css";
 import { TProfile } from "../../services/utils/types";
 import LoadingIcon from "../../components/loading-icon/loading-icon";
 import useOnScreen from "../../hooks/use-on-screen";
+import getUserProfile from "../../services/utils/api/get-user-profile";
 
 export default function MainPage () {
   const [profiles, setProfiles] = useState<TProfile[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState<any>('');
   const term = useRef<HTMLDivElement>(null);
-  
-  // Пока в бэке нет эндпойнта, который выдавал бы пользователю собственный профиль.
-  // Так же нет и способа определить, студентом является пользователь, или куратором.
-  // Исходя из этого пока хардкожу эти данные сюда.
-  const currentUser = { _id: "e638ad9bce6d7efd1b5b035b", role: "curator", cohort: "web+16" }
   
   // Начальная загрузка профилей
   useEffect(() => {
     setIsLoading(true);
+    // псевдозапрос на получение данных текущего пользователя:
+    getUserProfile().then((res) => setCurrentUser(res));
     getCohortProfiles({offset: 0, limit: 12, cohort: currentUser.cohort}).then((res) => {
       if (res.items?.length > 0) {
         // setProfiles(res.items);
