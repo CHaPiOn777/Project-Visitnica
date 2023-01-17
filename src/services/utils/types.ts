@@ -32,3 +32,9 @@ export type TReaction = {
   text?: string;
   emotion?: string;
 }
+
+export type TUser = {
+  _id: string;
+  role: string;
+  cohort: string;
+}

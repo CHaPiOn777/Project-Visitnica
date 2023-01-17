@@ -1,7 +1,10 @@
 // Пока в бэке нет эндпойнта, который выдавал бы пользователю собственный профиль.
 // Так же нет и способа определить, студентом является пользователь, или куратором.
+
+import { TUser } from "../types";
+
 // Исходя из этого пока хардкожу эти данные сюда.
-export default function getUserProfile (): Promise<any> {
+export default function getUserProfile (): Promise<TUser> {
   return new Promise((resolve) => {
     resolve(
       {
