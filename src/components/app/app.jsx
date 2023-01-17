@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import jwt_decode from "jwt-decode";
 import styles from './app.module.css';
@@ -9,6 +10,7 @@ import { LoginPage } from '../../pages/login/login';
 import { getCookie, setCookie } from '../../services/utils/cookie';
 import { getUserInfo } from '../api/api';
 import NotFound from '../../pages/not-found';
+import MainPage from '../../pages/main-page/main-page';
 import { DetailPage } from '../detailPage/detailPage';
 
 function App() {
@@ -43,20 +45,26 @@ function App() {
       <main className={styles.main}>
         <Switch>
           <Route path={'/'} exact={true}>
-            <>
-              <div style={{ fontWeight: 500, fontSize: 60 }}>
-                Шрифты подключены
-              </div>
-              <div style={{ fontWeight: 400, fontSize: 60 }}>
-                на 400 и 500 =)
-              </div>
-              <Input />
-            </>
+            <MainPage />
+            {
+              /*<>
+                <div style={{ fontWeight: 500, fontSize: 60 }}>
+                  Шрифты подключены
+                </div>
+                <div style={{ fontWeight: 400, fontSize: 60 }}>
+                  на 400 и 500 =)
+                </div>
+                <Input />
+              </>*/
+            }
           </Route>
           <Route path='/login' exact={true}>
             <LoginPage />
           </Route>
-          <Route path={'/detailinfo'} exact={true}>
+          <Route path='/tmp' exact={true}>
+            <MainPage />
+          </Route>
+          <Route path={'/detailinfo/:id'} exact={true}>
             <DetailPage />
           </Route>
           <Route path="*">
