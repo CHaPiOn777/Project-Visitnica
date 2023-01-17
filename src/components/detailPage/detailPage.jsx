@@ -13,10 +13,11 @@ export const DetailPage = () => {
 
   getUsers();
   return (
-    <div>
+    <div className={styles.page}>
       <h1 className={styles.name}>Виктория Листвиновская</h1>
-      <h2 className={styles.city}>Калуга</h2>
+      
       <ul className={styles.socialmedia}>
+        <li><h2 className={styles.city}>Калуга</h2></li>
         <li>
           <NavLink
             exact
@@ -36,12 +37,45 @@ export const DetailPage = () => {
           </NavLink>
         </li>
       </ul>
-      <img src={ava} alt="аватарка" />
+      <img src={ava} alt="аватарка" className={styles.ava}/>
       <div className="citates">
         <img src={qotes} alt="Кавычки" />
-        <blockquote>Делай, что должно и будь, что будет.</blockquote>
+        <blockquote className={styles.blockquote}>Делай, что должно и будь, что будет.</blockquote>
       </div>
-
+      <div className={styles.blocks}>
+        <div className={styles.block}>
+          <h3 className="">Увлечения</h3>
+          <img src="" alt="" className="" />
+          <p>
+            Увлекаюсь программированием, игрой на&nbsp;гитаре, вышиваю крестиком и&nbsp;играю в&nbsp;настолки. Увлекаюсь программированием, игрой на&nbsp;гитаре,
+            вышиваю крестиком и&nbsp;играю в&nbsp;настолки. Увлекаюсь программированием, игрой на&nbsp;гитаре, вышиваю крестиком и&nbsp;играю в&nbsp;настолки.
+          </p>
+        </div>
+        <div className={styles.block}>
+          <h3 className="">Увлечения</h3>
+          <img src="" alt="" className="" />
+          <p>
+            Увлекаюсь программированием, игрой на&nbsp;гитаре, вышиваю крестиком и&nbsp;играю в&nbsp;настолки. Увлекаюсь программированием, игрой на&nbsp;гитаре,
+            вышиваю крестиком и&nbsp;играю в&nbsp;настолки. Увлекаюсь программированием, игрой на&nbsp;гитаре, вышиваю крестиком и&nbsp;играю в&nbsp;настолки.
+          </p>
+        </div>
+        <div className={styles.block}>
+          <h3 className="">Увлечения</h3>
+          <img src="" alt="" className="" />
+          <p>
+            Увлекаюсь программированием, игрой на&nbsp;гитаре, вышиваю крестиком и&nbsp;играю в&nbsp;настолки. Увлекаюсь программированием, игрой на&nbsp;гитаре,
+            вышиваю крестиком и&nbsp;играю в&nbsp;настолки. Увлекаюсь программированием, игрой на&nbsp;гитаре, вышиваю крестиком и&nbsp;играю в&nbsp;настолки.
+          </p>
+        </div>
+        <div className={styles.block}>
+          <h3 className="">Увлечения</h3>
+          <img src="" alt="" className="" />
+          <p>
+            Увлекаюсь программированием, игрой на&nbsp;гитаре, вышиваю крестиком и&nbsp;играю в&nbsp;настолки. Увлекаюсь программированием, игрой на&nbsp;гитаре,
+            вышиваю крестиком и&nbsp;играю в&nbsp;настолки. Увлекаюсь программированием, игрой на&nbsp;гитаре, вышиваю крестиком и&nbsp;играю в&nbsp;настолки.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
