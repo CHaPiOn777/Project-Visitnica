@@ -9,6 +9,7 @@ import { getCookie, setCookie } from '../../services/utils/cookie';
 import { getToken } from '../../services/utils/token';
 import NotFound from '../../pages/not-found/not-found';
 import { CommentsPage } from '../../pages/comments/comments';
+import MainPage from '../../pages/main-page/main-page';
 
 function App() {
   const [name, setName] = useState();
@@ -45,18 +46,24 @@ function App() {
       <Header user={{ name, avatar }} />
         <Switch>
           <Route path={'/'} exact={true}>
-            <main className={styles.main}>
-              <div style={{ fontWeight: 500, fontSize: 60 }}>
-                Шрифты подключены
-              </div>
-              <div style={{ fontWeight: 400, fontSize: 60 }}>
-                на 400, 500, 700
-              </div>
-              <Input />
-            </main>
+            <MainPage />
+            {
+              /*<>
+                <div style={{ fontWeight: 500, fontSize: 60 }}>
+                  Шрифты подключены
+                </div>
+                <div style={{ fontWeight: 400, fontSize: 60 }}>
+                  на 400 и 500 =)
+                </div>
+                <Input />
+              </>*/
+            }
           </Route>
           <Route path='/login' exact={true}>
             <LoginPage />
+          </Route>
+          <Route path='/tmp' exact={true}>
+            <MainPage />
           </Route>
           <Route path='/comments'>
             <CommentsPage />
