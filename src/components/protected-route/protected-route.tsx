@@ -6,9 +6,10 @@ import LoadingIcon from "../loading-icon/loading-icon";
 interface TProtectedProps extends RouteProps {
   auth: string;
   path: string;
+  redirect?: string;
 }
 
-export default function ProtectedRoute ({path, auth, children, ...props}: TProtectedProps) {
+export default function ProtectedRoute ({path, auth, redirect, children, ...props}: TProtectedProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [role, setRole] = useState<string>('');
 
@@ -30,7 +31,7 @@ export default function ProtectedRoute ({path, auth, children, ...props}: TProte
 
   return (
     <Route path={path} {...props}>
-      {auth === role ? children : <Redirect to='/missing' />}
+      {auth === role ? children : <Redirect to={redirect ? redirect : '/missing'} />}
     </Route>
   )
 }

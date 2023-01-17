@@ -36,5 +36,5 @@ export type TReaction = {
 export type TUser = {
   _id: string;
   role: string;
-  cohort: string;
+  cohort?: string;
 }
