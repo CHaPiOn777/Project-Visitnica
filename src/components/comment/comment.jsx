@@ -11,7 +11,7 @@ import upset from '../../images/smiles/upset.svg';
 import fun from '../../images/smiles/fun.svg';
 import fear from '../../images/smiles/fear.svg';
 import confused from '../../images/smiles/confused.svg';
-import { deleteComment, getComment, postComment } from '../../services/api';
+import { deleteComment, getComment, postComment } from '../../services/utils/api/commentApi';
 import { setQty } from '../../services/utils/utils';
 import { useForm } from '../../hooks/useForm';
 

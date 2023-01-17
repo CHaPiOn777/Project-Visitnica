@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-import { getUserInfoRequest } from "../../components/api/api";
+import { getUserInfoRequest } from "./api/tokenApi";
 
 export function refreshToken() {
   const accessToken = JSON.parse(localStorage.getItem('accessToken'))

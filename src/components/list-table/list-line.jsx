@@ -1,8 +1,9 @@
 import styles from './list-line.module.css'
 import deletePic from './../../images/delete.svg';
 import { useEffect, useState } from 'react';
-import { getCommentsRequest, getStudentsRequest } from '../api/api';
+
 import { useLocation } from 'react-router';
+import { getCommentsRequest, getStudentsRequest } from '../../services/utils/api/tokenApi';
 
 export const ListLine = () => {
   const [users, setUsers] = useState(null);

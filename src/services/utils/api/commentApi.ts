@@ -1,5 +1,5 @@
-import { getCookie } from "./utils/cookie"
-import { TComments, TResponse } from "../types";
+import { getCookie } from "../cookie"
+import { TComments, TResponse } from "../../../types";
 
 const config = {
     baseUrl: 'https://visitki.practicum-team.ru/api',
@@ -52,3 +52,4 @@ export const deleteComment = (id: string) => {
     headers: config.headers
   })
 }
+

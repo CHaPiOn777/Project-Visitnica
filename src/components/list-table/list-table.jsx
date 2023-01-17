@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import { getStudentsRequest } from '../api/api';
 import { ListLine } from './list-line';
 import styles from './list-table.module.css';
 

@@ -12,7 +12,7 @@ import CommentsPage from '../../pages/comments/comments';
 import MainPage from '../../pages/main-page/main-page';
 import StudentsPage from '../../pages/students/students';
 import ProtectedRoute from '../protected-route/protected-route';
-import { getUserInfo } from '../../services/api';
+import { getUserInfo } from '../../services/utils/api/commentApi';
 import Comment from '../comment/comment';
 import PurpleBtn from '../btn/btn';
 import MapPage from '../../pages/map/map';
