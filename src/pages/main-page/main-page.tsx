@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProfileThumb from "../../components/profile-thumb/profile-thumb";
 
 import getCohortProfiles from "../../services/utils/api/get-cohort-profiles";
@@ -11,6 +11,7 @@ import useOnScreen from "../../hooks/use-on-screen";
 import getUserProfile from "../../services/utils/api/get-user-profile";
 
 export default function MainPage () {
+  const { cohort } = useParams<{ cohort: string }>();
   const [profiles, setProfiles] = useState<TProfile[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState<any>('');
@@ -21,7 +22,7 @@ export default function MainPage () {
     setIsLoading(true);
     // псевдозапрос на получение данных текущего пользователя:
     getUserProfile().then((res) => setCurrentUser(res));
-    getCohortProfiles({offset: 0, limit: 12, cohort: currentUser.cohort}).then((res) => {
+    getCohortProfiles({offset: 0, limit: 12, cohort: cohort || currentUser.cohort}).then((res) => {
       if (res.items?.length > 0) {
         // setProfiles(res.items);
         // !REMOVE искусственно наполняем массив профилей, чтобы сделать вёрстку нормально
@@ -43,7 +44,7 @@ export default function MainPage () {
   useEffect(() => {
     if (isAtBottom && !isLoading) {
       // setIsLoading(true);
-      getCohortProfiles({offset: profiles.length, limit: 12, cohort: currentUser.cohort}).then((res) => {
+      getCohortProfiles({offset: profiles.length, limit: 12, cohort: cohort || currentUser.cohort}).then((res) => {
         setProfiles((profiles) => profiles.concat(res.items));
         // !REMOVE искусственно добавляем больше профилей
         let arr: TProfile[] = [...profiles];

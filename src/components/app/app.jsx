@@ -10,6 +10,7 @@ import { getCookie, setCookie } from '../../services/utils/cookie';
 import { getUserInfo } from '../api/api';
 import NotFound from '../../pages/not-found';
 import MainPage from '../../pages/main-page/main-page';
+import ProtectedRoute from '../protected-route/protected-route';
 
 function App() {
   const [name, setName] = useState();
@@ -59,6 +60,9 @@ function App() {
           <Route path='/login' exact={true}>
             <LoginPage />
           </Route>
+          <ProtectedRoute path="/cohort/:cohort" auth="curator">
+            <MainPage />
+          </ProtectedRoute>
           <Route path="*">
             <NotFound />
           </Route>
