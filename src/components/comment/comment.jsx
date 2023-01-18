@@ -15,7 +15,7 @@ import { deleteComment, getComment, postComment } from '../../services/utils/api
 import { setQty } from '../../services/utils/utils';
 import { useForm } from '../../hooks/useForm';
 
-export default function Comment() {
+export default function Comment({target, access}) {
   const [ rules, setRules ] = useState('admin'); //vals: 'admin, 'owner', 'user'
   const [ comments, setComments ] = useState(null);
   const [ smiles, setSmiles ] = useState([
@@ -85,7 +85,7 @@ export default function Comment() {
 
   useEffect(() => {
     if(rules === 'admin' || rules === 'owner') {
-      getComment()
+      getComment(target)
         .then(res => {
           if(res) {
             const emotions = res.items.filter(el => el.emotion);

@@ -60,9 +60,7 @@ function App() {
                   Шрифты подключены на 400, 500 и 700
                 </div>
                 <Input />
-              </>*/
-            }
-            <>
+              </>            <>
               <div style={{ fontWeight: 500, fontSize: 60 }}>
                 Шрифты подключены
               </div>
@@ -72,7 +70,9 @@ function App() {
               <PurpleBtn text='Test' />
               <Comment />
               <Input />
-            </>
+            </>*/
+            }
+
           </Route>
           <Route path='/login' exact={true}>
             <LoginPage />
