@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { Link, NavLink, useLocation, useParams } from 'react-router-dom';
 import styles from './detailPage.module.css';
 import ava from '../../images/Avatarka.jpg';
 import qotes from '../../images/Qotes.svg';
 import union from '../../images/Union.svg';
 import telegram from '../../images/Subtract.svg';
 import getUserInfo from '../../services/utils/api/getUserInfo';
-import LoadingIcon from '../loading-icon/loading-icon';
+import LoadingIcon from '../../components/loading-icon/loading-icon';
 
 
 export const DetailPage = () => {
@@ -34,7 +34,7 @@ export const DetailPage = () => {
   const styleBlockInfo = useCallback(() => {
     return style === 'romantic' ? styles.blockRomantic : style === 'cocky' ? styles.blockCocky : styles.block
   }, [style])
-  
+
   const styleBlockquote = useCallback(() => {
     return style === 'romantic' ? styles.blockquoteRomantic : styles.blockquote
   }, [style])
@@ -56,7 +56,7 @@ export const DetailPage = () => {
             </li>
             <li>
               <a
-                href={`https://web.telegram.org/k/#@${user.profile.telegram}`}
+                href={`https://github.com/search?q=${user.profile.github}`}
                 className={styles.link}
               >
                 <img src={union} alt="GitHab" />

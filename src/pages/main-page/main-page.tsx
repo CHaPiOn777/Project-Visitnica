@@ -61,7 +61,6 @@ export default function MainPage () {
 
   const elements = useMemo(() => {
     return profiles.map((item: TProfile, index) => {
-<<<<<<< HEAD
       return (
         <ProfileThumb 
           key={item._id + index}
@@ -71,10 +70,6 @@ export default function MainPage () {
           {...item.profile}
         />
       )
-=======
-      console.log(item)
-      return <ProfileThumb key={item._id + index} {...item} />
->>>>>>> feet/infoBlock
     })
   }, [profiles]);
   
