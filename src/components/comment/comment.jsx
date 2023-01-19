@@ -15,8 +15,11 @@ import { deleteComment, getComment, postComment } from '../../services/utils/api
 import { setQty } from '../../services/utils/utils';
 import { useForm } from '../../hooks/useForm';
 
-export default function Comment({target, access}) {
-  const [ rules, setRules ] = useState('admin'); //vals: 'admin, 'owner', 'user'
+// target - ид пользователя, rules: 'admin' | 'owner' | 'user', в зависимости от того,
+// кто открывает комменты. Не похоже, что сервак фильтрует по job/hobby/т.д., так что,
+// видимо, это надо делать прямо в элементе.
+export default function Comment({target, rules}) {
+  // const [ rules, setRules ] = useState('admin');
   const [ comments, setComments ] = useState(null);
   const [ smiles, setSmiles ] = useState([
     {
