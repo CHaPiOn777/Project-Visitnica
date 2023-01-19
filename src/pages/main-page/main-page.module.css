@@ -33,19 +33,7 @@
   text-align: center;
 }
 
-@media screen and (max-width: 768px) {
-  .main {
-    padding: 0 32px;
-  }
-
-  .lead {
-    margin: 8px 0 32px;
-  }
-
-  .gallery {
-    gap: 31px 20px;
-  }
-}
+ 
 
 @media screen and (max-width: 320px) {
   .main {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 import styles from './detailPage.module.css';
 import ava from '../../images/Avatarka.jpg';
@@ -14,16 +14,31 @@ export const DetailPage = () => {
   const prodId = params.id;
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [style, setStyle] = useState();
 
   useEffect(() => {
     setIsLoading(true);
     getUserInfo(prodId)
       .then(res => {
         setUser(res);
+        setStyle(res.profile.template)
         setIsLoading(false);
       })
-  }, [])
-  console.log(user)
+  }, []);
+
+
+  const styleAvatar = useCallback(() => {
+    return style === 'romantic' ? styles.avaRomantic : style === 'cocky' ? styles.avaCocky : styles.ava
+  }, [style])
+
+  const styleBlockInfo = useCallback(() => {
+    return style === 'romantic' ? styles.blockRomantic : style === 'cocky' ? styles.blockCocky : styles.block
+  }, [style])
+  
+  const styleBlockquote = useCallback(() => {
+    return style === 'romantic' ? styles.blockquoteRomantic : styles.blockquote
+  }, [style])
+
   return (
     <>
       {!isLoading ?
@@ -49,15 +64,15 @@ export const DetailPage = () => {
             </li>
           </ul>
           <div className={styles.wrapperAva}>
-            <img src={user.profile.photo} alt="аватарка" className={styles.ava} />
+            <img src={user.profile.photo} alt="аватарка" className={styleAvatar()} />
           </div>
-          <div className="citates">
+          <div className={styles.citates}>
             <img src={qotes} alt="Кавычки" />
-            <blockquote className={styles.blockquote}>{user.profile.quote}</blockquote>
+            <blockquote className={styleBlockquote()}>{user.profile.quote}</blockquote>
           </div>
           <div className={styles.blocks}>
 
-            <div className={styles.block}>
+            <div className={styleBlockInfo()}>
               <h3 className={styles.blockTitle}>Увлечения</h3>
               <div className={styles.blockImgWrapper}>
                 <img src={user.info.hobby.image} alt="Увлечения" className={styles.blockImg} />
@@ -65,7 +80,7 @@ export const DetailPage = () => {
               <p className={styles.blockText}>{user.info.hobby.text}</p>
             </div>
 
-            <div className={styles.block}>
+            <div className={styleBlockInfo()}>
               <h3 className={styles.blockTitle}>Семья</h3>
               <div className={styles.blockImgWrapper}>
                 <img src={user.info.status.image} alt="Семья" className={styles.blockImg} />
@@ -73,7 +88,7 @@ export const DetailPage = () => {
               <p className={styles.blockText}>{user.info.status.text}</p>
             </div>
 
-            <div className={styles.block}>
+            <div className={styleBlockInfo()}>
               <h3 className={styles.blockTitle}>Сфера</h3>
               <div className={styles.blockImgWrapper}>
                 <img src={user.info.job.image} alt="Сфера деятельности" className={styles.blockImg} />
@@ -81,7 +96,7 @@ export const DetailPage = () => {
               <p className={styles.blockText}>{user.info.job.text}</p>
             </div>
 
-            <div className={styles.block}>
+            <div className={styleBlockInfo()}>
               <h3 className={styles.blockTitle}>Учеба</h3>
               <div className={styles.blockImgWrapper}>
                 <img src={user.info.edu.image} alt="Учеба" className={styles.blockImg} />
