@@ -13,3 +13,19 @@
 		url('./fonts/IBMPlexSans-Regular.woff') format('woff'); /* Firefox >= 3.6, any other modern browser */
 	font-weight: normal;
 }
+
+@font-face {
+	font-family: 'YS Text';
+	src: 
+		url('./fonts/YandexSansText-Medium.woff2') format('woff2'), /* Super Modern Browsers */
+		url('./fonts/YandexSansText-Medium.woff') format('woff'); /* Firefox >= 3.6, any other modern browser */
+	font-weight: 500;
+}
+
+@font-face {
+	font-family: 'YS Text';
+	src: 
+		url('./fonts/YandexSansText-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+		url('./fonts/YandexSansText-Regular.woff') format('woff'); /* Firefox >= 3.6, any other modern browser */
+	font-weight: normal;
+}
