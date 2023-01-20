@@ -80,12 +80,12 @@ function App() {
           <ProtectedRoute path="/cohort/:cohort" auth="curator">
             <MainPage />
           </ProtectedRoute>
-          <Route path='/students'>
+          <ProtectedRoute path='/students' auth="curator">
             <StudentsPage />
-          </Route>
-          <Route path='/comments'>
+            </ProtectedRoute>
+          <ProtectedRoute path='/comments' auth="curator">
             <CommentsPage />
-          </Route>
+          </ProtectedRoute>
           <Route path='/map' exact={true}>
             <MapPage />
           </Route>

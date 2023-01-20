@@ -4,7 +4,7 @@ import getUserProfile from "../../services/utils/api/get-user-profile";
 import LoadingIcon from "../loading-icon/loading-icon";
 
 interface TProtectedProps extends RouteProps {
-  auth: string;
+  auth?: string;
   path: string;
   redirect?: string;
 }
@@ -15,11 +15,19 @@ export default function ProtectedRoute ({path, auth, redirect, children, ...prop
 
   useEffect(() => {
     setLoading(true);
-    getUserProfile().then((res) => {
-      setRole(res.role);
-      setLoading(false);
-    });
+    if (localStorage.getItem('accessToken')) { 
+      getUserProfile().then((res) => {
+        setRole(res.role);
+        setLoading(false);
+      });
+    }
   }, [])
+  
+  if (!localStorage.getItem('accessToken')) {
+    return (
+      <Redirect to='/login' />
+    );
+  }
   
   if (loading) {
     return (
@@ -33,5 +41,5 @@ export default function ProtectedRoute ({path, auth, redirect, children, ...prop
     <Route path={path} {...props}>
       {auth === role ? children : <Redirect to={redirect ? redirect : '/missing'} />}
     </Route>
-  )
+  );
 }
