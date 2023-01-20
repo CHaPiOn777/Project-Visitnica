@@ -17,6 +17,7 @@ import Comment from '../comment/comment';
 import PurpleBtn from '../btn/btn';
 import MapPage from '../../pages/map/map';
 import NotFound from '../../pages/not-found/not-found';
+import { ProfileEdit } from '../../pages/profile-edit/profile-edit';
 
 function App() {
   const [name, setName] = useState();
@@ -76,6 +77,9 @@ function App() {
           </Route>
           <Route path='/login' exact={true}>
             <LoginPage />
+          </Route>
+          <Route path='/profile'>
+            <ProfileEdit />
           </Route>
           <ProtectedRoute path="/cohort/:cohort" auth="curator">
             <MainPage />
