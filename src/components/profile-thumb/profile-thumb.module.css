@@ -1,0 +1,82 @@
+.container {
+  position: relative;
+  color: #100c34;
+  cursor: pointer;
+}
+
+.container:hover {
+  color: #ff00a8;
+}
+
+.container:hover .image-border::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: '';
+  outline: 2px solid #ff00a8;
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.container:hover .chat-icon {
+  visibility: visible;
+}
+
+.link-overlay {
+  text-decoration: none;
+  color: inherit;
+}
+
+.image-border {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.chat-icon {
+  position: absolute;
+  top: 19px;
+  right: 19px;
+  z-index: 2;
+  visibility: hidden;
+}
+
+.comment-counter {
+  position: absolute;
+  padding: 2px 3px;
+  min-width: 13px;
+  top: -10px;
+  left: 11px;
+  border-radius: 10px;
+  background: #100c34;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  filter: grayscale(1);
+}
+
+.name {
+  margin: 8px 0 7px;
+  font-size: 20px;
+  color: inherit;
+}
+
+.city {
+  margin: 0;
+  font-size: 16px;
+  color: #a3a3a3;
+}
+
+@media screen and (max-width: 768px) {
+  .chat-icon {
+    visibility: visible;
+  }
+}
