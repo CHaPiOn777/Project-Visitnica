@@ -39,7 +39,7 @@ export default function ProtectedRoute ({path, auth, redirect, children, ...prop
 
   return (
     <Route path={path} {...props}>
-      {auth === role ? children : <Redirect to={redirect ? redirect : '/missing'} />}
+      {(!auth || auth === role) ? children : <Redirect to={redirect ? redirect : '/missing'} />}
     </Route>
   );
 }

@@ -52,7 +52,7 @@ function App() {
     <div className={styles.page}>
       <Header user={{ name, avatar }} />
         <Switch>
-          <Route path={'/'} exact={true}>
+          <ProtectedRoute path={'/'} exact={true} auth="student" redirect="cohort/web+16">
             <MainPage />
             {
               /*<>
@@ -73,7 +73,7 @@ function App() {
             </>*/
             }
 
-          </Route>
+          </ProtectedRoute>
           <Route path='/login' exact={true}>
             <LoginPage />
           </Route>
@@ -86,9 +86,9 @@ function App() {
           <ProtectedRoute path='/comments' auth="curator">
             <CommentsPage />
           </ProtectedRoute>
-          <Route path='/map' exact={true}>
+          <ProtectedRoute path='/map' exact={true}>
             <MapPage />
-          </Route>
+          </ProtectedRoute>
           <Route path="*">
             <NotFound />
           </Route>
