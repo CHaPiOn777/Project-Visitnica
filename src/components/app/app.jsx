@@ -54,14 +54,6 @@ function App() {
         <Switch>
           <Route path={'/'} exact={true}>
             <MainPage />
-            {
-              /*<>
-                <div style={{ fontWeight: 500, fontSize: 60 }}>
-                  Шрифты подключены на 400, 500 и 700
-                </div>
-                <Input />
-              </>*/
-            }
             <>
               <div style={{ fontWeight: 500, fontSize: 60 }}>
                 Шрифты подключены

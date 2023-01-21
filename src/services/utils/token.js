@@ -7,7 +7,6 @@ export function refreshToken() {
   if (!isValid) {
     getToken();
   }
-  debugger
 }
 
 export function getToken(user) {

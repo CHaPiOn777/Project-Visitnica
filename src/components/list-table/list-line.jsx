@@ -3,27 +3,28 @@ import deletePic from './../../images/delete.svg';
 import { useEffect, useState } from 'react';
 
 import { useLocation } from 'react-router';
-import { getCommentsRequest, getStudentsRequest } from '../../services/utils/api/tokenApi';
+// import { getCommentsRequest } from '../../services/utils/api/tokenApi';
+import { getStudentsRequest } from '../../services/utils/api/get-students';
+import { getCommentsRequest } from '../../services/utils/api/get-comments';
 
-export const ListLine = () => {
-  const [users, setUsers] = useState(null);
-  const [comments, setComments] = useState(null);
+export const ListLine = ({ array, setFunc }) => {
   const location = useLocation();
 
   useEffect(() => {
     if (location.pathname === '/students') {
-      getStudentsRequest()
-        .then(res => setUsers(res.items));
+      getStudentsRequest({})
+        .then(res => setFunc(res.items));
     }
     if (location.pathname === '/comments') {
-      getCommentsRequest()
-        .then(res => {debugger
-          setComments(res.items)});
+      getCommentsRequest({})
+        .then(res => {
+          setFunc(res.items)
+        });
     }
-  }, [users?.length])
-  if (users?.length) {
+  }, [array?.length])
+  if (array?.length && location.pathname === '/students' ) {
     return (
-      users.map(user => {
+      array.map(user => {
         return (
           <tr className={styles.line} key={user._id}>
             <td className={styles.line}>{user.cohort}</td>
@@ -34,9 +35,9 @@ export const ListLine = () => {
       })
     )
   }
-  if (comments?.length) {
+  if (array?.length && location.pathname === '/comments') {
     return (
-      comments.map(comment => {
+      array.map(comment => {
         return (
           <tr className={styles.line} key={comment._id}>
             <td className={styles.line}>{comment.cohort}</td>
@@ -45,6 +46,9 @@ export const ListLine = () => {
             <td className={styles.line}>{comment.to.name}</td>
             <td className={styles.line}>{comment.target}</td>
             <td className={styles.line}>{comment.text}</td>
+            <td className={styles.button_container}>
+              <button className={styles.button} style={{ backgroundImage: `url(${deletePic})` }} ></button>
+            </td>
           </tr >
         )
       })
