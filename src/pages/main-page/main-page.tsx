@@ -38,8 +38,9 @@ export default function MainPage () {
           setIsLoading(false);
         }
       }).catch((err) => {
+        setIsLoading(false);
         console.error(`Ошибка загрузки профилей пользователей: ${err}`);
-      })
+      });
     });
   }, []);
 
@@ -59,7 +60,10 @@ export default function MainPage () {
         setProfiles(arr);
 
         setIsLoading(false);
-      })
+      }).catch((err) => {
+        setIsLoading(false);
+        console.error(`Ошибка подгрузки профилей пользователей: ${err}`);
+      });
     }
   }, [isAtBottom]);
 
