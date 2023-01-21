@@ -1,0 +1,234 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 40px auto;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: none;
+  max-width: 440px;
+  padding: 0;
+  margin: 0;
+}
+
+.avatarLabel {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 1px solid rgba(16, 12, 52, 1);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.avatar {
+  position: relative;
+  z-index: 3;
+  width: 150px;
+  height: 150px;
+}
+
+.fileInput {
+  display: none;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.text {
+  margin: 0;
+  padding: 0;
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  font-feature-settings: "pnum" on, "lnum" on;
+  text-align: center;
+}
+
+.note {
+  margin: 0;
+  padding: 0;
+  font-family: "YS Text";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  font-feature-settings: "pnum" on, "lnum" on;
+  text-align: center;
+  color: rgba(131, 130, 143, 1);
+  margin-bottom: 11px;
+}
+
+.uploadButton {
+  background-color: rgba(16, 12, 52, 0.05);
+  transition: background-color 0.5s ease;
+  width: 150px;
+  height: 33px;
+  position: absolute;
+  bottom: 0;
+  background-image: url(../../images/Union.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 1;
+}
+
+.avatarLabel:hover .uploadButton {
+  background-color: rgba(16, 12, 52, 0.15);
+  z-index: 4;
+}
+
+.textarea {
+  width: 440px;
+  height: 118px;
+  border: 1px solid #100c34;
+  border-radius: 4px;
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  resize: none;
+  background: none;
+  color: #100c34;
+}
+
+.textInput {
+  width: 440px;
+  height: 48px;
+  border: 1px solid #100c34;
+  border-radius: 4px;
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  background: none;
+  /* text-dark */
+  color: #100c34;
+}
+
+.profileSaveButton {
+  width: 100%;
+  padding: 20px 132px;
+  gap: 8px;
+  background: linear-gradient(269.17deg, #3b23b7 30.28%, #c914e7 63.24%);
+  border-radius: 4px;
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  text-align: center;
+  color: #f0f0f0;
+  border: none;
+}
+
+.submitContainer {
+  display: flex;
+  border: none;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+}
+
+.input {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #100c34;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  position: relative;
+}
+
+.fileUpload {
+  width: 440px;
+  height: 48px;
+  border: 1px solid #100c34;
+  border-radius: 4px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  background: none;
+  color: #100c34;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.textInput:hover {
+  border: 1px solid #666666;
+}
+
+.textInput:focus {
+  outline: none;
+  border: 1px solid #666666;
+  filter: drop-shadow(0px 0px 4px rgba(78, 59, 255, 0.25));
+}
+
+.textarea:hover {
+  border: 1px solid #666666;
+}
+
+.textarea:focus {
+  outline: none;
+  border: 1px solid #666666;
+  filter: drop-shadow(0px 0px 4px rgba(78, 59, 255, 0.25));
+}
+
+.fileUpload:hover {
+  border: 1px solid #666666;
+}
+
+.stroke {
+  width: 16.24px;
+  height: 19.07px;
+}
+
+.filesNote {
+  position: absolute;
+  left: 0;
+  bottom: -22px;
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #100c34;
+}
+
+.error {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #e90d41;
+  position: absolute;
+  left: 0;
+  bottom: -20px;
+}
