@@ -53,7 +53,7 @@ function App() {
     <div className={styles.page}>
       <Header user={{ name, avatar }} />
         <Switch>
-          <Route path={'/'} exact={true}>
+          <ProtectedRoute path={'/'} exact={true} auth="student" redirect="cohort/web+16">
             <MainPage />
             {
               /*<>
@@ -61,9 +61,7 @@ function App() {
                   Шрифты подключены на 400, 500 и 700
                 </div>
                 <Input />
-              </>*/
-            }
-            <>
+              </>            <>
               <div style={{ fontWeight: 500, fontSize: 60 }}>
                 Шрифты подключены
               </div>
@@ -73,8 +71,10 @@ function App() {
               <PurpleBtn text='Test' />
               <Comment />
               <Input />
-            </>
-          </Route>
+            </>*/
+            }
+
+          </ProtectedRoute>
           <Route path='/login' exact={true}>
             <LoginPage />
           </Route>
@@ -84,15 +84,15 @@ function App() {
           <ProtectedRoute path="/cohort/:cohort" auth="curator">
             <MainPage />
           </ProtectedRoute>
-          <Route path='/students'>
+          <ProtectedRoute path='/students' auth="curator">
             <StudentsPage />
-          </Route>
-          <Route path='/comments'>
+            </ProtectedRoute>
+          <ProtectedRoute path='/comments' auth="curator">
             <CommentsPage />
-          </Route>
-          <Route path='/map' exact={true}>
+          </ProtectedRoute>
+          <ProtectedRoute path='/map' exact={true}>
             <MapPage />
-          </Route>
+          </ProtectedRoute>
           <Route path="*">
             <NotFound />
           </Route>
