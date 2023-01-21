@@ -1,15 +1,25 @@
 import styles from './list-line.module.css'
 import deletePic from './../../images/delete.svg';
-import { useEffect, useState } from 'react';
-
+import { useEffect } from 'react';
 import { useLocation } from 'react-router';
-// import { getCommentsRequest } from '../../services/utils/api/tokenApi';
 import { getStudentsRequest } from '../../services/utils/api/get-students';
-import { getCommentsRequest } from '../../services/utils/api/get-comments';
+import { deletecommentRequest, getCommentsRequest } from '../../services/utils/api/admin-comments';
 
+// компонент универсальный, в зависимости от роута заполняет таблицу данными
+// принимает массив данных (студентов или сообщений) и 
+// функцию изменения массива (переданы из компонентов страниц setStudents или setComments)
 export const ListLine = ({ array, setFunc }) => {
   const location = useLocation();
-
+  const deleteHandler = (id, index) => {
+    deletecommentRequest(id)
+    .then(res=> {
+      // на запрос delete сервер отвечвет НИЧЕГО,  поэтому здесь я удаляю сообщение для отображения
+      const existingComments = array.slice(0, index).concat(array.slice(index+1, array.length))
+      setFunc(existingComments);
+    })
+    debugger
+  };
+  
   useEffect(() => {
     if (location.pathname === '/students') {
       getStudentsRequest({})
@@ -21,7 +31,7 @@ export const ListLine = ({ array, setFunc }) => {
           setFunc(res.items)
         });
     }
-  }, [array?.length])
+  }, [])
   if (array?.length && location.pathname === '/students' ) {
     return (
       array.map(user => {
@@ -37,7 +47,7 @@ export const ListLine = ({ array, setFunc }) => {
   }
   if (array?.length && location.pathname === '/comments') {
     return (
-      array.map(comment => {
+      array.map((comment, index) => {
         return (
           <tr className={styles.line} key={comment._id}>
             <td className={styles.line}>{comment.cohort}</td>
@@ -47,7 +57,7 @@ export const ListLine = ({ array, setFunc }) => {
             <td className={styles.line}>{comment.target}</td>
             <td className={styles.line}>{comment.text}</td>
             <td className={styles.button_container}>
-              <button className={styles.button} style={{ backgroundImage: `url(${deletePic})` }} ></button>
+              <button className={styles.button} style={{ backgroundImage: `url(${deletePic})` }} onClick={()=>(deleteHandler(comment._id, index))}></button>
             </td>
           </tr >
         )

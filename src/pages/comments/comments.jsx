@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { CommentsTable } from '../../components/comments-table/comments-table';
 import { Filter } from '../../components/filter/filter';
 import { ListTable } from '../../components/list-table/list-table';
 import { ToggleNavigator } from '../../components/navigator/navigator';
-import { getCommentsRequest } from '../../services/utils/api/get-comments';
+import { getCommentsRequest } from '../../services/utils/api/admin-comments';
 import styles from './comments.module.css';
 
 export default function CommentsPage() {
@@ -15,12 +14,11 @@ export default function CommentsPage() {
       getCommentsRequest({})
         .then(res => setComments(res.items));
 
-  }, [header.length, comments?.length])
+  }, [header.length])
   return(
     <main className={styles.main}>
       <ToggleNavigator />
       <Filter setFunc={setComments}/>
-      {/* <CommentsTable /> */}
       <ListTable header={header} array={comments} setFunc={setComments} />
     </main>
   )

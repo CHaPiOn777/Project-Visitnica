@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { getCommentsRequest } from '../../services/utils/api/get-comments';
+import { getCommentsRequest } from '../../services/utils/api/admin-comments';
 import { getStudentsRequest } from '../../services/utils/api/get-students';
 import styles from './filter.module.css';
 
