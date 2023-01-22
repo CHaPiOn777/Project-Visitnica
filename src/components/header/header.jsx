@@ -7,9 +7,9 @@ export const Header = ({ user }) => {
   
   return (
       <header className={styles.header}>
-      <Link to="/">
-        <img src={logo} alt='visitki' className={styles.logo} />
-      </Link>
+        <Link to="/">
+          <img src={logo} alt='visitki' className={styles.logo} />
+        </Link>
            { name ? (<div className={styles.user}>
               <div className={styles.photo} style={{backgroundImage: `url(https://avatars.yandex.net/get-yapic/${avatar}/islands-34)`}} ></div>
               <p className={styles.name} >{name}</p>
