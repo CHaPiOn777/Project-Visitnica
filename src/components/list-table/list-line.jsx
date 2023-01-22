@@ -20,15 +20,27 @@ export const ListLine = ({ array, setFunc }) => {
         setFunc(existingComments);
       })
   };
+
+  //подсвечивает остальные ячейки в редактируемой строке
+  const onClick = (evt) => {
+    const changedLine = Array.from(evt.target.closest('tr').children);
+    changedLine.map(el => {
+      if (el !== evt.target.parentElement) { el.children[0].classList.add(`${styles.changed_line}`) }
+    })
+  }
+
+  // по Enter отправляет измененную информацию
   const submitHandler = (key, id) => {
     const changedElement = key.target;
-    const changedLine = key.target.parentElement.children;
+    //из HTMLCollection (измененная строка) сделала массив
+    const changedLine = Array.from(key.target.closest('tr').children);
+    changedLine.map(el => {
+      if (el.children[0] !== changedElement) { el.children[0].classList.remove(`${styles.changed_line}`) }
+    })
     if (key.keyCode === 13) {
       key.preventDefault();
-      //debugger
       changedElement.setAttribute('contentEditable', 'false');
-      //из HTMLCollection (измененная строка) сделала массив, взяла значение из каждого поля
-      const [cohort, email, name] = Array.from(changedLine).map(el => el.innerText);
+      const [cohort, email, name] = changedLine.map(el => el.innerText);
       const newData = {
         id: id,
         cohort,
@@ -43,6 +55,9 @@ export const ListLine = ({ array, setFunc }) => {
     }
     if (key.keyCode === 27) {
       changedElement.setAttribute('contentEditable', 'false');
+      changedLine.map(el => {
+        if (el.children[0] !== changedElement) { el.children[0].classList.remove(`${styles.changed_line}`) }
+      })
       changedElement.setAttribute('contentEditable', 'true');
     }
   }
@@ -64,26 +79,31 @@ export const ListLine = ({ array, setFunc }) => {
       array.map(user => {
         return (
           <tr className={styles.line} style={{ cursor: 'pointer' }} key={user._id} >
-            <td
-              className={styles.line}
-              contentEditable={true}
-              suppressContentEditableWarning={true}
-              onKeyDown={(key) => submitHandler(key, user._id)} >
-              {user.cohort}
+            <td className={styles.line} >
+              <div contentEditable={true}
+                suppressContentEditableWarning={true}
+                onClick={onClick}
+                onKeyDown={(key) => submitHandler(key, user._id)}>
+                {user.cohort}
+              </div>
             </td>
-            <td
-              className={styles.line}
-              contentEditable={true}
-              suppressContentEditableWarning={true}
-              onKeyDown={(key) => submitHandler(key, user._id)} >
-              {user.email}
+            <td className={styles.line} >
+              <div
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onClick={onClick}
+                onKeyDown={(key) => submitHandler(key, user._id)} >
+                {user.email}
+              </div>
             </td>
-            <td
-              className={styles.line}
-              contentEditable={true}
-              suppressContentEditableWarning={true}
-              onKeyDown={(key) => submitHandler(key, user._id)} >
-              {user.name}
+            <td className={styles.line} >
+              <div
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onClick={onClick}
+                onKeyDown={(key) => submitHandler(key, user._id)} >
+                {user.name}
+              </div>
             </td>
           </tr >
         )
