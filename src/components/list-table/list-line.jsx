@@ -2,7 +2,7 @@ import styles from './list-line.module.css'
 import deletePic from './../../images/delete.svg';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
-import { getStudentsRequest } from '../../services/utils/api/get-students';
+import { getStudentsRequest, putStudentInfoRequest } from '../../services/utils/api/admin-students';
 import { deletecommentRequest, getCommentsRequest } from '../../services/utils/api/admin-comments';
 
 // компонент универсальный, в зависимости от роута заполняет таблицу данными
@@ -20,12 +20,19 @@ export const ListLine = ({ array, setFunc }) => {
         setFunc(existingComments);
       })
   };
-  const onClick = () => {
-    debugger
-    return (
-      null
-    )
-
+  const submitHandler = (key, id) => {
+    if (key.keyCode === 13) {
+      key.preventDefault();
+      //из HTMLCollection (измененная строка) сделала массив, взяла значение из каждого поля
+      const [cohort, email, name] = Array.from(key.target.parentElement.children).map(el => el.innerText);
+      const newData = {
+        id: id,
+        cohort,
+        email,
+        name
+      }
+      putStudentInfoRequest(newData) // сервер возвращает неизмененного студента, поэтому дальше ничего не делала 
+    }
   }
 
   useEffect(() => {
@@ -45,9 +52,27 @@ export const ListLine = ({ array, setFunc }) => {
       array.map(user => {
         return (
           <tr className={styles.line} style={{ cursor: 'pointer' }} key={user._id} >
-            <td className={styles.line} contentEditable={true} >{user.cohort}</td>
-            <td className={styles.line} contentEditable={true} >{user.email}</td>
-            <td className={styles.line} contentEditable={true} >{user.name}</td>
+            <td
+              className={styles.line}
+              contentEditable={true}
+              suppressContentEditableWarning={true}
+              onKeyDown={(key) => submitHandler(key, user._id)} >
+              {user.cohort}
+            </td>
+            <td
+              className={styles.line}
+              contentEditable={true}
+              suppressContentEditableWarning={true}
+              onKeyDown={(key) => submitHandler(key, user._id)} >
+              {user.email}
+            </td>
+            <td
+              className={styles.line}
+              contentEditable={true}
+              suppressContentEditableWarning={true}
+              onKeyDown={(key) => submitHandler(key, user._id)} >
+              {user.name}
+            </td>
           </tr >
         )
       })

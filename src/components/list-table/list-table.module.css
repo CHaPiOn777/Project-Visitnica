@@ -1,6 +1,7 @@
 .container {
   padding-top: 60px;
-
+  padding-bottom: 13px;
+  min-height: 100vh - 80px;
 }
 
 .table {

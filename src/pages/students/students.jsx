@@ -3,7 +3,7 @@ import styles from './students.module.css';
 import { Filter } from "../../components/filter/filter";
 import { ToggleNavigator } from "../../components/navigator/navigator";
 import { ListTable } from '../../components/list-table/list-table';
-import { getStudentsRequest } from '../../services/utils/api/get-students';
+import { getStudentsRequest } from '../../services/utils/api/admin-students';
 
 // кураторская страница редактирования информации о студентах
 export default function StudentsPage() {
