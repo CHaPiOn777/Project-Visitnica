@@ -79,12 +79,12 @@ function App() {
         <Route path='/login' exact={true}>
           <LoginPage />
         </Route>
-        <Route path={'/detailinfo/:id'} exact={true}>
+        <ProtectedRoute path={'/detailinfo/:id'} exact={true}>
           <DetailPage />
-        </Route>
-        <Route path='/profile'>
+        </ProtectedRoute>
+        <ProtectedRoute path='/profile'>
           <ProfileEdit />
-        </Route>
+        </ProtectedRoute>
         <ProtectedRoute path="/cohort/:cohort" auth="curator">
           <MainPage />
         </ProtectedRoute>
