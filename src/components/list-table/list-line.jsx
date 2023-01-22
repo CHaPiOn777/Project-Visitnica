@@ -21,17 +21,29 @@ export const ListLine = ({ array, setFunc }) => {
       })
   };
   const submitHandler = (key, id) => {
+    const changedElement = key.target;
+    const changedLine = key.target.parentElement.children;
     if (key.keyCode === 13) {
       key.preventDefault();
+      //debugger
+      changedElement.setAttribute('contentEditable', 'false');
       //из HTMLCollection (измененная строка) сделала массив, взяла значение из каждого поля
-      const [cohort, email, name] = Array.from(key.target.parentElement.children).map(el => el.innerText);
+      const [cohort, email, name] = Array.from(changedLine).map(el => el.innerText);
       const newData = {
         id: id,
         cohort,
         email,
         name
       }
-      putStudentInfoRequest(newData) // сервер возвращает неизмененного студента, поэтому дальше ничего не делала 
+      // сервер возвращает неизмененного студента, поэтому дальше с данными ничего не делала 
+      putStudentInfoRequest(newData)
+        .then(res => {
+          changedElement.setAttribute('contentEditable', 'true');
+        })
+    }
+    if (key.keyCode === 27) {
+      changedElement.setAttribute('contentEditable', 'false');
+      changedElement.setAttribute('contentEditable', 'true');
     }
   }
 
