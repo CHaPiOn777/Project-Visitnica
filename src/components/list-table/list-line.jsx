@@ -23,11 +23,18 @@ export const ListLine = ({ array, setFunc }) => {
 
   //подсвечивает остальные ячейки в редактируемой строке
   const onClick = (evt) => {
-    const changedLine = Array.from(evt.target.closest('tr').children);
+    const changedLine = Array.from(evt.currentTarget.children);
+    const hightLights = Array.from(document.querySelectorAll(`.${styles.changed_line}`));
+    if (hightLights.length) {
+      hightLights.map(el => el.classList.remove(`${styles.changed_line}`))
+    }
     changedLine.map(el => {
       if (el !== evt.target.parentElement) { el.children[0].classList.add(`${styles.changed_line}`) }
     })
   }
+
+
+
 
   // по Enter отправляет измененную информацию
   const submitHandler = (key, id) => {
@@ -78,11 +85,10 @@ export const ListLine = ({ array, setFunc }) => {
     return (
       array.map(user => {
         return (
-          <tr className={styles.line} style={{ cursor: 'pointer' }} key={user._id} >
+          <tr className={styles.line} style={{ cursor: 'pointer' }} key={user._id} onClick={onClick}>
             <td className={styles.line} >
               <div contentEditable={true}
                 suppressContentEditableWarning={true}
-                onClick={onClick}
                 onKeyDown={(key) => submitHandler(key, user._id)}>
                 {user.cohort}
               </div>
@@ -91,7 +97,6 @@ export const ListLine = ({ array, setFunc }) => {
               <div
                 contentEditable={true}
                 suppressContentEditableWarning={true}
-                onClick={onClick}
                 onKeyDown={(key) => submitHandler(key, user._id)} >
                 {user.email}
               </div>
@@ -100,7 +105,6 @@ export const ListLine = ({ array, setFunc }) => {
               <div
                 contentEditable={true}
                 suppressContentEditableWarning={true}
-                onClick={onClick}
                 onKeyDown={(key) => submitHandler(key, user._id)} >
                 {user.name}
               </div>
