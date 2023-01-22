@@ -28,20 +28,17 @@ export const ListLine = ({ array, setFunc }) => {
     if (hightLights.length) {
       hightLights.map(el => el.classList.remove(`${styles.changed_line}`))
     }
-    changedLine.map(el => {
+    changedLine.forEach(el => {
       if (el !== evt.target.parentElement) { el.children[0].classList.add(`${styles.changed_line}`) }
     })
   }
-
-
-
 
   // по Enter отправляет измененную информацию
   const submitHandler = (key, id) => {
     const changedElement = key.target;
     //из HTMLCollection (измененная строка) сделала массив
     const changedLine = Array.from(key.target.closest('tr').children);
-    changedLine.map(el => {
+    changedLine.forEach(el => {
       if (el.children[0] !== changedElement) { el.children[0].classList.remove(`${styles.changed_line}`) }
     })
     if (key.keyCode === 13) {
@@ -62,7 +59,7 @@ export const ListLine = ({ array, setFunc }) => {
     }
     if (key.keyCode === 27) {
       changedElement.setAttribute('contentEditable', 'false');
-      changedLine.map(el => {
+      changedLine.forEach(el => {
         if (el.children[0] !== changedElement) { el.children[0].classList.remove(`${styles.changed_line}`) }
       })
       changedElement.setAttribute('contentEditable', 'true');
@@ -80,7 +77,7 @@ export const ListLine = ({ array, setFunc }) => {
           setFunc(res.items)
         });
     }
-  }, [])
+  }, [location.pathname, setFunc])
   if (array?.length && location.pathname === '/students') {
     return (
       array.map(user => {
