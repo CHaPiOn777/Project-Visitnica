@@ -7,7 +7,6 @@ type TCitySelectorProps = {
 
 export default function CitySelector (props: TCitySelectorProps) {
   const options = props.cities ? Array.from(props.cities).sort() : null;
-  console.log(options);
   const optElements = options?.map((item) => {
     return (
       <option key={item} value={item}>{item}</option>
