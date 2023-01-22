@@ -4,7 +4,7 @@ import { getStudentsRequest } from '../../services/utils/api/get-students';
 import styles from './filter.module.css';
 
 
-
+// фильтр отправляет запрос, но приходит неизмененный ответ.
 export const Filter =  ({ setFunc }) => {
   const location = useLocation();
   const onSubmit = (evt) => {

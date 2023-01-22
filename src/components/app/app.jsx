@@ -17,6 +17,8 @@ import Comment from '../comment/comment';
 import PurpleBtn from '../btn/btn';
 import MapPage from '../../pages/map/map';
 import NotFound from '../../pages/not-found/not-found';
+import { DetailPage } from '../../pages/detailPage/detailPage';
+import { ProfileEdit } from '../../pages/profile-edit/profile-edit';
 
 function App() {
   const [name, setName] = useState();
@@ -35,7 +37,7 @@ function App() {
             setName(userData.name)
             setAvatar(userData.avatar_id)
           }
-    })
+        })
     }
     if (getCookie('accessToken') && localStorage.getItem('accessToken')) {
       const userData = JSON.parse(localStorage.getItem('accessToken'));
@@ -51,40 +53,54 @@ function App() {
   return (
     <div className={styles.page}>
       <Header user={{ name, avatar }} />
-        <Switch>
-          <Route path={'/'} exact={true}>
-            <MainPage />
-            <>
+      <Switch>
+        <ProtectedRoute path={'/'} exact={true} auth="student" redirect="cohort/web+16">
+          <MainPage />
+          {
+            /*<>
               <div style={{ fontWeight: 500, fontSize: 60 }}>
-                Шрифты подключены
+                Шрифты подключены на 400, 500 и 700
               </div>
-              <div style={{ fontWeight: 400, fontSize: 60 }}>
-                на 400 и 500 =)
-              </div>
-              <PurpleBtn text='Test' />
-              <Comment />
               <Input />
-            </>
-          </Route>
-          <Route path='/login' exact={true}>
-            <LoginPage />
-          </Route>
-          <ProtectedRoute path="/cohort/:cohort" auth="curator">
-            <MainPage />
-          </ProtectedRoute>
-          <Route path='/students'>
-            <StudentsPage />
-          </Route>
-          <Route path='/comments'>
-            <CommentsPage />
-          </Route>
-          <Route path='/map' exact={true}>
-            <MapPage />
-          </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
-        </Switch>
+            </>            <>
+            <div style={{ fontWeight: 500, fontSize: 60 }}>
+              Шрифты подключены
+            </div>
+            <div style={{ fontWeight: 400, fontSize: 60 }}>
+              на 400 и 500 =)
+            </div>
+            <PurpleBtn text='Test' />
+            <Comment />
+            <Input />
+          </>*/
+          }
+
+        </ProtectedRoute>
+        <Route path='/login' exact={true}>
+          <LoginPage />
+        </Route>
+        <Route path={'/detailinfo/:id'} exact={true}>
+          <DetailPage />
+        </Route>
+        <Route path='/profile'>
+          <ProfileEdit />
+        </Route>
+        <ProtectedRoute path="/cohort/:cohort" auth="curator">
+          <MainPage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/students' auth="curator">
+          <StudentsPage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/comments' auth="curator">
+          <CommentsPage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/map' exact={true}>
+          <MapPage />
+        </ProtectedRoute>
+        <Route path="*">
+          <NotFound />
+        </Route>
+      </Switch>
       <Footer />
     </div>
   );

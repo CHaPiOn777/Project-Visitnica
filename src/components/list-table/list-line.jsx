@@ -10,16 +10,24 @@ import { deletecommentRequest, getCommentsRequest } from '../../services/utils/a
 // функцию изменения массива (переданы из компонентов страниц setStudents или setComments)
 export const ListLine = ({ array, setFunc }) => {
   const location = useLocation();
+
+  //удаление комментария
   const deleteHandler = (id, index) => {
     deletecommentRequest(id)
-    .then(res=> {
-      // на запрос delete сервер отвечвет НИЧЕГО,  поэтому здесь я удаляю сообщение для отображения
-      const existingComments = array.slice(0, index).concat(array.slice(index+1, array.length))
-      setFunc(existingComments);
-    })
-    debugger
+      .then(res => {
+        // на запрос delete сервер отвечвет НИЧЕГО,  поэтому здесь я удаляю сообщение для отображения
+        const existingComments = array.slice(0, index).concat(array.slice(index + 1, array.length))
+        setFunc(existingComments);
+      })
   };
-  
+  const onClick = () => {
+    debugger
+    return (
+      null
+    )
+
+  }
+
   useEffect(() => {
     if (location.pathname === '/students') {
       getStudentsRequest({})
@@ -32,14 +40,14 @@ export const ListLine = ({ array, setFunc }) => {
         });
     }
   }, [])
-  if (array?.length && location.pathname === '/students' ) {
+  if (array?.length && location.pathname === '/students') {
     return (
       array.map(user => {
         return (
-          <tr className={styles.line} key={user._id}>
-            <td className={styles.line}>{user.cohort}</td>
-            <td className={styles.line}>{user.email}</td>
-            <td className={styles.line}>{user.name}</td>
+          <tr className={styles.line} style={{ cursor: 'pointer' }} key={user._id} >
+            <td className={styles.line} contentEditable={true} >{user.cohort}</td>
+            <td className={styles.line} contentEditable={true} >{user.email}</td>
+            <td className={styles.line} contentEditable={true} >{user.name}</td>
           </tr >
         )
       })
@@ -50,14 +58,17 @@ export const ListLine = ({ array, setFunc }) => {
       array.map((comment, index) => {
         return (
           <tr className={styles.line} key={comment._id}>
-            <td className={styles.line}>{comment.cohort}</td>
+            <td className={styles.line} >{comment.cohort}</td>
             <td className={styles.line}>{comment.date}</td>
             <td className={styles.line}>{comment.from.name}</td>
             <td className={styles.line}>{comment.to.name}</td>
             <td className={styles.line}>{comment.target}</td>
             <td className={styles.line}>{comment.text}</td>
             <td className={styles.button_container}>
-              <button className={styles.button} style={{ backgroundImage: `url(${deletePic})` }} onClick={()=>(deleteHandler(comment._id, index))}></button>
+              <button
+                className={styles.button}
+                style={{ backgroundImage: `url(${deletePic})` }}
+                onClick={() => (deleteHandler(comment._id, index))}></button>
             </td>
           </tr >
         )

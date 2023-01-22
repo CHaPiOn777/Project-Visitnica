@@ -5,6 +5,7 @@ import { ToggleNavigator } from '../../components/navigator/navigator';
 import { getCommentsRequest } from '../../services/utils/api/admin-comments';
 import styles from './comments.module.css';
 
+// кураторская страница редактирования комментариев
 export default function CommentsPage() {
   const [header, setHeader] = useState([]);
   const [comments, setComments] = useState(null);

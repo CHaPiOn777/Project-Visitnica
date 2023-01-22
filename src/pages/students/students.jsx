@@ -5,7 +5,7 @@ import { ToggleNavigator } from "../../components/navigator/navigator";
 import { ListTable } from '../../components/list-table/list-table';
 import { getStudentsRequest } from '../../services/utils/api/get-students';
 
-
+// кураторская страница редактирования информации о студентах
 export default function StudentsPage() {
   const [header, setHeader] = useState([]);
   const [users, setUsers] = useState(null);
