@@ -9,14 +9,17 @@ import { TProfile, TUser } from "../../services/utils/types";
 import LoadingIcon from "../../components/loading-icon/loading-icon";
 import useOnScreen from "../../hooks/use-on-screen";
 import getUserProfile from "../../services/utils/api/get-user-profile";
+import CitySelector from "../../components/city-selector/city-selector";
 
 export default function MainPage () {
   const { cohort } = useParams<{ cohort: string }>();
   const [profiles, setProfiles] = useState<TProfile[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState<TUser>();
+  const [city, setCity] = useState<string | null>(null);
   const term = useRef<HTMLDivElement>(null);
   const numberOfProfiles = useRef<number | null>(null);
+  const cities = useRef<Set<string> | null>(new Set());
   
   // Начальная загрузка профилей
   useEffect(() => {
@@ -65,11 +68,12 @@ export default function MainPage () {
         console.error(`Ошибка подгрузки профилей пользователей: ${err}`);
       });
     }
-  }, [isAtBottom]);
+  }, [isAtBottom, city]);
 
   const elements = useMemo(() => {
     return profiles.map((item: TProfile, index) => {
-      return (
+      cities.current!.add(item.profile.city.name);
+      if (!city || city === item.profile.city.name) return (
         <ProfileThumb 
           key={item._id + index}
           id={item._id}
@@ -79,12 +83,12 @@ export default function MainPage () {
         />
       )
     })
-  }, [profiles]);
+  }, [profiles, city]);
   
   return (
     <main className={styles.main}>
       <div className={styles.lead}>
-        <span>здесь должен быть елемент выбора города</span>
+        <CitySelector cities={cities.current} setFunction={setCity} />
         <Link className={styles.link} to='/map'>Посмотреть на карте</Link>
       </div>
       <div className={styles.gallery}>
