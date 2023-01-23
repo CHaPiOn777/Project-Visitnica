@@ -1,3 +1,4 @@
+import PurpleBtn from '../../components/btn/btn';
 import styles from './login.module.css';
 
 export default function LoginPage () {
@@ -8,7 +9,7 @@ export default function LoginPage () {
         <p className={styles.text} >С кем я учусь?</p>
         <a 
           href='https://oauth.yandex.ru/authorize?response_type=token&client_id=a658c83148cf495f9b4b864843601cf1'
-          >войти с яндекс id</a>
+          ><PurpleBtn text='Войти с Яндекс ID'/></a>
       </div>
     </main>
   )
