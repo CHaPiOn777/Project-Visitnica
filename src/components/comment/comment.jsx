@@ -14,6 +14,7 @@ import confused from '../../images/smiles/confused.svg';
 import { deleteComment, getComment, postComment } from '../../services/utils/api/commentApi';
 import { setQty } from '../../services/utils/utils';
 import { useForm } from '../../hooks/useForm';
+import { isConstructorDeclaration } from 'typescript';
 
 // target - ид пользователя, rules: 'admin' | 'owner' | 'user', в зависимости от того,
 // кто открывает комменты. Не похоже, что сервак фильтрует по job/hobby/т.д., так что,
@@ -90,7 +91,9 @@ export default function Comment({target, rules}) {
     if(rules === 'admin' || rules === 'owner') {
       getComment(target)
         .then(res => {
+          console.log(res)
           if(res) {
+            
             const emotions = res.items.filter(el => el.emotion);
             setComments(res.items.filter(el => el.text));
             setSmiles(smiles.map(el => {
