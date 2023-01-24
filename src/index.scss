@@ -1,0 +1,54 @@
+@use "../src/vendor/fonts.css" as *;
+
+body {
+  margin: 0 auto;
+  max-width: 1440px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+$text-dark: #100c34;
+$neon-pink: #ff00a8;
+$neon-green: #38ec42;
+$error: #e90d41;
+$text-light: #a3a3a3;
+$input-hover: #666666;
+$placeholder: #83828f;
+$text-white: #ffffff;
+$text-black: #000000;
+$table-gray: #83828f;
+
+@mixin text($size, $height, $weight) {
+  font-size: $size;
+  line-height: $height;
+  font-weight: $weight;
+}
+
+.ymaps-2-1-79-search__suggest {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #100c34;
+  padding: 0;
+}
+
+.ymaps-2-1-79-search__suggest-item{
+  height: 36px;
+  padding: 0 16px;
+}
+
+.ymaps-2-1-79-search__suggest-item:hover {
+  background-color: #ff00a8;
+  color: white;
+}

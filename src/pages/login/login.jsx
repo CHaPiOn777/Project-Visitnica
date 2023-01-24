@@ -3,6 +3,7 @@ import PurpleBtn from '../../components/btn/btn';
 import styles from './login.module.css';
 
 export default function LoginPage () {
+  
   if (localStorage.getItem('accessToken')) {
     return (
       <Redirect to="/" />

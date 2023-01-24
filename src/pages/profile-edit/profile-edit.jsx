@@ -1,66 +1,105 @@
 import React, { useEffect, useState } from "react";
 import styles from "./profile-edit.module.css";
-import strokeImg from '../../images/stroke.png';
+import strokeImg from "../../images/stroke.png";
+import ymaps from "ymaps";
+import { DataPicker } from "../../components/datapicker/datapicker";
+import getUserProfile from "../../services/utils/api/get-user-profile";
+
+export const theme = ["серьезный", "романтический", "дерзкий"];
 
 export const ProfileEdit = () => {
-  const [avatar, setAvatar] = useState("");
-  const [birth, setBirth] = useState("");
-  const [city, setCity] = useState("");
+  // const user = JSON.parse(localStorage.getItem('accessToken')).avatar_id;
+
   const [avatarDirty, setAvatarDirty] = useState(false);
   const [birthDirty, setBirthDirty] = useState(false);
   const [cityDirty, setCityDirty] = useState(false);
-  const [avatarValidMessage, setAvatarValidMessage] = useState('Поле обязательно для заполнения');
-  const [birthValidMessage, setBirthValidMessage] = useState('Поле обязательно для заполнения');
-  const [cityValidMessage, setCityValidMessage] = useState('Поле обязательно для заполнения');
+  const [avatarValidMessage, setAvatarValidMessage] = useState(
+    "Поле обязательно для заполнения"
+  );
+  const [birthValidMessage, setBirthValidMessage] = useState(
+    "Поле обязательно для заполнения"
+  );
+  const [cityValidMessage, setCityValidMessage] = useState(
+    "Поле обязательно для заполнения"
+  );
+  const [formValid, setFormValid] = useState(false);
+
+  const [state, setState] = useState({
+    avatar: "",
+    birthday: undefined,
+    city: "",
+    telegram: "",
+    github: "",
+    template: "",
+    slogan: "",
+    dosugFile: "",
+    dosugText: "",
+    familyFile: "",
+    familyText: "",
+    jobText: "",
+    motivationText: "",
+  });
+
+  useEffect(() => {
+    avatarValidMessage || birthValidMessage || cityValidMessage
+      ? setFormValid(false)
+      : setFormValid(true);
+  }, [avatarValidMessage, birthValidMessage, cityValidMessage]);
+
+
+  
 
   const imageHandler = (e) => {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setAvatar(reader.result);
+        setState({ ...state, avatar: reader.result });
       }
     };
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  // function init() {
-  //   const suggestView1 = new ymaps.SuggestView('city');
-  // }
-  // ymaps.ready(init);
+  ymaps.load("https://api-maps.yandex.ru/2.1/?lang=en_US").then((maps) => {
+    const suggestView1 = new maps.SuggestView("city-input");
+  });
 
   const cityHandler = (e) => {
-    setCity(e.target.value);
-    if(e.target.value) {
-      setCityValidMessage('');
-    } else setCityValidMessage('Поле обязательно для заполнения');
-  }
+    setState({ ...state, city: e.target.value });
+    if (e.target.value) {
+      setCityValidMessage("");
+    } else setCityValidMessage("Поле обязательно для заполнения");
+  };
   const birthHandler = (e) => {
-    setBirth(e.target.value);
-    if(e.target.value) {
-      setBirthValidMessage('');
-    } else setBirthValidMessage('Поле обязательно для заполнения');
-  }
+    setState({ ...state, birthday: e.target.value });
+    if (e.target.value) {
+      setBirthValidMessage("");
+    } else setBirthValidMessage("Поле обязательно для заполнения");
+  };
   const blurHandler = (e) => {
     switch (e.target.name) {
-        case 'avatar':
-            setAvatarDirty(true);
-            break;
-        case 'birth-date':
-            setBirthDirty(true);
-            break;
-        case 'city':
-            setCityDirty(true);
-            break;
-        default:
-          setAvatarDirty(false);
-          setBirthDirty(false);
-          setCityDirty(false);
+      case "avatar":
+        setAvatarDirty(true);
+        break;
+      case "birthday":
+        setBirthDirty(true);
+        break;
+      case "city":
+        setCityDirty(true);
+        break;
+      default:
+        setAvatarDirty(false);
+        setBirthDirty(false);
+        setCityDirty(false);
     }
-};
-  
+  };
+
+  const handlerFormSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <form
-      // onSubmit={handlerFormSubmit}
+      onSubmit={handlerFormSubmit}
       id="profile-form"
       name="profile-form"
       className={styles.form}
@@ -71,8 +110,8 @@ export const ProfileEdit = () => {
         <label htmlFor="upload-photo" className={styles.avatarLabel}>
           <img
             className={styles.avatar}
-            style={{ display: avatar ? "block" : "none" }}
-            src={avatar}
+            style={{ display: state.avatar ? "block" : "none" }}
+            src={state.avatar}
             alt="аватар"
           />
           <div className={styles.uploadButton}></div>
@@ -86,26 +125,35 @@ export const ProfileEdit = () => {
             onBlur={blurHandler}
           />
         </label>
-        <label className={styles.input} htmlFor="birth-date">
+        <label className={styles.input} htmlFor="birthday">
           Дата рождения *
-          <input type="date" className={styles.textInput} id="birth-date" name='birth-date' onBlur={blurHandler} onChange={birthHandler} value={birth}/>
-          {birthDirty && birthValidMessage && (<span className={styles.error}>{birthValidMessage}</span>)}
+          <DataPicker
+            date={state.birthday}
+            maxDate={new Date()}
+            onDateChange={birthHandler}
+            value={state.birthday}
+            onBlur={blurHandler}
+          />
+          {birthDirty && birthValidMessage && (
+            <span className={styles.error}>{birthValidMessage}</span>
+          )}
         </label>
 
         <label className={styles.input} htmlFor="city-input">
           Выберите город *
           <input
             type="text"
-            id="city"
+            id="city-input"
             className={styles.textInput}
             placeholder="@example"
-            value={city}
+            value={state.city}
             onChange={(e) => cityHandler(e)}
             onBlur={blurHandler}
-            name='city'
+            name="city"
           />
-          {cityDirty && cityValidMessage && (<span className={styles.error}>{cityValidMessage}</span>)}
-          
+          {cityDirty && cityValidMessage && (
+            <span className={styles.error}>{cityValidMessage}</span>
+          )}
         </label>
 
         <label className={styles.input} htmlFor="tg-input">
@@ -156,10 +204,12 @@ export const ProfileEdit = () => {
               id="dosugImage"
               accept="image/*"
               className={styles.fileInput}
-            /><img src={strokeImg} alt="скрепка" className={styles.stroke} />
-            <span className={styles.filesNote}>Рекомендуемый размер фото 230x129</span>
+            />
+            <img src={strokeImg} alt="скрепка" className={styles.stroke} />
+            <span className={styles.filesNote}>
+              Рекомендуемый размер фото 230x129
+            </span>
           </label>
-          
           <textarea
             id="dosug-input"
             maxLength="300"
@@ -177,8 +227,11 @@ export const ProfileEdit = () => {
               id="dosugImage"
               accept="image/*"
               className={styles.fileInput}
-            /><img src={strokeImg} alt="скрепка" className={styles.stroke} />
-            <span className={styles.filesNote}>Рекомендуемый размер фото 230x129</span>
+            />
+            <img src={strokeImg} alt="скрепка" className={styles.stroke} />
+            <span className={styles.filesNote}>
+              Рекомендуемый размер фото 230x129
+            </span>
           </label>
           <textarea
             id="family-input"
@@ -210,7 +263,9 @@ export const ProfileEdit = () => {
       </fieldset>
       <fieldset className={styles.submitContainer}>
         <p>Поля, отмеченные звездочкой, обязательны для заполнения</p>
-        <button className={styles.profileSaveButton}>Сохранить</button>
+        <button disabled={!formValid} type="submit" className={styles.profileSaveButton}>
+          Сохранить
+        </button>
       </fieldset>
     </form>
   );
