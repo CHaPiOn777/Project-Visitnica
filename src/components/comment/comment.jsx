@@ -11,10 +11,9 @@ import upset from '../../images/smiles/upset.svg';
 import fun from '../../images/smiles/fun.svg';
 import fear from '../../images/smiles/fear.svg';
 import confused from '../../images/smiles/confused.svg';
-import { deleteComment, getComment, postComment } from '../../services/utils/api/commentApi';
+import { deleteComment, postComment } from '../../services/utils/api/commentApi';
 import { setQty } from '../../services/utils/utils';
 import { useForm } from '../../hooks/useForm';
-import { isConstructorDeclaration } from 'typescript';
 
 // target - ид пользователя, rules: 'admin' | 'owner' | 'user', в зависимости от того,
 // кто открывает комменты. Не похоже, что сервак фильтрует по job/hobby/т.д., так что,
@@ -84,7 +83,7 @@ export default function Comment({ target, rules }) {
       qty: 0,
     }
   ]);
-  console.log(target)
+
   const { values, handleChange, setValues } = useForm({ text: '' });
   useEffect(() => {
     if (rules === 'admin' || rules === 'owner') {
@@ -98,29 +97,6 @@ export default function Comment({ target, rules }) {
       }))
     }
   }, [])
-  // useEffect(() => {
-  //   if(rules === 'admin' || rules === 'owner') {
-  //     getComment(target)
-  //       .then(res => {
-  //         console.log(res)
-  //         if(res) {
-
-  //           const emotions = res.items.filter(el => el.emotion);
-  //           setComments(res.items.filter(el => el.text));
-  //           setSmiles(smiles.map(el => {
-  //             return {
-  //               ...el,
-  //               qty: setQty(emotions)[el.type] | 0
-  //             }
-  //           }))
-  //         }
-  //         else {
-  //           console.log(res)
-  //         }
-  //       })
-  //       .catch(err => console.log(err));
-  //   }
-  // }, [])
 
   const handleEmojiClick = (e, el) => {
     const els = document.querySelectorAll(`.${styles.emojiContDefault}`);
@@ -153,7 +129,7 @@ export default function Comment({ target, rules }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     postComment({ text: values.text, target: 'status' })
-      .then((res) => res && setValues({ text: '' })) //check res
+      .then((res) => res && setValues({ text: '' }))
       .catch(err => console.log(err))
   }
 

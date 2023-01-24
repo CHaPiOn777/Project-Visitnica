@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import styles from './app.module.css';
 import { Header } from '../header/header';
@@ -54,7 +53,7 @@ function App() {
     <div className={styles.page}>
       <Header user={{ name, avatar }} />
       <Switch>
-        <ProtectedRoute path={'/'} exact={true} auth="student" redirect="cohort/web+16">
+        <Route path={'/'} exact={true} auth="student" redirect="cohort/web+16">
           <MainPage />
           {
             /*<>
@@ -75,7 +74,7 @@ function App() {
           </>*/
           }
 
-        </ProtectedRoute>
+        </Route>
         <Route path='/login' exact={true}>
           <LoginPage />
         </Route>

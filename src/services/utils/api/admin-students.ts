@@ -1,5 +1,5 @@
 import request from "../request";
-import { TStudentsResponse } from "../types";
+import { TStudentsResponse, TRawUser } from "../types";
 
 type TGetStudents = {
   limit?: number;
@@ -33,6 +33,18 @@ export const putStudentInfoRequest = ({id, cohort, email, name}: TPutStudent) =>
       cohort, 
       email, 
       name
+    })
+  })
+}
+
+export function postStudentRequest(user: TRawUser) {
+  return request('/users', {
+    method: 'POST',
+    headers: {
+      Authorisation: `${token}`
+    },
+    body: JSON.stringify({
+      user: user
     })
   })
 }
