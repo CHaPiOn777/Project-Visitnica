@@ -82,9 +82,9 @@ function App() {
         <ProtectedRoute path={'/detailinfo/:id'} exact={true}>
           <DetailPage />
         </ProtectedRoute>
-        <Route path='/profile'>
+        <ProtectedRoute path='/profile'>
           <ProfileEdit />
-        </Route>
+        </ProtectedRoute>
         <ProtectedRoute path="/cohort/:cohort" auth="curator">
           <MainPage />
         </ProtectedRoute>
