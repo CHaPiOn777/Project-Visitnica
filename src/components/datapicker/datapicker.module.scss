@@ -69,7 +69,6 @@ select::-ms-expand {
   justify-content: center;
   align-items: center;
   position: absolute;
-  cursor: pointer;
   right: 0;
   top: 0;
   bottom: 0;
@@ -83,7 +82,7 @@ select::-ms-expand {
 }
 
 .input {
-    width: 440px;
+  width: 440px;
   height: 48px;
   border: 1px solid #100c34;
   border-radius: 4px;
@@ -96,14 +95,15 @@ select::-ms-expand {
   box-sizing: border-box;
   background: none;
   color: #100c34;
+  cursor: pointer;
 }
 
 .input:hover {
-    border: 1px solid #666666;
+  border: 1px solid #666666;
 }
 
 .input:focus {
-    outline: none;
-    border: 1px solid #666666;
-    filter: drop-shadow(0px 0px 4px rgba(78, 59, 255, 0.25));
-  }
+  outline: none;
+  border: 1px solid #666666;
+  filter: drop-shadow(0px 0px 4px rgba(78, 59, 255, 0.25));
+}

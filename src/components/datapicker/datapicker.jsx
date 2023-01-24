@@ -10,8 +10,8 @@ import calendarIcon from '../../images/calendar.png'
 
 registerLocale("ru", ru);
 
-export const DataPicker = (props, ref) => {
-  const { onDateChange, name, date } = props;
+export const DataPicker = (props) => {
+  const { onDateChange, name, date, onBlur } = props;
   const raiseDateChange = (date) => {
     onDateChange({
       target: { name: name, value: date },
@@ -22,6 +22,8 @@ export const DataPicker = (props, ref) => {
       <DatePicker
         renderCustomHeader={calendarHeader}
         id='birthday'
+        name="birthday"
+        onBlur={props.onBlur}
         locale="ru"
         popperClassName={`${styles.popper}`}
         popperPlacement="bottom-end"
@@ -40,7 +42,7 @@ export const DataPicker = (props, ref) => {
         }
       ></DatePicker>
       <div className={styles.wrapper}>
-        <img src={calendarIcon} alt="иконка календаря" />
+        <img className={styles.icon} src={calendarIcon} alt="иконка календаря" />
       </div>
     </div>
   );
