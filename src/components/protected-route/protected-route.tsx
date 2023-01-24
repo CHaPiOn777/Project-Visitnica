@@ -51,6 +51,12 @@ export default function ProtectedRoute({
     return <Redirect to="/login" />;
   }
 
+  if (!localStorage.getItem('accessToken')) {
+    return (
+      <Redirect to='/login' />
+    );
+  }
+
   return (
     <Route path={path} {...props}>
       {!auth || auth === role ? (

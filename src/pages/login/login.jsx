@@ -9,7 +9,7 @@ export default function LoginPage () {
       <Redirect to="/" />
     );
   }
-
+   
   return(
     <main className={styles.main}>
       <div className={styles.container}>
