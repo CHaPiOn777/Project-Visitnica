@@ -5,9 +5,6 @@ import ymaps from "ymaps";
 import { DataPicker } from "../../components/datapicker/datapicker";
 
 export const ProfileEdit = () => {
-  const [avatar, setAvatar] = useState("");
-  const [birth, setBirth] = useState("");
-  const [city, setCity] = useState("");
   const [avatarDirty, setAvatarDirty] = useState(false);
   const [birthDirty, setBirthDirty] = useState(false);
   const [cityDirty, setCityDirty] = useState(false);
@@ -15,11 +12,27 @@ export const ProfileEdit = () => {
   const [birthValidMessage, setBirthValidMessage] = useState('Поле обязательно для заполнения');
   const [cityValidMessage, setCityValidMessage] = useState('Поле обязательно для заполнения');
 
+  const [state, setState] = useState({
+    avatar: '',
+    birthday: undefined,
+    city: '',
+    telegram: '',
+    github: '',
+    template: '',
+    slogan: '',
+    dosugFile: '',
+    dosugText: '',
+    familyFile: '',
+    familyText: '',
+    jobText: '',
+    motivationText: '',
+  })
+
   const imageHandler = (e) => {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setAvatar(reader.result);
+        setState({...state, avatar: reader.result});
       }
     };
     reader.readAsDataURL(e.target.files[0]);
@@ -30,13 +43,13 @@ export const ProfileEdit = () => {
 });
 
   const cityHandler = (e) => {
-    setCity(e.target.value);
+    setState({...state, city: e.target.value});
     if(e.target.value) {
       setCityValidMessage('');
     } else setCityValidMessage('Поле обязательно для заполнения');
   }
   const birthHandler = (e) => {
-    setBirth(e.target.value);
+    setState({...state, birthday: e.target.value});
     if(e.target.value) {
       setBirthValidMessage('');
     } else setBirthValidMessage('Поле обязательно для заполнения');
@@ -76,8 +89,8 @@ const handlerFormSubmit = (e) => {
         <label htmlFor="upload-photo" className={styles.avatarLabel}>
           <img
             className={styles.avatar}
-            style={{ display: avatar ? "block" : "none" }}
-            src={avatar}
+            style={{ display: state.avatar ? "block" : "none" }}
+            src={state.avatar}
             alt="аватар"
           />
           <div className={styles.uploadButton}></div>
@@ -91,10 +104,9 @@ const handlerFormSubmit = (e) => {
             onBlur={blurHandler}
           />
         </label>
-        <label className={styles.input} htmlFor="birth-date">
+        <label className={styles.input} htmlFor="birthday">
           Дата рождения *
-          <input type="text" className={styles.textInput} id="birth-date" name='birth-date' onBlur={blurHandler} onChange={birthHandler} value={birth}/>
-          <DataPicker />
+          <DataPicker name={'birthday'} date={state.birthday} maxDate={new Date(Date.UTC(2022, 1, 24))} onDateChange={birthHandler} />
           {birthDirty && birthValidMessage && (<span className={styles.error}>{birthValidMessage}</span>)}
         </label>
 
@@ -102,10 +114,10 @@ const handlerFormSubmit = (e) => {
           Выберите город *
           <input
             type="text"
-            id="city"
+            id="city-input"
             className={styles.textInput}
             placeholder="@example"
-            value={city}
+            value={state.city}
             onChange={(e) => cityHandler(e)}
             onBlur={blurHandler}
             name='city'
