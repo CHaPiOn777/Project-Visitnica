@@ -2,9 +2,10 @@ import React, { forwardRef } from "react";
 import DatePicker, { ReactDatePickerCustomHeaderProps } from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 import ru from "date-fns/locale/ru";
+import './datapicker.scss'
 import styles from "./datapicker.module.scss";
 import { months, years } from "./lib";
-import './datapicker.scss'
+
 import calendarIcon from '../../images/calendar.png'
 
 registerLocale("ru", ru);
@@ -34,7 +35,7 @@ export const DataPicker = (props, ref) => {
         onChange={(date) => date && raiseDateChange(date)}
         dayClassName={(date) =>
           date.getDay() === 0 || date.getDay() === 6
-            ? `${styles.freeDay}`
+            ? styles.freeDay
             : "undefined"
         }
       ></DatePicker>

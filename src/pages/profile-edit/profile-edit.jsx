@@ -106,7 +106,7 @@ const handlerFormSubmit = (e) => {
         </label>
         <label className={styles.input} htmlFor="birthday">
           Дата рождения *
-          <DataPicker name={'birthday'} date={state.birthday} maxDate={new Date(Date.UTC(2022, 1, 24))} onDateChange={birthHandler} />
+          <DataPicker name={'birthday'} date={state.birthday} maxDate={new Date()} onDateChange={birthHandler} />
           {birthDirty && birthValidMessage && (<span className={styles.error}>{birthValidMessage}</span>)}
         </label>
 
