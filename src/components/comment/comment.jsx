@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './comment.module.css';
-import closeIcon from '../../images/Union.svg'; 
+import closeIcon from '../../images/Union.svg';
 import smile from '../../images/smiles/smile.svg';
 import like from '../../images/smiles/like.svg';
 import dislike from '../../images/smiles/dislike.svg';
@@ -19,10 +19,10 @@ import { isConstructorDeclaration } from 'typescript';
 // target - ид пользователя, rules: 'admin' | 'owner' | 'user', в зависимости от того,
 // кто открывает комменты. Не похоже, что сервак фильтрует по job/hobby/т.д., так что,
 // видимо, это надо делать прямо в элементе.
-export default function Comment({target, rules}) {
+export default function Comment({ target, rules }) {
   // const [ rules, setRules ] = useState('admin');
-  const [ comments, setComments ] = useState(null);
-  const [ smiles, setSmiles ] = useState([
+  const [comments, setComments] = useState(null);
+  const [smiles, setSmiles] = useState([
     {
       type: 'like',
       text: '👍',
@@ -84,97 +84,108 @@ export default function Comment({target, rules}) {
       qty: 0,
     }
   ]);
-
-  const { values, handleChange, setValues } = useForm({text: ''});
-
+  console.log(target)
+  const { values, handleChange, setValues } = useForm({ text: '' });
   useEffect(() => {
-    if(rules === 'admin' || rules === 'owner') {
-      getComment(target)
-        .then(res => {
-          console.log(res)
-          if(res) {
-            
-            const emotions = res.items.filter(el => el.emotion);
-            setComments(res.items.filter(el => el.text));
-            setSmiles(smiles.map(el => {
-              return {
-                ...el,
-                qty: setQty(emotions)[el.type] | 0
-              }
-            }))
-          }
-          else {
-            console.log(res)
-          }
-        })
-        .catch(err => console.log(err));
+    if (rules === 'admin' || rules === 'owner') {
+      const emotions = target.filter(el => el.emotion);
+      setComments(target.filter(el => el.text));
+      setSmiles(smiles.map(el => {
+        return {
+          ...el,
+          qty: setQty(emotions)[el.type] | 0
+        }
+      }))
     }
   }, [])
+  // useEffect(() => {
+  //   if(rules === 'admin' || rules === 'owner') {
+  //     getComment(target)
+  //       .then(res => {
+  //         console.log(res)
+  //         if(res) {
+
+  //           const emotions = res.items.filter(el => el.emotion);
+  //           setComments(res.items.filter(el => el.text));
+  //           setSmiles(smiles.map(el => {
+  //             return {
+  //               ...el,
+  //               qty: setQty(emotions)[el.type] | 0
+  //             }
+  //           }))
+  //         }
+  //         else {
+  //           console.log(res)
+  //         }
+  //       })
+  //       .catch(err => console.log(err));
+  //   }
+  // }, [])
 
   const handleEmojiClick = (e, el) => {
     const els = document.querySelectorAll(`.${styles.emojiContDefault}`);
     const target = e.currentTarget;
     target.classList.toggle(styles.emojiCont);
 
-    setSmiles(smiles.map(i => i === el ? {...i, qty: i.qty+1} : i));
+    setSmiles(smiles.map(i => i === el ? { ...i, qty: i.qty + 1 } : i));
 
-    if(!target.classList.contains(styles.emojiCont)) {
+    if (!target.classList.contains(styles.emojiCont)) {
       deleteComment(el._id);
-      setSmiles(smiles.map(i => i === el ? {...i, qty: i.qty-1} : i));
+      setSmiles(smiles.map(i => i === el ? { ...i, qty: i.qty - 1 } : i));
     }
     else {
-      postComment({emotion: el.type, target: null});
+      postComment({ emotion: el.type, target: null });
     }
 
     els.forEach(elem => {
-      if(elem !== target) {
+      if (elem !== target) {
         elem.classList.remove(styles.emojiCont); //delete && qty
       }
     })
   }
 
   const handleDelete = (el) => {
-    setComments(comments.filter(e => e!==el))
+    setComments(comments.filter(e => e !== el))
     deleteComment(el._id)
       .then(res => console.log(res))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment({text: values.text, target: 'status'})
-      .then((res) => res && setValues({text: ''})) //check res
+    postComment({ text: values.text, target: 'status' })
+      .then((res) => res && setValues({ text: '' })) //check res
       .catch(err => console.log(err))
   }
 
   return (
     <div className={styles.container}>
       <ul className={styles.list}>
-        { comments?.map((el, i) => 
+        {comments?.map((el, i) =>
           <li className={i === 0 ? styles.textEl_first : styles.textEl} key={i}>
             <p className={styles.text}>{el.text}</p>
-            { 
-              rules === 'admin' 
+            {
+              rules === 'admin'
               && <img src={closeIcon} alt="Удалить" className={styles.closeBtn} onClick={() => handleDelete(el)} />
             }
           </li>
         )}
       </ul>
       <form className={styles.form} onSubmit={e => handleSubmit(e)}>
-        <input 
+        <input
           placeholder='Обратная связь'
-          className={styles.input} 
-          name='text' 
-          type='text' 
-          onChange={handleChange} 
-          value={values.text} 
+          className={styles.input}
+          name='text'
+          type='text'
+          onChange={handleChange}
+          value={values.text}
         />
       </form>
       <div>
         <ul className={styles.emoji}>
-          { smiles.map((el, i) => 
-            <li key={i} onClick={(e) => { handleEmojiClick(e, el)}} className={styles.emojiContDefault} >
-              <img alt={el.text} src={el.img}/>
-              { el.qty !== 0 && <span className={styles.count}>{el.qty}</span> }
+          {smiles.map((el, i) =>
+            <li key={i} onClick={(e) => { handleEmojiClick(e, el) }} className={styles.emojiContDefault} >
+              <img alt={el.text} src={el.img} />
+              {el.qty !== 0 && <span className={styles.count}>{el.qty}</span>}
             </li>)}
         </ul>
       </div>

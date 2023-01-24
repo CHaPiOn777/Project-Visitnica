@@ -38,7 +38,7 @@ export const DetailPage = () => {
   const styleBlockquote = useCallback(() => {
     return style === 'romantic' ? styles.blockquoteRomantic : styles.blockquote
   }, [style])
-console.log(user)
+
   return (
     <>
       {!isLoading ?
