@@ -76,7 +76,7 @@ export default function MainPage () {
       if (!city || city === item.profile.city.name) return (
         <ProfileThumb 
           key={item._id + index}
-          id={item._id}
+          _id = {item._id}
           curator={currentUser?.role === "curator"}
           owner={item._id === currentUser?._id}
           {...item.profile}

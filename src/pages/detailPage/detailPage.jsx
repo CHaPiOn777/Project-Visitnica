@@ -7,6 +7,7 @@ import union from '../../images/Union.svg';
 import telegram from '../../images/Subtract.svg';
 import getUserInfo from '../../services/utils/api/getUserInfo';
 import LoadingIcon from '../../components/loading-icon/loading-icon';
+import ButtonComments from '../../components/profile-thumb/comments-thumb/button-comments';
 
 
 export const DetailPage = () => {
@@ -25,7 +26,6 @@ export const DetailPage = () => {
         setIsLoading(false);
       })
   }, []);
-
 
   const styleAvatar = useCallback(() => {
     return style === 'romantic' ? styles.avaRomantic : style === 'cocky' ? styles.avaCocky : styles.ava
@@ -65,6 +65,9 @@ export const DetailPage = () => {
           </ul>
           <div className={styles.wrapperAva}>
             <img src={user.profile.photo} alt="аватарка" className={styleAvatar()} />
+            <div className={styles['chat-icon']}>
+              <ButtonComments user={user} block='undefined' />
+            </div>
           </div>
           <div className={styles.citates}>
             <img src={qotes} alt="Кавычки" />
@@ -73,6 +76,9 @@ export const DetailPage = () => {
           <div className={styles.blocks}>
 
             <div className={styleBlockInfo()}>
+              <div className={styles['chat-icon']}>
+                <ButtonComments user={user} block='hobby'/>
+              </div>
               <h3 className={styles.blockTitle}>Увлечения</h3>
               <div className={styles.blockImgWrapper}>
                 <img src={user.info.hobby.image} alt="Увлечения" className={styles.blockImg} />
@@ -81,6 +87,9 @@ export const DetailPage = () => {
             </div>
 
             <div className={styleBlockInfo()}>
+              <div className={styles['chat-icon']}>
+                <ButtonComments user={user} block='status'/>
+              </div>
               <h3 className={styles.blockTitle}>Семья</h3>
               <div className={styles.blockImgWrapper}>
                 <img src={user.info.status.image} alt="Семья" className={styles.blockImg} />
@@ -89,6 +98,9 @@ export const DetailPage = () => {
             </div>
 
             <div className={styleBlockInfo()}>
+              <div className={styles['chat-icon']}>
+                <ButtonComments user={user} block='job'/>
+              </div>
               <h3 className={styles.blockTitle}>Сфера</h3>
               <div className={styles.blockImgWrapper}>
                 <img src={user.info.job.image} alt="Сфера деятельности" className={styles.blockImg} />
@@ -97,6 +109,9 @@ export const DetailPage = () => {
             </div>
 
             <div className={styleBlockInfo()}>
+              <div className={styles['chat-icon']}>
+                <ButtonComments user={user} block='edu'/>
+              </div>
               <h3 className={styles.blockTitle}>Учеба</h3>
               <div className={styles.blockImgWrapper}>
                 <img src={user.info.edu.image} alt="Учеба" className={styles.blockImg} />

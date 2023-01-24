@@ -33,6 +33,7 @@
   margin: 0;
 }
 
+
 .socialmedia {
   list-style-type: none;
   padding: 0;
@@ -44,12 +45,22 @@
 }
 
 .wrapperAva {
+  position: relative;
   grid-area: ava;
   width: 440px;
   height: 440px;
   object-fit: cover;
   -webkit-mask-size: cover;
   mask-size: cover;
+  cursor: pointer;
+}
+
+.wrapperAva:hover .chat-icon {
+  visibility: visible;
+}
+
+.chat-icon {
+  visibility: hidden;
 }
 
 .ava {
@@ -102,9 +113,15 @@
 }
 
 .block {
+  position: relative;
   max-width: 440px;
   margin-bottom: 56px;
   border-top: 3px solid black;
+  cursor: pointer;
+}
+
+.block:hover .chat-icon {
+  visibility: visible;
 }
 
 .blockRomantic {

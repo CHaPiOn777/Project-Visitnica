@@ -36,15 +36,7 @@
 }
 
 .chat-icon {
-  position: absolute;
-  top: 19px;
-  right: 19px;
-  padding: 0;
-  border: none;
-  background: none;
-  z-index: 2;
   visibility: hidden;
-  cursor: pointer;
 }
 
 .comment-counter {
