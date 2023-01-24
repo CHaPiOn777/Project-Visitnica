@@ -5,6 +5,7 @@ import { ToggleNavigator } from "../../components/navigator/navigator";
 import { ListTable } from '../../components/list-table/list-table';
 import { getStudentsRequest } from '../../services/utils/api/admin-students';
 import { TStudent } from '../../services/utils/types';
+import { AddStudents } from '../../components/add-students/add-students';
 
 // кураторская страница редактирования информации о студентах
 export default function StudentsPage() {
@@ -16,12 +17,14 @@ export default function StudentsPage() {
       .then(res => setUsers(res.items));
   }, [header.length, users?.length])
 
-
   return (
     <main className={styles.main}>
       <ToggleNavigator />
-      <Filter setFunc={setUsers} />
-      <ListTable header={header} array={users} setFunc={setUsers} />
+      <div className={styles.container}>
+        <Filter setFunc={setUsers} />
+        <ListTable header={header} array={users} setFunc={setUsers} />
+        <AddStudents setUsers={setUsers} users={users} />
+      </div>
     </main>
   )
 }

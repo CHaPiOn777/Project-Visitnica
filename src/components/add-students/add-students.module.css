@@ -1,0 +1,19 @@
+.container {
+  grid-row: 1/3;
+  grid-column: 2/3;
+  margin-top: 48px;
+}
+
+.title {
+  font-size: 24px;
+  line-height: 32px;
+  margin: 0 0 12px 0;
+  color: #100C34;
+}
+
+.par {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0 0 20px 0;
+  color: #100C34;
+}

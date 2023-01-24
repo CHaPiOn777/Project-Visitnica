@@ -4,3 +4,10 @@
   height: calc(100vh - 153px);
   min-width: 1240px;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  grid-template-rows: repeat(2, min-content);
+  column-gap: 40px;
+}

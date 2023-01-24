@@ -19,6 +19,7 @@ export type TProfile = {
     photo: string;
     city: {
       name: string;
+      geocode: Array<string>
     }
   }
 }
@@ -74,4 +75,9 @@ export type TAdminComment = {
       name: string,
       email: string
   }
+}
+
+export type TRawUser = {
+  email: string,
+  cohort: string
 }
