@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./profile-edit.module.css";
 import strokeImg from '../../images/stroke.png';
+import ymaps from "ymaps";
+import { DataPicker } from "../../components/datapicker/datapicker";
 
 export const ProfileEdit = () => {
   const [avatar, setAvatar] = useState("");
@@ -23,10 +25,9 @@ export const ProfileEdit = () => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  // function init() {
-  //   const suggestView1 = new ymaps.SuggestView('city');
-  // }
-  // ymaps.ready(init);
+  ymaps.load('https://api-maps.yandex.ru/2.1/?lang=en_US').then(maps => {
+    const suggestView1 = new maps.SuggestView('city');
+});
 
   const cityHandler = (e) => {
     setCity(e.target.value);
@@ -57,10 +58,14 @@ export const ProfileEdit = () => {
           setCityDirty(false);
     }
 };
+
+const handlerFormSubmit = (e) => {
+  e.preventDefault();
+}
   
   return (
     <form
-      // onSubmit={handlerFormSubmit}
+      onSubmit={handlerFormSubmit}
       id="profile-form"
       name="profile-form"
       className={styles.form}
@@ -88,7 +93,8 @@ export const ProfileEdit = () => {
         </label>
         <label className={styles.input} htmlFor="birth-date">
           Дата рождения *
-          <input type="date" className={styles.textInput} id="birth-date" name='birth-date' onBlur={blurHandler} onChange={birthHandler} value={birth}/>
+          <input type="text" className={styles.textInput} id="birth-date" name='birth-date' onBlur={blurHandler} onChange={birthHandler} value={birth}/>
+          <DataPicker />
           {birthDirty && birthValidMessage && (<span className={styles.error}>{birthValidMessage}</span>)}
         </label>
 
@@ -210,7 +216,7 @@ export const ProfileEdit = () => {
       </fieldset>
       <fieldset className={styles.submitContainer}>
         <p>Поля, отмеченные звездочкой, обязательны для заполнения</p>
-        <button className={styles.profileSaveButton}>Сохранить</button>
+        <button type="submit" className={styles.profileSaveButton}>Сохранить</button>
       </fieldset>
     </form>
   );
