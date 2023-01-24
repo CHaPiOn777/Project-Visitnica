@@ -3,12 +3,13 @@ import { Filter } from '../../components/filter/filter';
 import { ListTable } from '../../components/list-table/list-table';
 import { ToggleNavigator } from '../../components/navigator/navigator';
 import { getCommentsRequest } from '../../services/utils/api/admin-comments';
+import { TAdminComment } from '../../services/utils/types';
 import styles from './comments.module.css';
 
 // кураторская страница редактирования комментариев
 export default function CommentsPage() {
-  const [header, setHeader] = useState([]);
-  const [comments, setComments] = useState(null);
+  const [header, setHeader] = useState(Array<string>);
+  const [comments, setComments] = useState(Array<TAdminComment>);
 
   useEffect(() => {
       setHeader(['Когорта', 'Дата', 'Отправитель', 'Получатель', 'Откуда комментарий', 'Текст комментария']);
