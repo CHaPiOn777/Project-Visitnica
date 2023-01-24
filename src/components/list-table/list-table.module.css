@@ -1,6 +1,7 @@
 .container {
   padding-top: 60px;
-
+  padding-bottom: 13px;
+  min-height: 100vh - 80px;
 }
 
 .table {
@@ -21,4 +22,9 @@
   font-weight: normal;
   padding-bottom: 11px;
   border-bottom: 1px solid #83828F;
+  padding-left: 8px;
+}
+
+.empty {
+  color:red;
 }

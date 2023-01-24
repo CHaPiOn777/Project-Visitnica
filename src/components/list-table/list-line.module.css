@@ -1,8 +1,14 @@
 .line {
   padding-top: 12px;
   padding-bottom: 12px;
+  padding-right: 8px;
+  padding-left: 8px;
   border-bottom: 1px solid #83828F;
   position: relative;
+}
+.changed_line {
+  border: 1px solid #100C34;
+  border-radius: 4px;
 }
 
 .button_container {

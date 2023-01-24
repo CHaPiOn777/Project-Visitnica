@@ -1,5 +1,6 @@
 .icon {
   animation: spin 1.2s linear infinite;
+  text-align: center;
 }
 
 @keyframes spin {

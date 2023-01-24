@@ -6,6 +6,8 @@ type TGetProfiles = {
   limit?: number;
   offset?: number;
   cohort?: string;
+  search?: any;
+  id?: any;
 }
 
 export default function getCohortProfiles ({offset = 0, limit = 12, cohort}: TGetProfiles): Promise<TProfileResponse> {

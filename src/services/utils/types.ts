@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export type TProfileResponse = {
   total: number;
   items: TProfile[];
@@ -37,4 +39,39 @@ export type TUser = {
   _id: string;
   role: string;
   cohort?: string;
+}
+
+export type TStudentsResponse = {
+  total: number;
+  items: TStudent[];
+}
+
+export type TStudent = {
+  _id: string,
+  createdAt: number,
+  updatedAt: number | null,
+  email: string | null,
+  cohort: string,
+  name: string | null
+}
+
+export type TCommentsResponse = {
+  total: number;
+  items: TAdminComment[];
+}
+
+export type TAdminComment = {
+  _id: string,
+  from: {
+      _id: string,
+      name: string,
+      email: string
+  },
+  target: string | null,
+  text: string,
+  to: {
+      _id: string,
+      name: string,
+      email: string
+  }
 }
