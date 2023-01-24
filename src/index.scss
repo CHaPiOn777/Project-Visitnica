@@ -32,20 +32,20 @@ $table-gray: #83828f;
   font-weight: $weight;
 }
 
-
-
 .ymaps-2-1-79-search__suggest {
   font-family: "IBM Plex Sans";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-
-  /* identical to box height, or 150% */
-  display: flex;
-  align-items: center;
   font-feature-settings: "pnum" on, "lnum" on;
   color: #100c34;
+  padding: 0;
+}
+
+.ymaps-2-1-79-search__suggest-item{
+  height: 36px;
+  padding: 0 16px;
 }
 
 .ymaps-2-1-79-search__suggest-item:hover {
