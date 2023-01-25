@@ -18,7 +18,7 @@ export const Filter = ({ setFunc }) => {
   // сбрасывает фильтр
   const clearHangler = (evt) => {
     evt.target.parentElement.querySelector('input').value = '';
-    if (location.pathname === '/students') {
+    if (location.pathname === '/admin/users') {
       getStudentsRequest({ search: '' })
         .then(res => { res?.items.length ? setFunc(res.items) : setFunc([]) });
     }
@@ -32,7 +32,7 @@ export const Filter = ({ setFunc }) => {
   const onSubmit = (evt) => {
     evt.preventDefault();
     const searchCondition = evt.target.condition.value.toLowerCase();
-    if (location.pathname === '/students') {
+    if (location.pathname === '/admin/users') {
       getStudentsRequest({ search: searchCondition })
         .then(res => { res?.items.length ? setFunc(res.items) : setFunc([]) });
     }

@@ -10,6 +10,14 @@ import { deletecommentRequest, getCommentsRequest } from '../../services/utils/a
 // функцию изменения массива (переданы из компонентов страниц setStudents или setComments)
 export const ListLine = ({ array, setFunc }) => {
   const location = useLocation();
+  const target = {
+    hobby: 'Увлечения',
+    job: 'Сфера',
+    edu: 'Учеба',
+    status: 'Статус',
+    family: 'Семья',
+    quote: 'Цитата'
+  };
 
   //удаление комментария
   const deleteHandler = (id, index) => {
@@ -21,19 +29,34 @@ export const ListLine = ({ array, setFunc }) => {
       })
   };
 
-  //подсвечивает остальные ячейки в редактируемой строке
-  const onClick = (evt) => {
+  // подсвечивает остальные ячейки в редактируемой строке
+  // часть else удаляет студента
+  const onClick = (evt, id) => {
     const changedLine = Array.from(evt.currentTarget.children);
-    const hightLights = Array.from(document.querySelectorAll(`.${styles.changed_line}`));
-    if (hightLights.length) {
-      hightLights.map(el => el.classList.remove(`${styles.changed_line}`))
+    if (evt.target.tagName !== 'BUTTON') {
+      const hightLights = Array.from(document.querySelectorAll(`.${styles.changed_line}`));
+      if (hightLights.length) {
+        hightLights.map(el => el.classList.remove(`${styles.changed_line}`))
+      }
+      changedLine.forEach(el => {
+        el.children[0].classList.add(`${styles.changed_line}`) 
+      })
     }
-    changedLine.forEach(el => {
-      if (el !== evt.target.parentElement) { el.children[0].classList.add(`${styles.changed_line}`) }
-    })
+    else {
+      // запрос 
+      evt.currentTarget.querySelector('.cohort').textContent = 'deleted';
+      const [cohort, email, name] = changedLine.map(el => el.innerText);
+      const newData = {
+        id,
+        cohort: 'deleted',
+        email 
+      }
+      putStudentInfoRequest(newData)
+    }
   }
 
   // по Enter отправляет измененную информацию
+  // по Esc выходит из редактирования
   const submitHandler = (key, id) => {
     const changedElement = key.target;
     //из HTMLCollection (измененная строка) сделала массив
@@ -48,8 +71,7 @@ export const ListLine = ({ array, setFunc }) => {
       const newData = {
         id: id,
         cohort,
-        email,
-        name
+        email
       }
       // сервер возвращает неизмененного студента, поэтому дальше с данными ничего не делала 
       putStudentInfoRequest(newData)
@@ -60,14 +82,14 @@ export const ListLine = ({ array, setFunc }) => {
     if (key.keyCode === 27) {
       changedElement.setAttribute('contentEditable', 'false');
       changedLine.forEach(el => {
-        if (el.children[0] !== changedElement) { el.children[0].classList.remove(`${styles.changed_line}`) }
+        el.children[0].classList.remove(`${styles.changed_line}`)
       })
       changedElement.setAttribute('contentEditable', 'true');
     }
   }
 
   useEffect(() => {
-    if (location.pathname === '/students') {
+    if (location.pathname === '/admin/users') {
       getStudentsRequest({})
         .then(res => setFunc(res.items));
     }
@@ -78,15 +100,21 @@ export const ListLine = ({ array, setFunc }) => {
         });
     }
   }, [location.pathname, setFunc])
-  if (array?.length && location.pathname === '/students') {
+  if (array?.length && location.pathname === '/admin/users') {
     return (
       array.map(user => {
         return (
-          <tr className={styles.line} style={{ cursor: 'pointer' }} key={user._id} onClick={onClick}>
+          <tr 
+          className={styles.line} 
+          style={{ cursor: 'pointer' }} 
+          key={user._id} 
+          onClick={evt => onClick(evt, user._id)}>
             <td className={styles.line} >
-              <div contentEditable={true}
+              <div 
+                contentEditable={true}
                 suppressContentEditableWarning={true}
-                onKeyDown={(key) => submitHandler(key, user._id)}>
+                onKeyDown={(key) => submitHandler(key, user._id)} 
+                className='cohort' >
                 {user.cohort}
               </div>
             </td>
@@ -98,13 +126,15 @@ export const ListLine = ({ array, setFunc }) => {
                 {user.email}
               </div>
             </td>
-            <td className={styles.line} >
-              <div
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onKeyDown={(key) => submitHandler(key, user._id)} >
+            <td className={styles.line} style={{ cursor: 'auto' }} >
+              <div  >
                 {user.name}
               </div>
+            </td>
+            <td className={styles.button_container}>
+              <button
+                className={styles.button}
+                style={{ backgroundImage: `url(${deletePic})` }} ></button>
             </td>
           </tr >
         )
@@ -114,13 +144,15 @@ export const ListLine = ({ array, setFunc }) => {
   if (array?.length && location.pathname === '/comments') {
     return (
       array.map((comment, index) => {
+
         return (
           <tr className={styles.line} key={comment._id}>
             <td className={styles.line} >{comment.cohort}</td>
             <td className={styles.line}>{comment.date}</td>
             <td className={styles.line}>{comment.from.name}</td>
             <td className={styles.line}>{comment.to.name}</td>
-            <td className={styles.line}>{comment.target}</td>
+            <td className={styles.line}>
+              {comment.target ? `из блока ${target[comment.target]}` : 'из визитки'}</td>
             <td className={styles.line}>{comment.text}</td>
             <td className={styles.button_container}>
               <button

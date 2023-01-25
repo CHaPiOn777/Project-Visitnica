@@ -18,9 +18,9 @@ export const ListTable = ({ header, array, setFunc }) => {
                     {header.map(title =>
                       <th className={styles.header} key={title}>{title}</th>
                     )}
-                    {location.pathname === '/comments' &&
+                    {/* {location.pathname === '/comments' && */}
                       <th className={styles.header} key='button'></th>
-                    }
+                     {/* } */}
                   </tr>
                 </thead>
 

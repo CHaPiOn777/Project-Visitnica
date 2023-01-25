@@ -5,7 +5,7 @@ export const ToggleNavigator = () => {
   return (
     <nav className={styles.container}>
       <NavLink
-        to='/students'
+        to='/admin/users'
         exact={true}
         className={styles.link}
         activeClassName={styles.link_active} >СТУДЕНТЫ</NavLink>

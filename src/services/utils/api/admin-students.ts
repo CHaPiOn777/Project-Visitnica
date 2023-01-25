@@ -23,7 +23,7 @@ export const getStudentsRequest = ({offset = 0, limit = 12, search=''}: TGetStud
   })
 }
 
-export const putStudentInfoRequest = ({id, cohort, email, name}: TPutStudent) => {
+export const putStudentInfoRequest = ({id, cohort, email}: TPutStudent) => {
   return request(`/users/${id}`, {
     method: 'PUT',
     headers: {
@@ -31,8 +31,7 @@ export const putStudentInfoRequest = ({id, cohort, email, name}: TPutStudent) =>
     },
     body: JSON.stringify({
       cohort, 
-      email, 
-      name
+      email 
     })
   })
 }
