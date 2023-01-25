@@ -10,7 +10,7 @@ export const ToggleNavigator = () => {
         className={styles.link}
         activeClassName={styles.link_active} >СТУДЕНТЫ</NavLink>
       <NavLink
-        to='/comments'
+        to='/admin/'
         exact={true}
         className={styles.link}
         activeClassName={styles.link_active} >КОММЕНТАРИИ</NavLink>

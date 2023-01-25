@@ -93,7 +93,7 @@ export const ListLine = ({ array, setFunc }) => {
       getStudentsRequest({})
         .then(res => setFunc(res.items));
     }
-    if (location.pathname === '/comments') {
+    if (location.pathname === '/admin/') {
       getCommentsRequest({})
         .then(res => {
           setFunc(res.items)
@@ -141,10 +141,9 @@ export const ListLine = ({ array, setFunc }) => {
       })
     )
   }
-  if (array?.length && location.pathname === '/comments') {
+  if (array?.length && location.pathname === '/admin/') {
     return (
       array.map((comment, index) => {
-
         return (
           <tr className={styles.line} key={comment._id}>
             <td className={styles.line} >{comment.cohort}</td>

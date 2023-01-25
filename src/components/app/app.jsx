@@ -90,7 +90,7 @@ function App() {
         <ProtectedRoute path='/admin/users' auth="curator">
           <StudentsPage />
         </ProtectedRoute>
-        <ProtectedRoute path='/comments' auth="curator">
+        <ProtectedRoute path='/admin/' auth="curator">
           <CommentsPage />
         </ProtectedRoute>
         <ProtectedRoute path='/map' exact={true}>

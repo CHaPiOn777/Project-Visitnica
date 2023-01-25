@@ -22,10 +22,12 @@ export const Filter = ({ setFunc }) => {
       getStudentsRequest({ search: '' })
         .then(res => { res?.items.length ? setFunc(res.items) : setFunc([]) });
     }
-    if (location.pathname === '/comments') {
+    if (location.pathname === '/admin/') {
       getCommentsRequest({ search: '' })
         .then(res => { setFunc(res.items) });
     }
+    const button = document.querySelector(`.${styles.button}`);
+    button.classList.remove(`${styles.visible}`)
   }
 
   //отправить запрос с параметрами
@@ -36,7 +38,7 @@ export const Filter = ({ setFunc }) => {
       getStudentsRequest({ search: searchCondition })
         .then(res => { res?.items.length ? setFunc(res.items) : setFunc([]) });
     }
-    if (location.pathname === '/comments') {
+    if (location.pathname === '/admin/') {
       debugger
       getCommentsRequest({ search: searchCondition })
         .then(res => { setFunc(res.items) });
