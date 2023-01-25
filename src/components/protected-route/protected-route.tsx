@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import getUserProfile from "../../services/utils/api/get-user-profile";
 import { setCookie } from "../../services/utils/cookie";
 import LoadingIcon from "../loading-icon/loading-icon";
@@ -19,6 +20,8 @@ export default function ProtectedRoute({
 }: TProtectedProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [role, setRole] = useState<string>("");
+  const autho = useAuth();
+  console.log(autho);
 
   useEffect(() => {
     setLoading(true);
