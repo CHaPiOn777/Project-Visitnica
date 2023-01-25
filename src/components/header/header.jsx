@@ -10,10 +10,10 @@ export const Header = ({ user }) => {
         <Link to="/">
           <img src={logo} alt='visitki' className={styles.logo} />
         </Link>
-           { name ? (<div className={styles.user}>
+           { name ? (<Link to='/profile' className={styles.user}>
               <div className={styles.photo} style={{backgroundImage: `url(https://avatars.yandex.net/get-yapic/${avatar}/islands-34)`}} ></div>
-              <p className={styles.name} >{name}</p>
-          </div>) : null}
+              <p className={styles.name}>{name}</p>
+          </Link>) : null}
       </header>
   )
 }

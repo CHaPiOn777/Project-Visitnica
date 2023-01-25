@@ -138,6 +138,7 @@
   text-align: center;
   color: #f0f0f0;
   border: none;
+  cursor: pointer;
 }
 
 .submitContainer {
