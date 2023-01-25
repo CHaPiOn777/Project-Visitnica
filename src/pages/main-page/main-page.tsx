@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ProfileThumb from "../../components/profile-thumb/profile-thumb";
 
@@ -10,12 +10,13 @@ import LoadingIcon from "../../components/loading-icon/loading-icon";
 import useOnScreen from "../../hooks/use-on-screen";
 import getUserProfile from "../../services/utils/api/get-user-profile";
 import CitySelector from "../../components/city-selector/city-selector";
+import { AuthContext } from "../../components/app/app";
 
 export default function MainPage () {
   const { cohort } = useParams<{ cohort: string }>();
   const [profiles, setProfiles] = useState<TProfile[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState<TUser>();
+  const {currentUser} = useContext<any>(AuthContext);
   const [city, setCity] = useState<string | null>(null);
   const term = useRef<HTMLDivElement>(null);
   const numberOfProfiles = useRef<number | null>(null);
@@ -23,10 +24,10 @@ export default function MainPage () {
   
   // Начальная загрузка профилей
   useEffect(() => {
-    setIsLoading(true);
+    /* setIsLoading(true);
     // псевдозапрос на получение данных текущего пользователя:
     getUserProfile().then((res) => {
-      setCurrentUser(res);
+      setCurrentUser(res); */
       getCohortProfiles({ offset: 0, limit: 12, cohort: cohort || currentUser?.cohort }).then((res) => {
         numberOfProfiles.current = res.total;
         if (res.items?.length > 0) {
@@ -44,7 +45,7 @@ export default function MainPage () {
         setIsLoading(false);
         console.error(`Ошибка загрузки профилей пользователей: ${err}`);
       });
-    });
+    // });
   }, []);
 
   // Отслеживаем появление во вьюпорте дива с рефом term и догружаем еще профилей, если он появляется.
@@ -75,7 +76,7 @@ export default function MainPage () {
       cities.current!.add(item.profile.city.name);
       if (!city || city === item.profile.city.name) return (
         <ProfileThumb 
-          key={item._id + index}
+          key={item._id + index} //прибавляем индекс пока, потому что иначе ключ начнёт повторяться.
           _id = {item._id}
           curator={currentUser?.role === "curator"}
           owner={item._id === currentUser?._id}

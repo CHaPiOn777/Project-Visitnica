@@ -19,8 +19,9 @@ import { DetailPage } from '../../pages/detailPage/detailPage';
 import { ProfileEdit } from '../../pages/profile-edit/profile-edit';
 import getUserProfile from '../../services/utils/api/get-user-profile';
 
-// REMOVE! контекст для роли юзера
-export const AuthContext = React.createContext('curator');
+// REMOVE! контекст для роли юзера добавлен ТОЛЬКО для работы переключателя ролей в хедере.
+// Роль юзера получалась фейковым апи-запросом он деманд.
+export const AuthContext = React.createContext(null);
 
 function App() {
   const [name, setName] = useState();
@@ -29,7 +30,10 @@ function App() {
 
   // REMOVE! задаём роль
   const [currentUser, setCurrentUser] = useState(null);
-  console.log('blah');
+
+  useEffect(() => {
+    getUserProfile().then((res) => setCurrentUser(res));
+  }, []);
 
   useEffect(() => {
     if (document.location.hash) {
@@ -55,10 +59,11 @@ function App() {
       setName(userData.name)
       setAvatar(userData.avatar_id)
     }
-    getUserProfile().then((res) => {
-      setCurrentUser(res);
-    });
   }, [user, name])
+
+  if (!currentUser?.role) {
+    return <>loading</>;
+  }
   
   return (
     <AuthContext.Provider value={{
@@ -68,7 +73,7 @@ function App() {
       <div className={styles.page}>
         <Header user={{ name, avatar }} />
         <Switch>
-          <Route path={'/'} exact={true} auth="student" redirect="cohort/web+16">
+          <ProtectedRoute path={'/'} exact={true} auth="student" redirect="/comments">
             <MainPage />
             {
               /*<>
@@ -89,7 +94,7 @@ function App() {
             </>*/
             }
 
-          </Route>
+          </ProtectedRoute>
           <Route path='/login' exact={true}>
             <LoginPage />
           </Route>

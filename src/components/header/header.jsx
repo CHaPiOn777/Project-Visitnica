@@ -1,11 +1,12 @@
 import styles from './header.module.css';
 import logo from '../../images/VISITKI.svg';
 import { Link } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
+import { useContext } from 'react';
+import { AuthContext } from '../app/app';
 
 export const Header = ({ user }) => {
   const { name, avatar } = user;
-  const { setCurrentUser } = useAuth();
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
   
   // REMOVE! обработчик переключалки ролей
   function roleChange (evt) {
@@ -20,7 +21,7 @@ export const Header = ({ user }) => {
           <img src={logo} alt='visitki' className={styles.logo} />
       </Link>
       {/* REMOVE! переключалка для ролей */}
-      <select onChange={roleChange}>
+      <select onChange={roleChange} defaultValue="curator">
         <option value="student">student</option>
         <option value="curator">curator</option>
       </select>
