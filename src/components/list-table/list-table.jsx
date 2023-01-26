@@ -1,10 +1,8 @@
-import { useLocation } from 'react-router';
 import { ListLine } from './list-line';
 import styles from './list-table.module.css';
 
 
 export const ListTable = ({ header, array, setFunc }) => {
-  const location = useLocation();
 
   return (
     array?.length ?
@@ -18,9 +16,7 @@ export const ListTable = ({ header, array, setFunc }) => {
                     {header.map(title =>
                       <th className={styles.header} key={title}>{title}</th>
                     )}
-                    {/* {location.pathname === '/comments' && */}
                       <th className={styles.header} key='button'></th>
-                     {/* } */}
                   </tr>
                 </thead>
 

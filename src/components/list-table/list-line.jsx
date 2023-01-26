@@ -1,7 +1,7 @@
 import styles from './list-line.module.css'
 import deletePic from './../../images/delete.svg';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { getStudentsRequest, putStudentInfoRequest } from '../../services/utils/api/admin-students';
 import { deletecommentRequest, getCommentsRequest } from '../../services/utils/api/admin-comments';
 
@@ -10,6 +10,7 @@ import { deletecommentRequest, getCommentsRequest } from '../../services/utils/a
 // функцию изменения массива (переданы из компонентов страниц setStudents или setComments)
 export const ListLine = ({ array, setFunc }) => {
   const location = useLocation();
+  const history = useHistory();
   const target = {
     hobby: 'Увлечения',
     job: 'Сфера',
@@ -130,8 +131,12 @@ export const ListLine = ({ array, setFunc }) => {
                 {user.email}
               </div>
             </td>
-            <td className={styles.line} style={{ cursor: 'auto' }} >
-              <div  >
+            <td 
+            className={styles.line} 
+            onClick={(evt)=> {
+              history.replace(`/detailinfo/${user._id}`)
+            }} >
+              <div >
                 {user.name}
               </div>
             </td>
