@@ -55,7 +55,9 @@ export function AddStudents({users, setUsers}: {users: Array<TStudent>, setUsers
       reader.readAsArrayBuffer(file);
       
       getStudentsRequest({})
-        .then(res => setUsers(res.items))
+        .then(res => setUsers(res.items)).catch((err) => {
+          console.error(`Ошибка загрузки данных студентов: ${err}`);
+        });
     }
   }
 

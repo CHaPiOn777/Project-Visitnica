@@ -27,6 +27,7 @@ export const ListLine = ({ array, setFunc }) => {
         const existingComments = array.slice(0, index).concat(array.slice(index + 1, array.length))
         setFunc(existingComments);
       })
+      .catch((err) => {console.error(`Ошибка удаления комментария: ${err}`)});
   };
 
   // подсвечивает остальные ячейки в редактируемой строке
@@ -78,6 +79,7 @@ export const ListLine = ({ array, setFunc }) => {
         .then(res => {
           changedElement.setAttribute('contentEditable', 'true');
         })
+        .catch((err) => { console.error(`Ошибка изменения данных студента: ${err}`)});
     }
     if (key.keyCode === 27) {
       changedElement.setAttribute('contentEditable', 'false');
@@ -91,13 +93,15 @@ export const ListLine = ({ array, setFunc }) => {
   useEffect(() => {
     if (location.pathname === '/admin/users') {
       getStudentsRequest({})
-        .then(res => setFunc(res.items));
+        .then(res => setFunc(res.items))
+        .catch((err) => { console.error(`Ошибка запроса данных студента: ${err}`) });
     }
     if (location.pathname === '/admin/') {
       getCommentsRequest({})
         .then(res => {
           setFunc(res.items)
-        });
+        })
+        .catch((err) => { console.error(`Ошибка запроса комментариев: ${err}`) });
     }
   }, [location.pathname, setFunc])
   if (array?.length && location.pathname === '/admin/users') {

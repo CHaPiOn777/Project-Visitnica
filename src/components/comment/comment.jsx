@@ -124,7 +124,9 @@ export default function Comment({ target, rules }) {
   const handleDelete = (el) => {
     setComments(comments.filter(e => e !== el))
     deleteComment(el._id)
-      .then(res => console.log(res))
+      .then(res => console.log(res)).catch((err) => {
+        console.error(`Ошибка удаления комментария: ${err}`);
+      });
   }
 
   const handleSubmit = (e) => {

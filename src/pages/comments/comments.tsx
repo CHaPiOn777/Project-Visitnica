@@ -14,7 +14,8 @@ export default function CommentsPage() {
   useEffect(() => {
       setHeader(['Когорта', 'Дата', 'Отправитель', 'Получатель', 'Откуда комментарий', 'Текст комментария']);
       getCommentsRequest({})
-        .then(res => setComments(res.items));
+        .then(res => setComments(res.items))
+        .catch((err) => { console.error(`Ошибка загрузки комментариев: ${err}`) });
 
   }, [header.length])
   return(
