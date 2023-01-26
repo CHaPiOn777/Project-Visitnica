@@ -11,7 +11,7 @@ export default function MapPage() {
   useEffect(() => {
     getCohortProfiles({offset: 0, limit: 12, cohort: 'web+16'})
       .then(res => setUsers(res.items))
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }, [])
   
   const defaultState = {

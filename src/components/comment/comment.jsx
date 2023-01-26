@@ -133,7 +133,7 @@ export default function Comment({ target, rules }) {
     e.preventDefault();
     postComment({ text: values.text, target: 'status' })
       .then((res) => res && setValues({ text: '' })) //check res
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }
 
   return (
