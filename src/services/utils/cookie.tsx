@@ -1,4 +1,5 @@
-function setCookie (cookieName, value, options={}) {
+function setCookie (cookieName:string, value: string | boolean, options: { [key: string]: any } & { expires?: number | Date | string } = {}) {
+
   options = {
     'path': '/',
     ...options
@@ -13,7 +14,7 @@ function setCookie (cookieName, value, options={}) {
   }
   document.cookie = createdCookie;
 }
-function getCookie (cookieName) {
+function getCookie (cookieName: string) {
   let matches = document.cookie ? (document.cookie + '; ').split('; ')
   .filter((str) => str.includes(cookieName))[0]
   .split('=')[1] 

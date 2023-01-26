@@ -26,7 +26,7 @@ export const DetailPage = () => {
         setIsLoading(false);
       })
   }, []);
-
+  console.log(user)
   const styleAvatar = useCallback(() => {
     return style === 'romantic' ? styles.avaRomantic : style === 'cocky' ? styles.avaCocky : styles.ava
   }, [style])

@@ -81,3 +81,35 @@ export type TRawUser = {
   email: string,
   cohort: string
 }
+
+export type TUserInfo = {
+  cohort: string,
+  createdAt: number,
+  email: string,
+  info: {
+    edu: TuserInfoDetails[],
+    hobby: TuserInfoDetails[],
+    job: TuserInfoDetails[],
+    status: TuserInfoDetails[],
+  }
+  profile: {
+    birthday: string | null,
+    name: string | null,
+    photo: string | null
+    github: string | null,
+    quote: string | null,
+    telegram: string | null,
+    template: string | null,
+    city: {
+      name: string,
+      geocode: Array<string>
+    }
+  }
+
+}
+
+type TuserInfoDetails = {
+  image: string | null,
+  ractions: number | null,
+  text: string | null
+}
