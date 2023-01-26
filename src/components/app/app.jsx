@@ -11,18 +11,30 @@ import CommentsPage from '../../pages/comments/comments';
 import MainPage from '../../pages/main-page/main-page';
 import StudentsPage from '../../pages/students/students';
 import ProtectedRoute from '../protected-route/protected-route';
-import { getUserInfo } from '../../services/utils/api/commentApi';
 import Comment from '../comment/comment';
 import PurpleBtn from '../btn/btn';
 import MapPage from '../../pages/map/map';
 import NotFound from '../../pages/not-found/not-found';
 import { DetailPage } from '../../pages/detailPage/detailPage';
 import { ProfileEdit } from '../../pages/profile-edit/profile-edit';
+import getUserProfile from '../../services/utils/api/get-user-profile';
+
+// REMOVE! контекст для роли юзера добавлен ТОЛЬКО для работы переключателя ролей в хедере.
+// Роль юзера получалась фейковым апи-запросом он деманд.
+export const AuthContext = React.createContext(null);
 
 function App() {
   const [name, setName] = useState();
   const [avatar, setAvatar] = useState();
   const user = {} //данные юзера, тут есть id
+
+  // REMOVE! задаём роль
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    getUserProfile().then((res) => setCurrentUser(res));
+  }, []);
+
   useEffect(() => {
     if (document.location.hash) {
       const newToken = document.location.hash.split('&').find(el => el.includes('access_token')).split('=')[1]
@@ -49,59 +61,68 @@ function App() {
     }
   }, [user, name])
 
+  if (!currentUser?.role) {
+    return <>loading</>;
+  }
+  
   return (
-    <div className={styles.page}>
-      <Header user={{ name, avatar }} />
-      <Switch>
-        <Route path={'/'} exact={true} auth="student" redirect="cohort/web+16">
-          <MainPage />
-          {
-            /*<>
+    <AuthContext.Provider value={{
+      currentUser,
+      setCurrentUser
+    }}>
+      <div className={styles.page}>
+        <Header user={{ name, avatar }} />
+        <Switch>
+          <ProtectedRoute path={'/'} exact={true} auth="student" redirect="/comments">
+            <MainPage />
+            {
+              /*<>
+                <div style={{ fontWeight: 500, fontSize: 60 }}>
+                  Шрифты подключены на 400, 500 и 700
+                </div>
+                <Input />
+              </>            <>
               <div style={{ fontWeight: 500, fontSize: 60 }}>
-                Шрифты подключены на 400, 500 и 700
+                Шрифты подключены
               </div>
+              <div style={{ fontWeight: 400, fontSize: 60 }}>
+                на 400 и 500 =)
+              </div>
+              <PurpleBtn text='Test' />
+              <Comment />
               <Input />
-            </>            <>
-            <div style={{ fontWeight: 500, fontSize: 60 }}>
-              Шрифты подключены
-            </div>
-            <div style={{ fontWeight: 400, fontSize: 60 }}>
-              на 400 и 500 =)
-            </div>
-            <PurpleBtn text='Test' />
-            <Comment />
-            <Input />
-          </>*/
-          }
+            </>*/
+            }
 
-        </Route>
-        <Route path='/login' exact={true}>
-          <LoginPage />
-        </Route>
-        <ProtectedRoute path={'/detailinfo/:id'} exact={true}>
-          <DetailPage />
-        </ProtectedRoute>
-        <ProtectedRoute path='/profile'>
-          <ProfileEdit />
-        </ProtectedRoute>
-        <ProtectedRoute path="/cohort/:cohort" auth="curator">
-          <MainPage />
-        </ProtectedRoute>
-        <ProtectedRoute path='/students' auth="curator">
-          <StudentsPage />
-        </ProtectedRoute>
-        <ProtectedRoute path='/comments' auth="curator">
-          <CommentsPage />
-        </ProtectedRoute>
-        <ProtectedRoute path='/map' exact={true}>
-          <MapPage />
-        </ProtectedRoute>
-        <Route path="*">
-          <NotFound />
-        </Route>
-      </Switch>
-      <Footer />
-    </div>
+          </ProtectedRoute>
+          <Route path='/login' exact={true}>
+            <LoginPage />
+          </Route>
+          <ProtectedRoute path={'/detailinfo/:id'} exact={true}>
+            <DetailPage />
+          </ProtectedRoute>
+          <ProtectedRoute path='/profile'>
+            <ProfileEdit />
+          </ProtectedRoute>
+          <ProtectedRoute path="/cohort/:cohort" auth="curator">
+            <MainPage />
+          </ProtectedRoute>
+          <ProtectedRoute path='/students' auth="curator">
+            <StudentsPage />
+          </ProtectedRoute>
+          <ProtectedRoute path='/comments' auth="curator">
+            <CommentsPage />
+          </ProtectedRoute>
+          <ProtectedRoute path='/map' exact={true}>
+            <MapPage />
+          </ProtectedRoute>
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
+        <Footer />
+      </div>
+    </AuthContext.Provider>
   );
 }
 

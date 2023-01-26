@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import getProfileReactions from "../../services/utils/api/get-profile-reacitons";
-import Comment from "../comment/comment";
 import styles from "./profile-thumb.module.css";
-import { TProfile } from "../../services/utils/types";
 import ButtonComments from "./comments-thumb/button-comments";
 
 type TThumbProps = {

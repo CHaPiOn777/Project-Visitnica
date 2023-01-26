@@ -1,7 +1,8 @@
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { useEffect, useState } from 'react';
 import { getCommentsRequest } from '../../../services/utils/api/admin-comments';
 import getProfileReactions from '../../../services/utils/api/get-profile-reacitons';
+import { AuthContext } from '../../app/app';
 import Comment from '../../comment/comment';
 import styles from "./button-comments.module.css";
 
@@ -14,6 +15,8 @@ const ButtonComments = ({ user, block }) => {
   function toggleComments() {
     setCommentVisible((prev) => !prev);
   }
+  const {currentUser} = useContext(AuthContext);
+  // const user = currentUser;
 
   useEffect(() => {
     if (user) {

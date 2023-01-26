@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
 import getUserProfile from "../../services/utils/api/get-user-profile";
 import { setCookie } from "../../services/utils/cookie";
+import { AuthContext } from "../app/app";
 import LoadingIcon from "../loading-icon/loading-icon";
 
 interface TProtectedProps extends RouteProps {
@@ -18,16 +19,17 @@ export default function ProtectedRoute({
   ...props
 }: TProtectedProps) {
   const [loading, setLoading] = useState<boolean>(true);
-  const [role, setRole] = useState<string>("");
+  const {currentUser} = useContext<any>(AuthContext);
+  const role = currentUser.role;
 
   useEffect(() => {
-    setLoading(true);
+    /* setLoading(true);
     if (localStorage.getItem("accessToken")) {
       getUserProfile().then((res) => {
         setRole(res.role);
         setLoading(false);
       });
-    } else {
+    } else { */
       if (document.location.hash) {
         const newToken = document.location.hash
           .split("&")
@@ -36,7 +38,7 @@ export default function ProtectedRoute({
         setCookie("accessToken", newToken);
       }
       setLoading(false);
-    }
+    // }
   }, []);
 
   if (loading) {
