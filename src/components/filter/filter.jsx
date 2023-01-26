@@ -18,25 +18,27 @@ export const Filter = ({ setFunc }) => {
   // сбрасывает фильтр
   const clearHangler = (evt) => {
     evt.target.parentElement.querySelector('input').value = '';
-    if (location.pathname === '/students') {
+    if (location.pathname === '/admin/users') {
       getStudentsRequest({ search: '' })
         .then(res => { res?.items.length ? setFunc(res.items) : setFunc([]) });
     }
-    if (location.pathname === '/comments') {
+    if (location.pathname === '/admin/') {
       getCommentsRequest({ search: '' })
         .then(res => { setFunc(res.items) });
     }
+    const button = document.querySelector(`.${styles.button}`);
+    button.classList.remove(`${styles.visible}`)
   }
 
   //отправить запрос с параметрами
   const onSubmit = (evt) => {
     evt.preventDefault();
     const searchCondition = evt.target.condition.value.toLowerCase();
-    if (location.pathname === '/students') {
+    if (location.pathname === '/admin/users') {
       getStudentsRequest({ search: searchCondition })
         .then(res => { res?.items.length ? setFunc(res.items) : setFunc([]) });
     }
-    if (location.pathname === '/comments') {
+    if (location.pathname === '/admin/') {
       debugger
       getCommentsRequest({ search: searchCondition })
         .then(res => { setFunc(res.items) });

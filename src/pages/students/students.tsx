@@ -14,7 +14,11 @@ export default function StudentsPage() {
   useEffect(() => {
     setHeader(['Номер когорты', 'E-mail', 'Имя и фамилия студента']);
     getStudentsRequest({})
-      .then(res => setUsers(res.items));
+      .then(res => {
+        const students = res.items.sort((a, b) => (b.createdAt - a.createdAt)) 
+        //сортировка от новых изменений к старым
+        setUsers(students)
+      });
   }, [header.length, users?.length])
 
   return (
