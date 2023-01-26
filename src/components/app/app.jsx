@@ -24,8 +24,8 @@ import getUserProfile from '../../services/utils/api/get-user-profile';
 export const AuthContext = React.createContext(null);
 
 function App() {
-  const [name, setName] = useState();
-  const [avatar, setAvatar] = useState();
+  const [name, setName] = useState('');
+  const [avatar, setAvatar] = useState('');
   const user = {} //данные юзера, тут есть id
 
   // REMOVE! задаём роль
@@ -92,10 +92,10 @@ function App() {
           <ProtectedRoute path="/cohort/:cohort" auth="curator">
             <MainPage />
           </ProtectedRoute>
-          <ProtectedRoute path='/students' auth="curator">
+          <ProtectedRoute path='/admin/users' auth="curator">
             <StudentsPage />
           </ProtectedRoute>
-          <ProtectedRoute path='/comments' auth="curator">
+          <ProtectedRoute path='/admin/' auth="curator">
             <CommentsPage />
           </ProtectedRoute>
           <ProtectedRoute path='/map' exact={true}>

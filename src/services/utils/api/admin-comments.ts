@@ -12,7 +12,6 @@ type TDelComment = {
 const token = JSON.parse(localStorage.getItem('accessToken') || '{}').bearerToken;
 
 export const getCommentsRequest = ({offset = 0, limit = 12, search=''}: TGetComments): Promise<TCommentsResponse> => {
-  // const token = JSON.parse(localStorage.getItem('accessToken') || '{}').bearerToken;
   return request(`/comments?limit=${limit}&offset=${offset}&search=${search}`, {
     headers: {
       Authorisation: `${token}`
@@ -31,7 +30,7 @@ export const deletecommentRequest = (id: TDelComment) => {
     if(res.ok) {
       return res.text();
     } else {
-      return res.text().then((obj) => { throw new Error() });
+      return res.text().then((obj) => { throw new Error('Ошибка удаления комментария') });
     }
   })
 }
