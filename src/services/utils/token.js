@@ -24,4 +24,7 @@ export function getToken(user) {
       }
       localStorage.setItem('accessToken', JSON.stringify({ 'bearerToken': decodedUser.jti, 'created_at': decodedUser.iat * 1000, 'exp': decodedUser.exp * 1000, 'name': decodedUser.name, avatar_id: decodedUser.avatar_id }))
     })
+    .catch((err) => {
+      console.error(`Ошибка загрузки данных пользователя: ${err}`);
+    })
 }

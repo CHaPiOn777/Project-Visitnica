@@ -124,14 +124,16 @@ export default function Comment({ target, rules }) {
   const handleDelete = (el) => {
     setComments(comments.filter(e => e !== el))
     deleteComment(el._id)
-      .then(res => console.log(res))
+      .then(res => console.log(res)).catch((err) => {
+        console.error(`Ошибка удаления комментария: ${err}`);
+      });
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     postComment({ text: values.text, target: 'status' })
       .then((res) => res && setValues({ text: '' })) //check res
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }
 
   return (

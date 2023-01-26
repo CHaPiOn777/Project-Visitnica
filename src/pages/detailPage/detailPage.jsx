@@ -25,6 +25,9 @@ export const DetailPage = () => {
         setStyle(res.profile.template)
         setIsLoading(false);
       })
+      .catch((err) => {
+        console.error(`Ошибка загрузки информации пользователя: ${err}`);
+      });
   }, []);
 
   const styleAvatar = useCallback(() => {

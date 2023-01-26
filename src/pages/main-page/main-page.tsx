@@ -28,23 +28,23 @@ export default function MainPage () {
     // псевдозапрос на получение данных текущего пользователя:
     getUserProfile().then((res) => {
       setCurrentUser(res); */
-      getCohortProfiles({ offset: 0, limit: 12, cohort: cohort || currentUser?.cohort }).then((res) => {
-        numberOfProfiles.current = res.total;
-        if (res.items?.length > 0) {
-          // setProfiles(res.items);
-          // !REMOVE искусственно наполняем массив профилей, чтобы сделать вёрстку нормально
-          let arr: TProfile[] = [];
-          while (arr.length < 12) {
-            arr = arr.concat(res.items);
-          }
-          setProfiles(arr);
-
-          setIsLoading(false);
+    getCohortProfiles({ offset: 0, limit: 12, cohort: cohort || currentUser?.cohort }).then((res) => {
+      numberOfProfiles.current = res.total;
+      if (res.items?.length > 0) {
+        // setProfiles(res.items);
+        // !REMOVE искусственно наполняем массив профилей, чтобы сделать вёрстку нормально
+        let arr: TProfile[] = [];
+        while (arr.length < 12) {
+          arr = arr.concat(res.items);
         }
-      }).catch((err) => {
+        setProfiles(arr);
+
         setIsLoading(false);
-        console.error(`Ошибка загрузки профилей пользователей: ${err}`);
-      });
+      }
+    }).catch((err) => {
+      setIsLoading(false);
+      console.error(`Ошибка загрузки профилей пользователей: ${err}`);
+    });
     // });
   }, []);
 
@@ -85,7 +85,6 @@ export default function MainPage () {
       )
     })
   }, [profiles, city]);
-  console.log(currentUser)
   
   return (
     <main className={styles.main}>

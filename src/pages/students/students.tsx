@@ -18,6 +18,9 @@ export default function StudentsPage() {
         const students = res.items.sort((a, b) => (b.createdAt - a.createdAt)) 
         //сортировка от новых изменений к старым
         setUsers(students)
+      })
+      .catch((err) => {
+        console.error(`Ошибка загрузки данных студентов: ${err}`);
       });
   }, [header.length, users?.length])
 

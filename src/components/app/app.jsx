@@ -32,7 +32,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    getUserProfile().then((res) => setCurrentUser(res));
+    getUserProfile().then((res) => setCurrentUser(res)).catch((err) => {
+      console.error(`Ошибка загрузки профиля пользователя: ${err}`);
+    });
   }, []);
 
   useEffect(() => {
@@ -48,6 +50,8 @@ function App() {
             setName(userData.name)
             setAvatar(userData.avatar_id)
           }
+        }).catch((err) => {
+          console.error(`Ошибка получения токена: ${err}`);
         })
     }
     if (getCookie('accessToken') && localStorage.getItem('accessToken')) {

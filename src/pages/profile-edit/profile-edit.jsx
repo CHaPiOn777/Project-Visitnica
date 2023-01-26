@@ -60,7 +60,9 @@ export const ProfileEdit = () => {
   };
 
   ymaps.load("https://api-maps.yandex.ru/2.1/?lang=en_US").then((maps) => {
-    const suggestView1 = new maps.SuggestView("city-input");
+    const suggestView1 = new maps.SuggestView("city-input").catch((err) => {
+      console.error(`Ошибка загрузки Яндекс карт: ${err}`);
+    });
   });
 
   const cityHandler = (e) => {

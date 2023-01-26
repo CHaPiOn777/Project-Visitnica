@@ -20,11 +20,13 @@ export const Filter = ({ setFunc }) => {
     evt.target.parentElement.querySelector('input').value = '';
     if (location.pathname === '/admin/users') {
       getStudentsRequest({ search: '' })
-        .then(res => { res?.items.length ? setFunc(res.items) : setFunc([]) });
+        .then(res => { res?.items.length ? setFunc(res.items) : setFunc([]) })
+        .catch((err) => { console.error(`Ошибка запроса данных студентов: ${err}`)});
     }
     if (location.pathname === '/admin/') {
       getCommentsRequest({ search: '' })
-        .then(res => { setFunc(res.items) });
+        .then(res => { setFunc(res.items) })
+        .catch((err) => { console.error(`Ошибка запроса комментариев: ${err}`)});
     }
     const button = document.querySelector(`.${styles.button}`);
     button.classList.remove(`${styles.visible}`)
@@ -36,12 +38,14 @@ export const Filter = ({ setFunc }) => {
     const searchCondition = evt.target.condition.value.toLowerCase();
     if (location.pathname === '/admin/users') {
       getStudentsRequest({ search: searchCondition })
-        .then(res => { res?.items.length ? setFunc(res.items) : setFunc([]) });
+        .then(res => { res?.items.length ? setFunc(res.items) : setFunc([]) })
+        .catch((err) => { console.error(`Ошибка запроса данных студентов: ${err}`)});
     }
     if (location.pathname === '/admin/') {
       debugger
       getCommentsRequest({ search: searchCondition })
-        .then(res => { setFunc(res.items) });
+        .then(res => { setFunc(res.items) })
+        .catch((err) => { console.error(`Ошибка запроса комментариев: ${err}`)});
     }
   }
 
