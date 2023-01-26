@@ -85,6 +85,7 @@ export default function MainPage () {
       )
     })
   }, [profiles, city]);
+  console.log(currentUser)
   
   return (
     <main className={styles.main}>

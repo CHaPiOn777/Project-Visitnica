@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './comment.module.css';
-import closeIcon from '../../images/Union.svg';
+import closeIcon from '../../images/del.svg';
 import smile from '../../images/smiles/smile.svg';
 import like from '../../images/smiles/like.svg';
 import dislike from '../../images/smiles/dislike.svg';
@@ -11,9 +11,10 @@ import upset from '../../images/smiles/upset.svg';
 import fun from '../../images/smiles/fun.svg';
 import fear from '../../images/smiles/fear.svg';
 import confused from '../../images/smiles/confused.svg';
-import { deleteComment, postComment } from '../../services/utils/api/commentApi';
+import { deleteComment, getComment, postComment } from '../../services/utils/api/commentApi';
 import { setQty } from '../../services/utils/utils';
 import { useForm } from '../../hooks/useForm';
+import { isConstructorDeclaration } from 'typescript';
 
 // target - ид пользователя, rules: 'admin' | 'owner' | 'user', в зависимости от того,
 // кто открывает комменты. Не похоже, что сервак фильтрует по job/hobby/т.д., так что,
@@ -129,7 +130,7 @@ export default function Comment({ target, rules }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     postComment({ text: values.text, target: 'status' })
-      .then((res) => res && setValues({ text: '' }))
+      .then((res) => res && setValues({ text: '' })) //check res
       .catch(err => console.log(err))
   }
 

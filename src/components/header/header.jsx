@@ -3,6 +3,7 @@ import logo from '../../images/VISITKI.svg';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../app/app';
+import { isConstructorDeclaration } from 'typescript';
 
 export const Header = ({ user }) => {
   const { name, avatar } = user;
@@ -14,7 +15,7 @@ export const Header = ({ user }) => {
       return { ...prev, role: evt.target.value }
     });
   }
-  
+
   return (
       <header className={styles.header}>
         <Link to="/">

@@ -73,27 +73,8 @@ function App() {
       <div className={styles.page}>
         <Header user={{ name, avatar }} />
         <Switch>
-          <ProtectedRoute path={'/'} exact={true} auth="student" redirect="/comments">
+          <ProtectedRoute path={'/'} exact={true} auth="student" redirect="/cohort/:cohort">
             <MainPage />
-            {
-              /*<>
-                <div style={{ fontWeight: 500, fontSize: 60 }}>
-                  Шрифты подключены на 400, 500 и 700
-                </div>
-                <Input />
-              </>            <>
-              <div style={{ fontWeight: 500, fontSize: 60 }}>
-                Шрифты подключены
-              </div>
-              <div style={{ fontWeight: 400, fontSize: 60 }}>
-                на 400 и 500 =)
-              </div>
-              <PurpleBtn text='Test' />
-              <Comment />
-              <Input />
-            </>*/
-            }
-
           </ProtectedRoute>
           <Route path='/login' exact={true}>
             <LoginPage />
@@ -101,7 +82,7 @@ function App() {
           <ProtectedRoute path={'/detailinfo/:id'} exact={true}>
             <DetailPage />
           </ProtectedRoute>
-          <ProtectedRoute path='/profile'>
+          <ProtectedRoute path='/profile' auth="student">
             <ProfileEdit />
           </ProtectedRoute>
           <ProtectedRoute path="/cohort/:cohort" auth="curator">
