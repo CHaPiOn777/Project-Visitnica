@@ -1,54 +1,53 @@
 .header {
-    box-sizing: border-box;
-    height: 80px;
-    display: flex;
-    padding-left: 24px;
-    padding-right: 24px;
-    align-items: center;
-    justify-content: space-between;
+  box-sizing: border-box;
+  height: 80px;
+  display: flex;
+  padding-left: 24px;
+  padding-right: 24px;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.user{
-    display: flex;
-    align-items: center;
+.user {
+  display: flex;
+  align-items: center;
 }
 .logo {
-    height: 25px;
+  height: 25px;
 }
 .name {
-    display: none;
-    
+  display: none;
 }
 
 .photo {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 }
 
 @media screen and (min-width: 768px) {
-    .header {
-        padding-left: 32px;
-        padding-right: 32px;
-    }
-    .name {
-        display: inline;
-        box-sizing: border-box;
-        width: 215px;
-        height: 20px;
-        text-align: left;
-        font-size: 16px;
-        line-height: 20px;
-        margin-left: 4px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
+  .header {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  .name {
+    display: inline;
+    box-sizing: border-box;
+    max-width: 215px;
+    height: 20px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 20px;
+    margin-left: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 }
 
 @media screen and (min-width: 1024px) {
-    .header {
-        padding-left: 40px;
-        padding-right: 40px;
-    }
+  .header {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }

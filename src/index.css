@@ -10,7 +10,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+main {
+  padding: 0 40px;
+  align-self: center;
+  justify-content: center;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    padding: 0 32px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  main {
+    padding: 0 24px;
+  }
 }

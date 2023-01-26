@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./profile-edit.module.css";
 import strokeImg from '../../images/stroke.png';
+import PurpleBtn from "../../components/btn/btn";
 
 export const ProfileEdit = () => {
   const [avatar, setAvatar] = useState("");
@@ -59,159 +60,161 @@ export const ProfileEdit = () => {
 };
   
   return (
-    <form
-      // onSubmit={handlerFormSubmit}
-      id="profile-form"
-      name="profile-form"
-      className={styles.form}
-    >
-      <fieldset className={styles.inputContainer}>
-        <p className={styles.text}>Загрузите фото *</p>
-        <p className={styles.note}>(Размер не менее 440x440 пикселей)</p>
-        <label htmlFor="upload-photo" className={styles.avatarLabel}>
-          <img
-            className={styles.avatar}
-            style={{ display: avatar ? "block" : "none" }}
-            src={avatar}
-            alt="аватар"
-          />
-          <div className={styles.uploadButton}></div>
-          <input
-            className={styles.fileInput}
-            type="file"
-            name="avatar"
-            id="upload-photo"
-            accept="image/*"
-            onChange={imageHandler}
-            onBlur={blurHandler}
-          />
-        </label>
-        <label className={styles.input} htmlFor="birth-date">
-          Дата рождения *
-          <input type="date" className={styles.textInput} id="birth-date" name='birth-date' onBlur={blurHandler} onChange={birthHandler} value={birth}/>
-          {birthDirty && birthValidMessage && (<span className={styles.error}>{birthValidMessage}</span>)}
-        </label>
-
-        <label className={styles.input} htmlFor="city-input">
-          Выберите город *
-          <input
-            type="text"
-            id="city"
-            className={styles.textInput}
-            placeholder="@example"
-            value={city}
-            onChange={(e) => cityHandler(e)}
-            onBlur={blurHandler}
-            name='city'
-          />
-          {cityDirty && cityValidMessage && (<span className={styles.error}>{cityValidMessage}</span>)}
-          
-        </label>
-
-        <label className={styles.input} htmlFor="tg-input">
-          Ник в телеграм
-          <input
-            type="text"
-            id="tg-input"
-            className={styles.textInput}
-            placeholder="@example"
-          />
-        </label>
-
-        <label className={styles.input} htmlFor="git-input">
-          Ник на гитхабе
-          <input
-            type="text"
-            id="git-input"
-            className={styles.textInput}
-            placeholder="@example"
-          />
-        </label>
-
-        <label className={styles.input} htmlFor="character-input">
-          Выберите шаблон
-          <select id="character-input" className={styles.textInput}>
-            <option>серьезный</option>
-            <option>дерзкий</option>
-            <option>романтичный</option>
-          </select>
-        </label>
-
-        <label className={styles.input} htmlFor="slogan-input">
-          Девиз, цитата
-          <textarea
-            id="slogan-input"
-            maxLength="100"
-            className={styles.textarea}
-            placeholder="Не более 100 символов"
-          ></textarea>
-        </label>
-
-        <label className={styles.input} htmlFor="dosug-input">
-          Увлечения, досуг, интересы
-          <label className={styles.fileUpload}>
+    <main>
+      <form
+        // onSubmit={handlerFormSubmit}
+        id="profile-form"
+        name="profile-form"
+        className={styles.form}
+      >
+        <fieldset className={styles.inputContainer}>
+          <p className={styles.text}>Загрузите фото *</p>
+          <p className={styles.note}>(Размер не менее 440x440 пикселей)</p>
+          <label htmlFor="upload-photo" className={styles.avatarLabel}>
+            <img
+              className={styles.avatar}
+              style={{ display: avatar ? "block" : "none" }}
+              src={avatar}
+              alt="аватар"
+            />
+            <div className={styles.uploadButton}></div>
             <input
-              type="file"
-              name="dosugImage"
-              id="dosugImage"
-              accept="image/*"
               className={styles.fileInput}
-            /><img src={strokeImg} alt="скрепка" className={styles.stroke} />
-            <span className={styles.filesNote}>Рекомендуемый размер фото 230x129</span>
+              type="file"
+              name="avatar"
+              id="upload-photo"
+              accept="image/*"
+              onChange={imageHandler}
+              onBlur={blurHandler}
+            />
           </label>
-          
-          <textarea
-            id="dosug-input"
-            maxLength="300"
-            className={styles.textarea}
-            placeholder="Не более 300 символов"
-          ></textarea>
-        </label>
+          <label className={styles.input} htmlFor="birth-date">
+            Дата рождения *
+            <input type="date" className={styles.textInput} id="birth-date" name='birth-date' onBlur={blurHandler} onChange={birthHandler} value={birth}/>
+            {birthDirty && birthValidMessage && (<span className={styles.error}>{birthValidMessage}</span>)}
+          </label>
 
-        <label className={styles.input} htmlFor="family-input">
-          Семья, статус, домашние животные
-          <label className={styles.fileUpload}>
+          <label className={styles.input} htmlFor="city-input">
+            Выберите город *
             <input
-              type="file"
-              name="dosugImage"
-              id="dosugImage"
-              accept="image/*"
-              className={styles.fileInput}
-            /><img src={strokeImg} alt="скрепка" className={styles.stroke} />
-            <span className={styles.filesNote}>Рекомендуемый размер фото 230x129</span>
+              type="text"
+              id="city"
+              className={styles.textInput}
+              placeholder="@example"
+              value={city}
+              onChange={(e) => cityHandler(e)}
+              onBlur={blurHandler}
+              name='city'
+            />
+            {cityDirty && cityValidMessage && (<span className={styles.error}>{cityValidMessage}</span>)}
+            
           </label>
-          <textarea
-            id="family-input"
-            maxLength="300"
-            className={styles.textarea}
-            placeholder="Не более 300 символов"
-          ></textarea>
-        </label>
 
-        <label className={styles.input} htmlFor="job-input">
-          Из какой сферы пришёл? Кем работаешь?
-          <textarea
-            id="job-input"
-            maxLength="300"
-            className={styles.textarea}
-            placeholder="Не более 300 символов"
-          ></textarea>
-        </label>
+          <label className={styles.input} htmlFor="tg-input">
+            Ник в телеграм
+            <input
+              type="text"
+              id="tg-input"
+              className={styles.textInput}
+              placeholder="@example"
+            />
+          </label>
 
-        <label className={styles.input} htmlFor="motivation-input">
-          Почему решил учиться на веб-разработчика?
-          <textarea
-            id="motivation-input"
-            maxLength="300"
-            className={styles.textarea}
-            placeholder="Не более 300 символов"
-          ></textarea>
-        </label>
-      </fieldset>
-      <fieldset className={styles.submitContainer}>
-        <p>Поля, отмеченные звездочкой, обязательны для заполнения</p>
-        <button className={styles.profileSaveButton}>Сохранить</button>
-      </fieldset>
-    </form>
+          <label className={styles.input} htmlFor="git-input">
+            Ник на гитхабе
+            <input
+              type="text"
+              id="git-input"
+              className={styles.textInput}
+              placeholder="@example"
+            />
+          </label>
+
+          <label className={styles.input} htmlFor="character-input">
+            Выберите шаблон
+            <select id="character-input" className={styles.textInput}>
+              <option>серьезный</option>
+              <option>дерзкий</option>
+              <option>романтичный</option>
+            </select>
+          </label>
+
+          <label className={styles.input} htmlFor="slogan-input">
+            Девиз, цитата
+            <textarea
+              id="slogan-input"
+              maxLength="100"
+              className={styles.textarea}
+              placeholder="Не более 100 символов"
+            ></textarea>
+          </label>
+
+          <label className={styles.input} htmlFor="dosug-input">
+            Увлечения, досуг, интересы
+            <label className={styles.fileUpload}>
+              <input
+                type="file"
+                name="dosugImage"
+                id="dosugImage"
+                accept="image/*"
+                className={styles.fileInput}
+              /><img src={strokeImg} alt="скрепка" className={styles.stroke} />
+              <span className={styles.filesNote}>Рекомендуемый размер фото 230x129</span>
+            </label>
+            
+            <textarea
+              id="dosug-input"
+              maxLength="300"
+              className={styles.textarea}
+              placeholder="Не более 300 символов"
+            ></textarea>
+          </label>
+
+          <label className={styles.input} htmlFor="family-input">
+            Семья, статус, домашние животные
+            <label className={styles.fileUpload}>
+              <input
+                type="file"
+                name="dosugImage"
+                id="dosugImage"
+                accept="image/*"
+                className={styles.fileInput}
+              /><img src={strokeImg} alt="скрепка" className={styles.stroke} />
+              <span className={styles.filesNote}>Рекомендуемый размер фото 230x129</span>
+            </label>
+            <textarea
+              id="family-input"
+              maxLength="300"
+              className={styles.textarea}
+              placeholder="Не более 300 символов"
+            ></textarea>
+          </label>
+
+          <label className={styles.input} htmlFor="job-input">
+            Из какой сферы пришёл? Кем работаешь?
+            <textarea
+              id="job-input"
+              maxLength="300"
+              className={styles.textarea}
+              placeholder="Не более 300 символов"
+            ></textarea>
+          </label>
+
+          <label className={styles.input} htmlFor="motivation-input">
+            Почему решил учиться на веб-разработчика?
+            <textarea
+              id="motivation-input"
+              maxLength="300"
+              className={styles.textarea}
+              placeholder="Не более 300 символов"
+            ></textarea>
+          </label>
+        </fieldset>
+        <fieldset className={styles.submitContainer}>
+          <p>Поля, отмеченные звездочкой, обязательны для заполнения</p>
+          <PurpleBtn text="Сохранить"/>
+        </fieldset>
+      </form>
+    </main>
   );
 };

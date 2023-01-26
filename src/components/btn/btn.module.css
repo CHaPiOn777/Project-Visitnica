@@ -33,3 +33,9 @@
   font-size: 16px;
   line-height: 20px;
 }
+
+@media screen and (max-width: 500px) {
+  .btn {
+    width: 272px;
+  }
+}

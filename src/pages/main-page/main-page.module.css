@@ -1,12 +1,7 @@
 .main {
   box-sizing: border-box;
   width: 100%;
-  /* height: 100vh; */
   margin: auto;
-  max-width: 1440px;
-  padding: 0 40px;
-  /* overflow-y: scroll; */
-  /* scrollbar-width: none; */
 }
 
 .lead {
@@ -37,7 +32,11 @@
   text-align: center;
 }
 
- 
+@media screen and (max-width: 768px) {
+  .main {
+    padding: 0 32px;
+  }
+}
 
 @media screen and (max-width: 320px) {
   .main {

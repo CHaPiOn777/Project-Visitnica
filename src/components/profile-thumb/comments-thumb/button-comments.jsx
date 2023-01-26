@@ -1,6 +1,4 @@
-import { useMemo } from 'react';
 import { useEffect, useState } from 'react';
-import { getCommentsRequest } from '../../../services/utils/api/admin-comments';
 import getProfileReactions from '../../../services/utils/api/get-profile-reacitons';
 import Comment from '../../comment/comment';
 import styles from "./button-comments.module.css";

@@ -1,14 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Link, NavLink, useLocation, useParams } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styles from './detailPage.module.css';
-import ava from '../../images/Avatarka.jpg';
 import qotes from '../../images/Qotes.svg';
 import union from '../../images/Union.svg';
 import telegram from '../../images/Subtract.svg';
 import getUserInfo from '../../services/utils/api/getUserInfo';
 import LoadingIcon from '../../components/loading-icon/loading-icon';
 import ButtonComments from '../../components/profile-thumb/comments-thumb/button-comments';
-
 
 export const DetailPage = () => {
   const params = useParams();
@@ -42,7 +40,7 @@ export const DetailPage = () => {
   return (
     <>
       {!isLoading ?
-        <div className={styles.page}>
+        <main className={styles.page}>
           <h1 className={styles.name}>{user.profile.name}</h1>
           <h2 className={styles.city}>{user.profile.city.name}</h2>
           <ul className={styles.socialmedia}>
@@ -119,10 +117,9 @@ export const DetailPage = () => {
               <p className={styles.blockText}>{user.info.edu.text}</p>
             </div>
           </div>
-        </div> :
+        </main> :
         <LoadingIcon />
       }
-
     </>
   );
 };
