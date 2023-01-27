@@ -44,7 +44,7 @@ export const DetailPage = () => {
   return (
     <>
       {!isLoading ?
-        <div className={styles.page}>
+        <main className={styles.page}>
           <h1 className={styles.name}>{user.profile.name}</h1>
           <h2 className={styles.city}>{user.profile.city.name}</h2>
           <ul className={styles.socialmedia}>
@@ -121,7 +121,7 @@ export const DetailPage = () => {
               <p className={styles.blockText}>{user.info.edu.text}</p>
             </div>
           </div>
-        </div> :
+        </main> :
         <LoadingIcon />
       }
 
