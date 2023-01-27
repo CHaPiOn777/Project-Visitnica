@@ -1,7 +1,5 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import { useEffect, useState } from 'react';
-import { isConstructorDeclaration } from 'typescript';
-import { getCommentsRequest } from '../../../services/utils/api/admin-comments';
 import getProfileReactions from '../../../services/utils/api/get-profile-reacitons';
 import { AuthContext } from '../../app/app';
 import Comment from '../../comment/comment';

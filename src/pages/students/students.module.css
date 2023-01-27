@@ -1,8 +1,5 @@
 .main {
-  padding-right: 40px;
-  padding-left: 40px;
-  height: calc(100vh - 153px);
-  min-width: 1240px;
+  align-self: auto;
 }
 
 .container {
@@ -10,4 +7,12 @@
   grid-template-columns: 1fr min-content;
   grid-template-rows: repeat(2, min-content);
   column-gap: 40px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    margin-top: 48px;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+  }
 }

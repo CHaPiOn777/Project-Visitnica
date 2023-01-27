@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Link, NavLink, useLocation, useParams } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styles from './detailPage.module.css';
-import ava from '../../images/Avatarka.jpg';
 import qotes from '../../images/Qotes.svg';
 import union from '../../images/Union.svg';
 import telegram from '../../images/Subtract.svg';

@@ -1,10 +1,7 @@
 .page {
   box-sizing: border-box;
-  max-width: 1440px;
-  margin: 0 auto;
   margin-top: 50px;
   margin-bottom: 40px;
-  padding: 0 40px;
   display: grid;
   grid-template-columns: 1fr 1fr 325px;
   grid-template-rows: repeat(4, max-content);
@@ -179,12 +176,10 @@
   gap: 0 60px;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1439px) {
   .page {
     margin-top: 46px;
     margin-bottom: 50px;
-    padding: 0 32px;
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
     grid-template-rows: repeat(5, max-content);
     grid-template-areas:
@@ -228,12 +223,10 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .page {
     margin-top: 35px;
     margin-bottom: 70px;
-    padding: 0 24px;
-    display: grid;
     grid-template-areas:
       'h1'
       'city'

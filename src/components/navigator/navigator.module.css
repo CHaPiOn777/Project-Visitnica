@@ -8,8 +8,11 @@
   font-weight: 700;
   font-size: 14px;
   line-height: 18px;
-  padding-right: 80px;
   text-decoration: none;
+}
+
+.link:first-of-type {
+  padding-right: 80px;
 }
 
 .link_active {

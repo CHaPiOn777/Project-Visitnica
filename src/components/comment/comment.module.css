@@ -5,9 +5,14 @@
   background-color: white;
   display: flex;
   flex-direction: column;
-  max-width: 539px;
   padding: 12px 4px 8px 12px;
   gap: 12px;
+  position: absolute;
+  top: 48px;
+  max-height: 84%;
+  z-index: 2;
+  color: #100c34;
+  box-sizing: border-box;
 }
 
 .list {
@@ -104,3 +109,15 @@
   margin-left: 12px;
   cursor: pointer;
 }
+
+/* @media screen and (max-width: 768px) {
+  .container {
+    height: calc(340px - 14%);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .container {
+    height: calc(270px - 14%);
+  }
+} */
