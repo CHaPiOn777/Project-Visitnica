@@ -9,3 +9,13 @@
   margin: auto;
   min-height: 100vh;
 }
+
+::-webkit-scrollbar {
+  background-color: inherit;
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #A3A3A3;
+  border-radius: 3px;
+}

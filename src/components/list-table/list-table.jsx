@@ -1,11 +1,12 @@
 import { ListLine } from './list-line';
+import ListLineAdded from './list-line-add';
 import styles from './list-table.module.css';
 
 
-export const ListTable = ({ header, array, setFunc }) => {
+export const ListTable = ({ header, array, setFunc, addedArr }) => {
 
   return (
-    array?.length ?
+    array?.length || addedArr?.length ?
       (
         <section className={styles.container}>
           {header?.length &&
@@ -21,6 +22,11 @@ export const ListTable = ({ header, array, setFunc }) => {
                 </thead>
 
                 <tbody>
+                  {
+                    addedArr && addedArr?.length 
+                      ? <ListLineAdded array={addedArr} /> 
+                      : null
+                  }
                   <ListLine array={array} setFunc={setFunc} />
                 </tbody>
               </table>

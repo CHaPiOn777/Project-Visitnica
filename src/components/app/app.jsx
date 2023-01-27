@@ -15,6 +15,7 @@ import NotFound from '../../pages/not-found/not-found';
 import { DetailPage } from '../../pages/detailPage/detailPage';
 import { ProfileEdit } from '../../pages/profile-edit/profile-edit';
 import getUserProfile from '../../services/utils/api/get-user-profile';
+import LoadingIcon from '../loading-icon/loading-icon';
 
 // REMOVE! контекст для роли юзера добавлен ТОЛЬКО для работы переключателя ролей в хедере.
 // Роль юзера получалась фейковым апи-запросом он деманд.
@@ -63,7 +64,7 @@ function App() {
   }, [user, name])
 
   if (!currentUser?.role) {
-    return <>loading</>;
+    return <LoadingIcon />;
   }
 
   return (

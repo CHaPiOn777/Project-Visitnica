@@ -52,3 +52,21 @@ $table-gray: #83828f;
   background-color: #ff00a8;
   color: white;
 }
+
+main {
+  padding: 0 40px;
+  align-self: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    padding: 0 32px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  main {
+    padding: 0 24px;
+  }
+}

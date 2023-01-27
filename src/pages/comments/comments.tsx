@@ -22,7 +22,7 @@ export default function CommentsPage() {
     <main className={styles.main}>
       <ToggleNavigator />
       <Filter setFunc={setComments}/>
-      <ListTable header={header} array={comments} setFunc={setComments} />
+      <ListTable header={header} array={comments} setFunc={setComments} addedArr={[]} />
     </main>
   )
 }

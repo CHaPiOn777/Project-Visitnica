@@ -23,3 +23,8 @@
   padding: 0;
   background-size: cover;
 }
+
+.line_type_added {
+  composes: line;
+  color: #3B23B7;
+}
