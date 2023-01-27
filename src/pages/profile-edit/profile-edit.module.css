@@ -217,4 +217,7 @@
   .textarea, .fileUpload, .textInput, .input {
     width: 100%;
   }
+  .page {
+    padding: 0 24px;
+  }
 }

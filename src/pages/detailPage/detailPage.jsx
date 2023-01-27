@@ -14,7 +14,7 @@ export const DetailPage = () => {
   const prodId = params.id;
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [style, setStyle] = useState();
+  const [style, setStyle] = useState('');
 
   useEffect(() => {
     setIsLoading(true);
