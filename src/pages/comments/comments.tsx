@@ -8,8 +8,8 @@ import styles from './comments.module.css';
 
 // кураторская страница редактирования комментариев
 export default function CommentsPage() {
-  const [header, setHeader] = useState(Array<string>);
-  const [comments, setComments] = useState(Array<TAdminComment>);
+  const [header, setHeader] = useState<Array<string>>([]);
+  const [comments, setComments] = useState<Array<TAdminComment>>([]);
 
   useEffect(() => {
       setHeader(['Когорта', 'Дата', 'Отправитель', 'Получатель', 'Откуда комментарий', 'Текст комментария']);

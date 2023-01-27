@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './app.module.css';
 import { Header } from '../header/header';
 import { Footer } from '../footer/footer';
-import { Input } from '../input/input';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import LoginPage from '../../pages/login/login';
 import { getCookie, setCookie } from '../../services/utils/cookie';
 import { getToken } from '../../services/utils/token';
@@ -11,8 +10,6 @@ import CommentsPage from '../../pages/comments/comments';
 import MainPage from '../../pages/main-page/main-page';
 import StudentsPage from '../../pages/students/students';
 import ProtectedRoute from '../protected-route/protected-route';
-import Comment from '../comment/comment';
-import PurpleBtn from '../btn/btn';
 import MapPage from '../../pages/map/map';
 import NotFound from '../../pages/not-found/not-found';
 import { DetailPage } from '../../pages/detailPage/detailPage';
@@ -24,8 +21,8 @@ import getUserProfile from '../../services/utils/api/get-user-profile';
 export const AuthContext = React.createContext(null);
 
 function App() {
-  const [name, setName] = useState();
-  const [avatar, setAvatar] = useState();
+  const [name, setName] = useState('');
+  const [avatar, setAvatar] = useState('');
   const user = {} //данные юзера, тут есть id
 
   // REMOVE! задаём роль
@@ -68,7 +65,7 @@ function App() {
   if (!currentUser?.role) {
     return <>loading</>;
   }
-  
+
   return (
     <AuthContext.Provider value={{
       currentUser,
@@ -77,9 +74,17 @@ function App() {
       <div className={styles.page}>
         <Header user={{ name, avatar }} />
         <Switch>
-          <ProtectedRoute path={'/'} exact={true} auth="student" redirect="/cohort/:cohort">
-            <MainPage />
-          </ProtectedRoute>
+          {currentUser.role === 'student' ?
+            (
+             <ProtectedRoute path={'/'} exact={true} auth="student" redirect="/cohort/:cohort">
+              <MainPage />
+             </ProtectedRoute>
+            ) :
+            (
+             <ProtectedRoute path='/' exact={true} auth="curator" redirect="/admin/">
+              <Redirect to='/admin/' />
+             </ProtectedRoute>
+            )}
           <Route path='/login' exact={true}>
             <LoginPage />
           </Route>
@@ -92,10 +97,10 @@ function App() {
           <ProtectedRoute path="/cohort/:cohort" auth="curator">
             <MainPage />
           </ProtectedRoute>
-          <ProtectedRoute path='/students' auth="curator">
+          <ProtectedRoute path="/admin/users" auth="curator">
             <StudentsPage />
           </ProtectedRoute>
-          <ProtectedRoute path='/comments' auth="curator">
+          <ProtectedRoute path='/admin/' auth="curator">
             <CommentsPage />
           </ProtectedRoute>
           <ProtectedRoute path='/map' exact={true}>
