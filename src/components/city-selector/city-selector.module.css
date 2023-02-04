@@ -1,0 +1,27 @@
+.cityInput {
+  width: 325px;
+  height: 48px;
+  border: 1px solid #100c34;
+  border-radius: 4px;
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  background: none;
+  color: #100c34;
+}
+
+@media screen and (max-width: 768px) {
+  .cityInput {
+    width: 342px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .cityInput {
+    width: 272px;
+  }
+}

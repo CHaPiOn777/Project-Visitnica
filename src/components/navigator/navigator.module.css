@@ -1,0 +1,20 @@
+.container{
+  padding-top: 48px;
+}
+
+.link {
+  color: #A3A3A3;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  text-decoration: none;
+}
+
+.link:first-of-type {
+  padding-right: 80px;
+}
+
+.link_active {
+  color: #100C34;
+}

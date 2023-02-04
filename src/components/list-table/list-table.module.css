@@ -1,0 +1,30 @@
+.container {
+  padding-top: 60px;
+  padding-bottom: 13px;
+  overflow-x: scroll;
+}
+
+.table {
+  width: 100%;
+  color: #100C34;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  text-align: left;
+  border-collapse: collapse;
+  padding: 0;
+}
+
+.header {
+  color: #83828F;
+  font-weight: normal;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #83828F;
+  padding-left: 8px;
+}
+
+.empty {
+  color:red;
+}

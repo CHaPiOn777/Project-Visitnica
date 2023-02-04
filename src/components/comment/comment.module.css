@@ -1,0 +1,113 @@
+.container {
+  width: 100%;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 4px 8px 12px;
+  gap: 12px;
+  position: absolute;
+  top: 48px;
+  max-height: 84%;
+  z-index: 2;
+  color: #100c34;
+  box-sizing: border-box;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0 8px 0 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 303px;
+  overflow-y: scroll;
+}
+
+.textEl {
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px solid #100C34;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.textEl_first {
+  composes: textEl;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.text {
+  margin: 0;
+}
+
+.form {
+  display: flex;
+}
+
+.input {
+  width: 100%;
+  background-color: #F3F3F3;
+  border-radius: 4px;
+  border: 0px;
+  padding: 8px;
+  margin-right: 8px;
+}
+
+.input::placeholder {
+  color: #A3A3A3;
+}
+
+.emoji {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  row-gap: 10px;
+  column-gap: 12px;
+  flex-wrap: wrap;
+}
+
+.emojiContDefault {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2.5px 0px;
+  cursor: pointer;
+}
+
+.emojiCont {
+  border: 1px solid #FF00A8;
+  border-radius: 20px;
+  padding: 2.5px 3.5px;
+}
+
+.count {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  color: #FF00A8;
+}
+
+.closeBtn {
+  align-self: flex-start;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+/* @media screen and (max-width: 768px) {
+  .container {
+    height: calc(340px - 14%);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .container {
+    height: calc(270px - 14%);
+  }
+} */

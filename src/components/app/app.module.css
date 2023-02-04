@@ -1,0 +1,21 @@
+@import url('./../../vendor/fonts.css');
+
+.page {
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: auto;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  background-color: inherit;
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #A3A3A3;
+  border-radius: 3px;
+}

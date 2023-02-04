@@ -1,0 +1,30 @@
+.line {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 8px;
+  padding-left: 8px;
+  border-bottom: 1px solid #83828F;
+  position: relative;
+}
+.changed_line {
+  border: 1px solid #100C34;
+  border-radius: 4px;
+}
+
+.button_container {
+  text-align: end;
+}
+
+.button {
+  width: 21px;
+  height: 21px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  background-size: cover;
+}
+
+.line_type_added {
+  composes: line;
+  color: #3B23B7;
+}

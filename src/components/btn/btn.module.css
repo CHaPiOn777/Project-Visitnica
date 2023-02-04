@@ -1,0 +1,41 @@
+.btn {
+  width: 440px;
+  height: 68px;
+  background: linear-gradient(269.17deg, #3B23B7 30.28%, #C914E7 63.24%);
+  border-radius: 4px;
+  border: 0px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: #F0F0F0;
+  padding: 20px;
+}
+
+.btn:hover {
+  background: linear-gradient(269.17deg, #3F26C4 30.28%, #D315F2 63.24%);
+  cursor: pointer;
+}
+
+.btn:focus {
+  background: linear-gradient(269.17deg, #4328D1 30.28%, #DE16FF 63.24%);
+}
+
+.btn:disabled {
+  background: #BFBFBF;
+  cursor: auto;
+}
+
+.btn_size_s {
+  composes: btn;
+  width: 285px;
+  height: 44px;
+  padding: 12px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+@media screen and (max-width: 500px) {
+  .btn {
+    width: 272px;
+  }
+}
